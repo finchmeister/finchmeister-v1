@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color: green;
+    text-align: center;
+}
+
+p {
+    font-family: "courier";
+    font-size: 20px;
+    color: green;
+}
