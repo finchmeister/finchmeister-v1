@@ -3,33 +3,26 @@ PIIP=192.168.0.2
 VERSION=X_00_01
 
 # Update the version html file going out to the PI with the new version no.
-echo "${VERSION}" > html/version.html
+echo "${VERSION}" > trunk/html/version.html
 
 # Commit the WC
-svn commit -m "Commit prior to deployment of ${VERSION} to PI"
+svn commit trunk -m "Commit prior to deployment of ${VERSION} to PI"
 
 # Create the branch
-svn --parents copy file:///Users/jfinch/raspberrypiSVN file:///Users/jfinch/raspberrypiSVN/tags/${VERSION} -m "Deployment of ${VERSION} to PI"
-
-# Export the branch to tmp
-
-# Rsync the branch to PI
-
-
-
-# Rsync the temp file
-# rsync -r /Users/jfinch/rpiwc/html/ pi@${PIIP}:/var/www/html
+svn --parents copy /Users/jfinch/raspberrypiSVN/trunk file:///Users/jfinch/raspberrypiSVN/tags/${VERSION} -m "Deployment of ${VERSION} to PI"
 
 # Reset the LOCAL version html file
-echo "Bleeding edge dev code - version last deployed to PI: ${VERSION}" > html/version.html
+echo "Bleeding edge dev code - version last deployed to PI: ${VERSION}" > trunk/html/version.html
 
-svn move file:///Users/jfinch/raspberrypiSVN file:///Users/jfinch/raspberrypiSVN2/trunk -m "Relocating trunk"
-svn mkdir file:///Users/jfinch/raspberrypiSVN/trunk -m "Creating trunk folder"
+# Create temporary directory /tmp/rpiwebsite/${VERSION}
+cd /tmp
+mkdir rpiwebsite
+cd rpiwebsite
+mkdir ${VERSION}
+cd ${VERSION}
 
-Take a copy of ~/rpiwc
-Delete file:///Users/jfinch/raspberrypiSVN/
-Create new repoistry file:///Users/jfinch/raspberrypiSVN/trunk
-Import copy to repositry
-checkout repositry to ~/rpiwc
+# Export the tag into it
+svn export file:///Users/jfinch/raspberrypiSVN/tags/${VERSION}
 
-svn list file:///Users/jfinch/raspberrypiSVN/trunk
+# Rsync the tag to PI
+rsync -r /tmp/rpiwebsite/${VERSION}/html/ pi@${PIIP}:/var/www/html

@@ -1,0 +1,14 @@
+# Create the repository
+sudo svnadmin create /Users/jfinch/raspberrypiSVN/
+
+# Set the permission so that jfinch can do stuff
+cd ~
+sudo chown -R jfinch:staff raspberrypiSVN
+
+# Now import from the copied location to the trunk location of the repositry
+svn import -m "Let's try again shall we" /Users/jfinch/Documents/rpiwc file:///Users/jfinch/raspberrypiSVN/trunk
+
+# Create a working copy in ~/rpiwebsite
+mkdir rpiwebsite
+cd rpiwebsite/
+svn checkout file:///Users/jfinch/raspberrypiSVN/trunk
