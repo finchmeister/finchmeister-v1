@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Last commit: $Id$
+# Version Location: $HeadURL$
 PIIP=192.168.0.2
 VERSION=X_00_01
 
@@ -9,7 +11,7 @@ echo "${VERSION}" > trunk/html/version.html
 svn commit trunk -m "Commit prior to deployment of ${VERSION} to PI"
 
 # Create the branch
-svn --parents copy /Users/jfinch/raspberrypiSVN/trunk file:///Users/jfinch/raspberrypiSVN/tags/${VERSION} -m "Deployment of ${VERSION} to PI"
+svn --parents copy file:///Users/jfinch/raspberrypiSVN/trunk file:///Users/jfinch/raspberrypiSVN/tags/${VERSION} -m "Deployment of ${VERSION} to PI"
 
 # Reset the LOCAL version html file
 echo "Bleeding edge dev code - version last deployed to PI: ${VERSION}" > trunk/html/version.html
@@ -18,8 +20,6 @@ echo "Bleeding edge dev code - version last deployed to PI: ${VERSION}" > trunk/
 cd /tmp
 mkdir rpiwebsite
 cd rpiwebsite
-mkdir ${VERSION}
-cd ${VERSION}
 
 # Export the tag into it
 svn export file:///Users/jfinch/raspberrypiSVN/tags/${VERSION}
