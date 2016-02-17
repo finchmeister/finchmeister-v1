@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <!-- Last commit: $Id$ -->
+    <!-- Version Location: $HeadURL$ -->
     <title>Bootstrap Theme Simply Me</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,8 +104,8 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#about">WHO</a></li>
-                <li><a href="#what">WHAT</a></li>
                 <li><a href="#where">WHERE</a></li>
+                <li><a href="#what">WHAT</a></li>
                 <li><a href="#contact">CONTACT</a></li>
             </ul>
         </div>
@@ -115,11 +116,12 @@
 <div id="about" class="container-fluid bg-1 text-center">
     <h3 class="margin">Who Am I?</h3>
     <img src="resources/images/me.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
-    <h3>I'm an adventurer</h3>
+    <h3>Jonathan Finch</h3>
+    <!--TODO Fly in from the side-->
 </div>
 
 <!-- Second "TBD" Container-->
-<div id="what" class="container-fluid bg-2 text-center">
+<div id="where" class="container-fluid bg-2 text-center">
     <h3 class="margin">What Am I?</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
     <a href="#" class="btn btn-default btn-lg">
@@ -128,22 +130,45 @@
 </div>
 
 <!-- Third Container (Grid) -->
-<div id="where" class="container-fluid bg-3 text-center slideanim">
-    <h3 class="margin">Where To Find Me?</h3><br>
-    <div class="row">
+<div id="what" class="container-fluid bg-3 text-center">
+    <h3 class="margin">What I've Been Up To</h3><br>
+    <div class="row slideanim">
         <div class="col-sm-4">
             <p>Poker Hand Simulator</p>
-            <img src="resources/images/poker.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            <a href="poker_simulator/pokerindex.html">
+                <img src="resources/images/poker.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            </a>
         </div>
         <div class="col-sm-4">
             <p>Beat Factory</p>
-            <img src="resources/images/music.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            <a href="beat_factory/beatindex.html">
+                <img src="resources/images/music.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            </a>
         </div>
         <div class="col-sm-4">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            <p>Running Stats</p>
+            <a href="running_stats/runningindex.html">
+                <img src="resources/images/running.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+            </a>
         </div>
     </div>
+</div>
+
+<!-- Fourth Container "Member's Area"  TODO LOTS-->
+<div id="members" class="container-fluid bg-4 text-center">
+    <h3 class="margin">Member's Area</h3><br>
+    <p>Login for goodies</p>
+    <form class="form-inline" role="form">
+        <div class="form-group">
+            <label class="sr-only" for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 </div>
 
 <!-- Contact Box -->
@@ -151,12 +176,12 @@
     <h2 class="text-center">CONTACT</h2>
     <div class="row">
         <div class="col-sm-5">
-            <p>Contact us and we'll get back to you within 24 hours.</p>
-            <p><span class="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
-            <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
-            <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+            <p>Contact me and I'll get back to you within 24 hours.</p>
+            <p><span class="glyphicon glyphicon-map-marker"></span> Reading, UK</p>
+            <p><span class="glyphicon glyphicon-phone"></span> +00 44 7917724***</p>
+            <p><span class="glyphicon glyphicon-envelope"></span> thefinch*********.com</p>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7 slideanim">
             <div class="row">
                 <div class="col-sm-6 form-group">
                     <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
@@ -174,6 +199,34 @@
         </div>
     </div>
 </div>
+
+<div id="googleMap" style="height:400px;width:100%;"></div>
+
+<!-- Add Google Maps -->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+    var myCenter = new google.maps.LatLng(51.458299, -0.942967);
+
+    function initialize() {
+        var mapProp = {
+            center:myCenter,
+            zoom:12,
+            scrollwheel:false,
+            draggable:false,
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        var marker = new google.maps.Marker({
+            position:myCenter
+        });
+
+        marker.setMap(map);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">

@@ -1,11 +1,13 @@
 Poker simulator - AJAX requests
 Front Page content
-Google map
+Button images
+Members zone (Password protected)
+Google map <- Pins on map
+Poker stats analysis
 Facebook integration?
 Instagram integration
-Running stats <-
+Running stats <- mapmyrunapi
 Beat factory
 Contact us Workbooks integration
-Improve deployment: Automate Tag > Export > SCP, include version logging.
 Version number on page (Small HTML page that is updated during deployment)
 PHP 7 (poss http://php-osx.liip.ch/)
