@@ -1,7 +1,10 @@
 Poker simulator - AJAX requests
+
+
 Front Page content
-Button images
-Members zone (Password protected)
+Button images (
+Members zone (Password protected) Dashboard http://demos.creative-tim.com/light-bootstrap-dashboard/dashboard
+view-source:https://getbootstrap.com/examples/dashboard/
 Google map <- Pins on map
 Poker stats analysis
 Facebook integration?

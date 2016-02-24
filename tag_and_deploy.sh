@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Last commit: $Id$
 # Version Location: $HeadURL$
-PIIP=192.168.0.2
+PIIP=finchmeister.co.uk
 VERSION=X_00_01
 
 # Update the version txt file going out to the PI with the new version no.
