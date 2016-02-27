@@ -2,7 +2,7 @@
 # Last commit: $Id$
 # Version Location: $HeadURL$
 PIIP=finchmeister.co.uk
-VERSION=X_00_03
+VERSION=X_00_04
 
 # Update the version txt file going out to the PI with the new version no.
 echo "${VERSION}" > html/version.txt
