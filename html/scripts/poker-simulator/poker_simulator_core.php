@@ -7,6 +7,17 @@
  *
  */
 
+function debug($debug) {
+  global $DEBUG;
+  if ($DEBUG) {
+    if(is_array($debug)) {
+      print_r($debug);
+    } else {
+      echo $debug . "\n\n";
+    }
+  }
+}
+
 class DeckFunctions {
 
   //Create an unshuffled deck
@@ -944,6 +955,13 @@ class PokerSimulation {
   //Player card array must include an index even if blank, e.g., [['Ks', '5h']] FIXME??
   //The total number of players, if left undefined will default to number of players in the hand.
   //Will out put an array for each player with their win %, split %
+  /**
+   * @param $playersCards
+   * @param bool $shownCards
+   * @param bool $noOfPlayers
+   * @param int $iterations
+   * @return mixed
+   */
   public static function calculateOdds($playersCards, $shownCards = FALSE, $noOfPlayers = FALSE, $iterations = 1){
 
     $noOfPlayersPassed = count($playersCards);
@@ -1130,15 +1148,15 @@ class StatisticsFunctions{
 
 
 
-$sharedCards = ['Qs','Kh', '7c', '5c'  ];
-$playerCards = ['Luke' => ['6h', '6s'],  'steve' => ['Ks', '5d'], 'alice' =>['Kd', '5s'],];
+#$sharedCards = ['Qs','Kh', '7c', '5c'  ];
+#$playerCards = ['Luke' => ['6h', '6s'],  'steve' => ['Ks', '5d'], 'alice' =>['Kd', '5s'],];
 #$playerCards = [ 'alice' =>['Qd', '2s'],];
 #print_r(PokerSimulation::rankPlayersHands($playerCards, $sharedCards));
 #print_r(PokerSimulation::simulatePreFlopSinglePlayerCards(['Ah', 'As'], 5, 50));
 #print_r(TestingFunctions::preFlopSimulation(['Kh', '5s'], 6));
 
-$hands = [['Qd', '2s', 'Qs', 'Kh', '7c' ], ['Qh', 'Ad', 'Qd', 'Ks', '7d' ]];
-$hand = ['10d', '4s', '3s', '10h', '7c' ];
+#$hands = [['Qd', '2s', 'Qs', 'Kh', '7c' ], ['Qh', 'Ad', 'Qd', 'Ks', '7d' ]];
+#$hand = ['10d', '4s', '3s', '10h', '7c' ];
 #print_r(PokerSimulation::rankHands($hands));
 
 
