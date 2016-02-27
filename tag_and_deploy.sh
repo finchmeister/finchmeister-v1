@@ -2,10 +2,10 @@
 # Last commit: $Id$
 # Version Location: $HeadURL$
 PIIP=finchmeister.co.uk
-VERSION=X_00_01
+VERSION=X_00_03
 
 # Update the version txt file going out to the PI with the new version no.
-echo "${VERSION}" > trunk/html/version.txt
+echo "${VERSION}" > html/version.txt
 
 # Commit the WC
 svn commit trunk -m "Commit prior to deployment of ${VERSION} to PI"
@@ -14,7 +14,7 @@ svn commit trunk -m "Commit prior to deployment of ${VERSION} to PI"
 svn --parents copy file:///Users/jfinch/raspberrypiSVN/trunk file:///Users/jfinch/raspberrypiSVN/tags/${VERSION} -m "Deployment of ${VERSION} to PI"
 
 # Reset the LOCAL version txt file
-echo "Bleeding edge dev code - version last deployed to PI: ${VERSION}" > trunk/html/version.txt
+echo "Bleeding edge dev code - version last deployed to PI: ${VERSION}" > html/version.txt
 
 # Create temporary directory /tmp/rpiwebsite/${VERSION}
 cd /tmp
