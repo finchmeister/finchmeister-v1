@@ -18,7 +18,7 @@ header('Content-Type: application/json');
 include 'poker_simulator_core.php';
 
 const NO_OF_ITERATIONS = 100;
-$DEBUG = TRUE;
+$DEBUG = FALSE;
 
 debug($_REQUEST);
 
