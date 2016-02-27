@@ -8,7 +8,7 @@ VERSION=X_00_03
 echo "${VERSION}" > html/version.txt
 
 # Commit the WC
-svn commit trunk -m "Commit prior to deployment of ${VERSION} to PI"
+svn commit -m "Commit prior to deployment of ${VERSION} to PI"
 
 # Create the branch
 svn --parents copy file:///Users/jfinch/raspberrypiSVN/trunk file:///Users/jfinch/raspberrypiSVN/tags/${VERSION} -m "Deployment of ${VERSION} to PI"
