@@ -40,8 +40,8 @@
                         document.getElementById("jsonresponse").innerHTML = xmlhttp.responseText;
                     }
                 };
-                var params = card1 + card2;
-                xmlhttp.open("GET", "../Scripts/poker-simulator/poker_simulator_interface.php?q=" + params, true);
+                var params = "t=co&p=2&i=100&p1c1="+card1+"&p1c2="+card2;
+                xmlhttp.open("GET", "../Scripts/poker-simulator/poker_simulator_interface.php?" + params, true);
                 xmlhttp.send();
 
             }
@@ -74,7 +74,7 @@
     </script>
 </head>
 <body>
-
+<!--
 <p><b>Heads Up Simulator (No Opponent)</b></p>
 <form>
     Enter your cards pre flop: <input type="text" onkeyup="showHint(this.value)">
@@ -86,9 +86,10 @@
     Enter your cards pre flop: <input type="text" onkeyup="showHint(this.value)">
 </form>
 <p>Chance of winning: <span id="txtHint"></span></p>
+-->
 
 <!--Heads UP, 1 Player, Community 0, Card 1-->
-<p>Heads UP, 1 Player, Community 0, Card 1</p>
+<p>Heads UP, 1 Player, Community 0, Card 1, 100 iterations</p>
 <p>jsresponse: <span id="jsresponse"></span></p>
 <p>jsonresponse: <span id="jsonresponse"></span></p>
 <select id="hu1pc0c1" onchange="hu1pc0()">
