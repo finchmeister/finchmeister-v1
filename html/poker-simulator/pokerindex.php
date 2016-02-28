@@ -1,7 +1,17 @@
+<!--
+TODO:
+ * Make JS tidy
+ *
+
+-->
+
+
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script>
+
         function showHint(str) {
             if (str.length < 4) {
                 document.getElementById("txtHint").innerHTML = "";
@@ -13,10 +23,21 @@
                         document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
                     }
                 };
-                xmlhttp.open("GET", "../Scripts/poker-simulator/poker_simulator_interface.php?q=" + str, true);
+                xmlhttp.open("GET", "../scripts/poker-simulator/poker_simulator_interface.php?q=" + str, true);
                 xmlhttp.send();
             }
         }
+
+        function calculateOdds () {
+
+        }
+
+        // Pass in an array of cards, this will ensure they are unique and will return an error if not.
+        function validateCards(cards) {
+
+        }
+
+
         function hu1pc0() {
             var e = document.getElementById("hu1pc0c1"); //This can be simplified with jquery
             var card1 = e.options[e.selectedIndex].value;
@@ -41,31 +62,68 @@
                     }
                 };
                 var params = "t=co&p=2&i=100&p1c1="+card1+"&p1c2="+card2;
-                xmlhttp.open("GET", "../Scripts/poker-simulator/poker_simulator_interface.php?" + params, true);
+                xmlhttp.open("GET", "../scripts/poker-simulator/poker_simulator_interface.php?" + params, true);
                 xmlhttp.send();
 
             }
         }
 
-        function callCalculateOdds(urlParams) {
+        function callPokerSim(urlParams) {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     return xmlhttp.responseText;
                 }
             };
-            xmlhttp.open("GET", "../Scripts/poker-simulator/poker_simulator_interface.php?" + urlParams, true);
+            xmlhttp.open("GET", "../scripts/poker-simulator/poker_simulator_interface.php?" + urlParams, true);
             xmlhttp.send();
         }
 
         function cohu1pc0() {
-            var e = document.getElementById("hu1pc0c1"); //This can be simplified with jquery
-            var card1 = e.options[e.selectedIndex].value;
-            var e = document.getElementById("hu1pc0c2");
-            var card2 = e.options[e.selectedIndex].value;
+          var card1 = $( "#zhu1pc0c1" ).val();
+          var card2 = $( "#zhu1pc0c2" ).val();
+          var pokerSimURL = "../scripts/poker-simulator/poker_simulator_interface.php";
+          //var params = "?t=co&p=2&i=100&p1c1="+card1+"&p1c2="+card2;
+          var params = {
+            "t":"co",
+            "p":2,
+            "i":10,
+            "p1c1":card1,
+            "p1c2":card2
+          };
+          console.log(params);
 
+          $.ajax({
+            type: 'POST',
+            url: '../scripts/poker-simulator/poker_simulator_interface.php',
+            data: {
+              "t":"co",
+              "p":2,
+              "i":10,
+              "p1c1":card1,
+              "p1c2":card2
+            },
+            dataType: 'json',
+            success: function (data) {
+              console.log(data);
+              $('#zhu1pc0response').text(data[0]);
+            }
+          });
+
+          /*$("#zhu1pc0response").load(pokerSimURL, params, function( response, status, xhr ) {
+            console.log('response gone');
+            if ( status == "error" ) {
+              var msg = "Sorry but there was an error: ";
+              $( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
+            }
+          });*/
         }
+
+
+
         // TODO validate input function
+
+
 
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
@@ -74,6 +132,7 @@
     </script>
 </head>
 <body>
+
 <!--
 <p><b>Heads Up Simulator (No Opponent)</b></p>
 <form>
@@ -219,6 +278,14 @@
         <option value="2s">2s</option>
     </optgroup>
 </select>
+
+<p>zhu1pc0: <span id="zhu1pc0response"></span></p>
+
+<?php
+include "../scripts/poker-simulator/generate_card_html.php";
+echo generateCardHTML('zhu1pc0c1', 'cohu1pc0');
+echo generateCardHTML('zhu1pc0c2', 'cohu1pc0');
+?>
 
 
 </body>

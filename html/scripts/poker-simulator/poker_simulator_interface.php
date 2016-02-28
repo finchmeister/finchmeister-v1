@@ -27,7 +27,6 @@ if ($_REQUEST['t'] == 'co') {
   echo calculateOddsFromRequest();
 }
 
-
 function calculateOddsFromRequest(){
   $playersCards = [
     'p1' => ['c1', 'c2'],
