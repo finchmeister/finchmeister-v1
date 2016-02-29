@@ -71,3 +71,19 @@ function generateCardHTML($divId, $functionName){
 EOF;
   return $html;
 }
+
+function generateNoOfPlayersHTML($divId, $functionName) {
+  $html = <<<EOF
+<select id="{$divId}" onchange="{$functionName}()">
+  <option selected value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+</select>
+EOF;
+  return $html;
+}
