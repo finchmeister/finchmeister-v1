@@ -1,5 +1,4 @@
-Poker simulator - AJAX requests
-
+Poker simulator - CHARTS - MAKE LOOK NICE
 
 Front Page content
 Button images (

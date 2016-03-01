@@ -61,6 +61,8 @@ function calculateOddsFromRequest(){
 
   $iterations = isset($_REQUEST['i']) ? $_REQUEST['i'] : NO_OF_ITERATIONS;
   $results = PokerSimulation::calculateOdds($hands, $shownCards, $noOfPlayers, $iterations);
-
   return json_encode($results);
 }
+
+//http://localhost/scripts/poker-simulator/poker_simulator_interface.php?t=co&p1c1=Kh&p1c2=Qd&p2c1=4h&p2c2=3h&cc1=Qh&cc2=5s&cc3=6h&cc4=3d&i=1000
+//http://localhost/scripts/poker-simulator/poker_simulator_interface.php?t=co&p1c1=Kh&p1c2=Qd&p2c1=4h&p2c2=3h&i=1000

@@ -120,6 +120,10 @@ class DeckFunctions {
     return $remainingCards;
   }
 
+  public static function dealIndividualCard($shuffledDeck){
+
+  }
+
 } //End of deck functions.
 
 
@@ -964,6 +968,7 @@ class PokerSimulation {
    */
   public static function calculateOdds($playersCards, $shownCards = FALSE, $noOfPlayers = FALSE, $iterations = 1){
 
+
     $noOfPlayersPassed = count($playersCards);
 
     if(!$noOfPlayers) { //If the number of players is undefined, then we'll only evaluate the hands we've got
@@ -976,6 +981,7 @@ class PokerSimulation {
 
     //Find the remaining available cards
     $shownCards = $shownCards ? $shownCards : [];
+    $noOfShownCards = count($shownCards);
     $cardsInPlay = $shownCards; //Initialise the array
     foreach($playersCards as $playerCards){
       $cardsInPlay = array_merge($cardsInPlay, $playerCards);
@@ -983,7 +989,7 @@ class PokerSimulation {
     $unshuffledDeck = DeckFunctions::createUnshuffledDeck();
     $remainingDeck = DeckFunctions::removeCardsFromDeck($cardsInPlay, $unshuffledDeck);
 
-    //Initalise the player stats array
+    //Initialise the player stats array
     foreach($playersCards as $player => $cards){
       $playerStats[$player] = [
         'win' => 0,
@@ -997,9 +1003,11 @@ class PokerSimulation {
       //We only need to deal for the remaining players, i.e., total no. of players - 1.
       $dealtCards = DeckFunctions::deal($remainingPlayers, $remainingDeck); //Empty players array if blank
 
-      //We need to differentiate between cards passed in and dealt cards.
-      //We don't care about the rankings of dealt cards, we only care about those with passed in.
-      //
+      // Prepare the shown cards in play array, take cards from the deal up until the necessary point
+      for($j = 0; $j < 5-$noOfShownCards; $j++) {
+        $shownCardsInPlay[] = $dealtCards['river'][$j];
+      }
+      $shownCardsInPlay = array_merge($shownCardsInPlay, $shownCards);
 
       //If we have any extra players we must include them in all players cards, otherwise $allPlayersCards is all we need.
       if(isset($dealtCards['players'])) {
@@ -1009,7 +1017,8 @@ class PokerSimulation {
         $allPlayersCards = $playersCards;
       }
 
-      $rankings = self::rankPlayersHands($allPlayersCards, $dealtCards['river']);
+      $rankings = self::rankPlayersHands($allPlayersCards, $shownCardsInPlay);
+      unset($shownCardsInPlay);
       $winner = $rankings[1];
       /*echo 'rankings ';
       print_r($rankings);
