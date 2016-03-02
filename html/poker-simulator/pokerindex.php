@@ -15,6 +15,17 @@ TODO:
 
     var i = 10;
 
+    var playersCards = {
+      p1:['c1', 'c2'],
+      p2:['c1', 'c2'],
+      p3:['c1', 'c2'],
+      p4:['c1', 'c2'],
+      p5:['c1', 'c2'],
+      p6:['c1', 'c2'],
+      p7:['c1', 'c2'],
+      p8:['c1', 'c2']
+    };
+
     // Pass in an array of cards, this will ensure they are unique and will return an error if not.
     function validateCards(cards) {
 
@@ -123,7 +134,7 @@ TODO:
         dataType: 'json',
         success: function (data) {
           console.log(data);
-          $('#cop2pc1cc0response').text(data[0]['win']);
+          $('#cop2pc1cc0response').text(JSON.stringify(data));
         }
       });
 
@@ -134,17 +145,67 @@ TODO:
     function cop2pc1cc0ChartFromJSON(json) {
 
 
+
+    }
+
+    function validateCommunityCards(ccArray) {
+      var cardsAtPreFlop = ccArray[0] == null && ccArray[1] == null && ccArray[2] == null && ccArray[3] == null && ccArray[4] == null;
+      var cardsAtFlop    = ccArray[0] != null && ccArray[1] != null && ccArray[2] != null && ccArray[3] == null && ccArray[4] == null;
+      var cardsAtTurn    = ccArray[0] != null && ccArray[1] != null && ccArray[2] != null && ccArray[3] != null && ccArray[4] == null;
+      var cardsAtRiver   = ccArray[0] != null && ccArray[1] != null && ccArray[2] != null && ccArray[3] != null && ccArray[4] != null;
+      return (cardsAtPreFlop || cardsAtFlop || cardsAtTurn || cardsAtRiver);
     }
 
     // calculateodds, players=n, player cards=1, community cards=n
-    function copnpc1ccn() {
 
+    function copnp1ccn() {
+      //Get the card values
+      var p1c1 = $( "#copnp1c1ccn" ).val();
+      var p1c2 = $( "#copnp1c2ccn" ).val();
+      // Community cards
+      var cc1 = $( "#copnp1cc1" ).val();
+      var cc2 = $( "#copnp1cc2" ).val();
+      var cc3 = $( "#copnp1cc3" ).val();
+      var cc4 = $( "#copnp1cc4" ).val();
+      var cc5 = $( "#copnp1cc5" ).val();
+
+      //TODO function to validate cards (see poker core)
+      var ccCardsValid = validateCommunityCards([cc1, cc2, cc3, cc4, cc5]);
+      console.log('cc'+ccCardsValid);
+
+      console.log("p1c1" + p1c1);
+      console.log("p1c2" + p1c2);
+      return;
+
+      var data = {
+        t:"co",
+        p:2,
+        i:i,
+        p1c1:p1c1,
+        p1c2:p1c2
+      };
+
+
+
+      $.ajax({
+        type: 'POST',
+        url: '../scripts/poker-simulator/poker_simulator_interface.php',
+        data: {
+          t:"co",
+          p:2,
+          i:i,
+          p1c1:card1,
+          p1c2:card2
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data);
+          $('#cop2pc1cc0response').text(JSON.stringify(data));
+        }
+      });
     }
 
     //calculateodds, players=n, player cards=n, community cards=n
-    function copnpcnccn() {
-
-    }
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
@@ -183,32 +244,32 @@ echo generateCardHTML('cop2pc1cc0c2', 'cop2pc1cc0');
 <?php
 //include "../scripts/poker-simulator/generate_card_html.php";
 // P1 Cards
-echo generateCardHTML('copnpc1ccnc1', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccnc2', 'copnpc1ccn');
+echo generateCardHTML('copnp1c1ccn', 'copnp1ccn');
+echo generateCardHTML('copnp1c2ccn', 'copnp1ccn');
 // Community Cards
-echo generateCardHTML('copnpc1ccncc1', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc2', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc3', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc4', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc5', 'copnpc1ccn');
+echo generateCardHTML('copnp1cc1', 'copnp1ccn');
+echo generateCardHTML('copnp1cc2', 'copnp1ccn');
+echo generateCardHTML('copnp1cc3', 'copnp1ccn');
+echo generateCardHTML('copnp1cc4', 'copnp1ccn');
+echo generateCardHTML('copnp1cc5', 'copnp1ccn');
 // No of Players
-echo generateNoOfPlayersHTML('copnpc1ccnp', 'copnpc1ccn');
+echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
 ?>
-<p>copnpc1ccnresponse: <span id="copnpc1ccnresponse"></span></p>
+<p>copnp1ccnresponse: <span id="copnp1ccnresponse"></span></p>
 
 
 <h2>calculateodds, players=n, player cards=n, community cards=n</h2>
 <?php
 //include "../scripts/poker-simulator/generate_card_html.php";
 // P1 Cards
-echo generateCardHTML('copnpc1ccnc1', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccnc2', 'copnpc1ccn');
+echo generateCardHTML('copnpc1ccnc1', 'copnp1ccn');
+echo generateCardHTML('copnpc1ccnc2', 'copnp1ccn');
 // Community Cards
-echo generateCardHTML('copnpc1ccncc1', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc2', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc3', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc4', 'copnpc1ccn');
-echo generateCardHTML('copnpc1ccncc5', 'copnpc1ccn');
+echo generateCardHTML('copnpc1ccncc1', 'copnp1ccn');
+echo generateCardHTML('copnpc1ccncc2', 'copnp1ccn');
+echo generateCardHTML('copnpc1ccncc3', 'copnp1ccn');
+echo generateCardHTML('copnpc1ccncc4', 'copnp1ccn');
+echo generateCardHTML('copnpc1ccncc5', 'copnp1ccn');
 echo '<br>';
 
 for($i=2; $i<=9; $i++) {
