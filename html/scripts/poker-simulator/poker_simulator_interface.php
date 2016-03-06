@@ -37,22 +37,20 @@ function calculateOddsFromRequest(){
     'p6' => ['c1', 'c2'],
     'p7' => ['c1', 'c2'],
     'p8' => ['c1', 'c2'],
+    'p9' => ['c1', 'c2'],
   ];
 
 // Convert player cards from the request into a format caculateOdds() will accept.
   foreach($playersCards as $player => $cards) {
-    if(isset($_REQUEST[$player.$cards[0]]) && isset($_REQUEST[$player.$cards[1]])) {
-      $hands[] = [$_REQUEST[$player.$cards[0]], $_REQUEST[$player.$cards[1]]];
-    }
-    else {
-      break;
+    if(!empty($_REQUEST[$player.$cards[0]]) && !empty($_REQUEST[$player.$cards[1]])) {
+      $hands[$player] = [$_REQUEST[$player.$cards[0]], $_REQUEST[$player.$cards[1]]];
     }
   }
 
 //Community cards
   $communityCards = ['cc1', 'cc2', 'cc3', 'cc4', 'cc5'];
   foreach ($communityCards as $communityCard) {
-    if(isset($_REQUEST[$communityCard])) {
+    if(!empty($_REQUEST[$communityCard])) {
       $shownCards[] = $_REQUEST[$communityCard];
     }
   }

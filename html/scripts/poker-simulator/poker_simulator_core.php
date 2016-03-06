@@ -594,8 +594,9 @@ class ReturnOrderedHandAndHandValue {
 
   public static function flush($hand) {
     $hand = HandEvaluation::findFlush($hand);
-    $highCardOfFlush[0] = $hand[0];
-    $handValue = 5 + CardFunctions::calculateDecimalHandValue($highCardOfFlush);
+    /*$highCardOfFlush[0] = $hand[0];
+    $handValue = 5 + CardFunctions::calculateDecimalHandValue($highCardOfFlush);*/
+    $handValue = 5 + CardFunctions::calculateDecimalHandValue($hand);
     $handAndHandValue = self::createHandAndHandValueArray($hand, $handValue, 'Flush');
     return $handAndHandValue;
   }
@@ -1004,6 +1005,7 @@ class PokerSimulation {
       $dealtCards = DeckFunctions::deal($remainingPlayers, $remainingDeck); //Empty players array if blank
 
       // Prepare the shown cards in play array, take cards from the deal up until the necessary point
+      $shownCardsInPlay = [];
       for($j = 0; $j < 5-$noOfShownCards; $j++) {
         $shownCardsInPlay[] = $dealtCards['river'][$j];
       }

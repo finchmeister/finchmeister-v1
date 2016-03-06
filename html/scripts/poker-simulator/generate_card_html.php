@@ -3,10 +3,11 @@
 // Last commit $Id$
 // Version Location $HeadURL$
 
-function generateCardHTML($divId, $functionName){
+function generateCardHTML($divId, $functionName, $attributes = ""){
   $html = <<<EOF
-<select id="{$divId}" onchange="{$functionName}()">
-    <option selected disabled hidden value=''></option>
+<select id="{$divId}" {$attributes} onchange="{$functionName}()">
+    /*<option selected disabled hidden value=''></option>*/
+    <option selected value=''></option>
     <optgroup label="Clubs">
         <option value="Ac">Ac</option>
         <option value="Kc">Kc</option>
