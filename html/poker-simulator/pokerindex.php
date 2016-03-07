@@ -13,7 +13,7 @@ TODO:
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script>
 
-    var i = 100;
+    var coI = 100;
 
     var playersCards = {
       p1:['c1', 'c2'],
@@ -80,7 +80,7 @@ TODO:
       var params = {
         "t":"co",
         "p":2,
-        "i":10,
+        "i":coI,
         "p1c1":card1,
         "p1c2":card2
       };
@@ -92,7 +92,7 @@ TODO:
         data: {
           "t":"co",
           "p":2,
-          "i":i,
+          "i":coI,
           "p1c1":card1,
           "p1c2":card2
         },
@@ -127,7 +127,7 @@ TODO:
         data: {
           "t":"co",
           "p":2,
-          "i":i,
+          "i":coI,
           "p1c1":card1,
           "p1c2":card2
         },
@@ -280,8 +280,7 @@ TODO:
     }
 
     function copnpnccn() {
-
-      // Fetch an ensure correct no. of players cards are selected
+      // Fetch an ensure valid no. of players cards are selected
       var playersCards = {};
       var cardsSelected = true;
 
@@ -289,7 +288,11 @@ TODO:
         for (j = 1; j <=2; j++) {
           var playerCardIndex = "p" + i + "c" + j;
           var divId = "copn" + playerCardIndex + "ccn";
-          playersCards[playerCardIndex] = $( "#" + divId ).val();
+          if (copnpnccnCardState[divId] || i == 1) {
+            // Ensure the cards are not sat out, otherwise don't add them to the players cards obj
+            // Don't do the check on the first set of cards, these are mandatory.
+            playersCards[playerCardIndex] = $( "#" + divId ).val();
+          }
         }
         var currentPlayerCards = playersCards["p" + i + "c1"] + playersCards["p" + i + "c2"];
         if (currentPlayerCards.length != 0 && currentPlayerCards.length < 4) {
@@ -297,20 +300,18 @@ TODO:
           cardsSelected = false;
           console.log("player " + i + " needs all cards selected");
         }
-        else {
-          // Two cards
-          atLeastOnePlayer = true;
-        }
       }
       if (!cardsSelected) {
-        console.log('Player cards not selected');
+        console.log('All players must have cards selected');
         return;
         //TODO message
       }
 
+      // P1 must have cards set to continue
       if (isEmpty(playersCards["p1c1"]) && isEmpty(playersCards["p1c2"])) {
-        console.log('At least one player must be selected');
-        return
+        console.log('Player one must have cards selected');
+        return;
+        //TODO message
       }
 
       // Fetch and ensure the correct no. of community cards are select
@@ -330,34 +331,52 @@ TODO:
 
       // Validate all cards for uniqueness
       var allCardsObj = $.extend({}, playersCards, communityCards);
-      var allCardsArray = $.map(allCardsObj, function(value, index) {
+      var allCardsArray = $.map(allCardsObj, function(value, index) { // Converts object to array
         return [value];
       });
       if (!validateUniqueCards(allCardsArray)) {
         // Cards not unique
         console.log('Cards must be unique');
         return;
-        //TOOD return message
+        //TODO return message
       }
 
+      // Now get the no of players
+      var p = Object.keys(playersCards).length/2;
+      if (p < 2) {
+        console.log('There must be at least 2 players');
+        return;
+      }
 
+      // Prepare the params
+      var data = {
+        t:"co",
+        p:p,
+        i:coI
+      };
 
+      $.extend(data, playersCards, communityCards);
+      console.log('data');
+      console.log(data)
 
+      $.ajax({
+        type: 'POST',
+        url: '../scripts/poker-simulator/poker_simulator_interface.php',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+          console.log(data);
+          $('#copnpnccnresponse').text(JSON.stringify(data));
+        }
+      });
 
-      console.log(playersCards);
     }
+
 
     function calculateOdds(noOfPlayers, playersCards, communityCards) {
       var p1c1 = playersCards["p1c1"];
       var p1c2 = playersCards["p1c2"];
 
-      var ccCardsValid = validateCommunityCards(communityCards);
-      console.log(ccCardsValid);
-      if (!(ccCardsValid)) {
-        console.log('Community cards not valid');
-        return;
-        //TODO RETURN MESSAGE
-      }
 
 
 
@@ -377,9 +396,15 @@ TODO:
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
+    // Just blanks all the cards
     function resetcopnp1ccn() {
       var divs = ["copnp1c1", "copnp1c2", "copnp1cc1", "copnp1cc2", "copnp1cc3", "copnp1cc4", "copnp1cc5"];
       resetDivs(divs);
+    }
+
+    // Reloads the entire copnpnccn div
+    function resetcopnpnccn() {
+      $('#copnpnccn').load('pokerindex.php' +  ' #copnpnccn');
     }
 
     /**
@@ -416,6 +441,14 @@ TODO:
       }
     }
 
+    // Initialise the variable out of the scope of the function
+    var copnpnccnCardState = {};
+
+    /**
+     * On click of the button will disable/enable the cards.
+     * @param buttonDiv string of button div id
+     * @param cardDivs array of card div ids
+     */
     function changePlayerState(buttonDiv, cardDivs) {
      // var cardDivs = [cardDivs[0].replace('ccn', 'c1ccn'), cardDivs[1].replace('ccn', 'c2ccn')];
       var selector = "#" + buttonDiv;
@@ -424,12 +457,18 @@ TODO:
       if (state == 'Add Player') {
         enableDivs(cardDivs);
         newValue = "Sit Out";
+        copnpnccnCardState[cardDivs[0]] = true;
+        copnpnccnCardState[cardDivs[1]] = true;
       }
       else {
+        resetDivs(cardDivs);
         disableDivs(cardDivs);
         newValue = "Add Player";
+        copnpnccnCardState[cardDivs[0]] = false;
+        copnpnccnCardState[cardDivs[1]] = false;
       }
       $(selector).text(newValue)
+      copnpnccn();
     }
 
 
@@ -486,38 +525,44 @@ echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
 
 
 <h2>calculateodds, players=n, player cards=n, community cards=n</h2>
-<?php
-//include "../scripts/poker-simulator/generate_card_html.php";
-// P1 Cards
-echo generateCardHTML('copnp1c1ccn', 'copnpnccn');
-echo generateCardHTML('copnp1c2ccn', 'copnpnccn');
-// Community Cards
-echo generateCardHTML('copnpncc1', 'copnpnccn');
-echo generateCardHTML('copnpncc2', 'copnpnccn');
-echo generateCardHTML('copnpncc3', 'copnpnccn');
-echo generateCardHTML('copnpncc4', 'copnpnccn');
-echo generateCardHTML('copnpncc5', 'copnpnccn');
-echo '<br>';
+<!--copnpnccn-->
+<div id="copnpnccn">
+  <?php
+  //include "../scripts/poker-simulator/generate_card_html.php";
+  // P1 Cards
+  echo generateCardHTML('copnp1c1ccn', 'copnpnccn');
+  echo generateCardHTML('copnp1c2ccn', 'copnpnccn');
+  // Community Cards
+  echo generateCardHTML('copnpncc1', 'copnpnccn');
+  echo generateCardHTML('copnpncc2', 'copnpnccn');
+  echo generateCardHTML('copnpncc3', 'copnpnccn');
+  echo generateCardHTML('copnpncc4', 'copnpnccn');
+  echo generateCardHTML('copnpncc5', 'copnpnccn');
+  echo '<br>';
 
-for($i=2; $i<=9; $i++) {
-  $pcDivIds = [];
-  for($j = 1; $j <=2; $j++) {
-    $divId = "copnp{$i}c{$j}ccn";
-    echo generateCardHTML($divId, 'copnpnccn', 'disabled="true"');
-    $pcDivIds[] = $divId;
+  // Create the card dropdowns and buttons for players p2<=
+  for($i=2; $i<=9; $i++) {
+    $pcDivIds = [];
+    for($j = 1; $j <=2; $j++) {
+      $divId = "copnp{$i}c{$j}ccn";
+      echo generateCardHTML($divId, 'copnpnccn', 'disabled="true"');
+      $pcDivIds[] = $divId;
+    }
+    $pcDivIds = '["' . implode('" , "', $pcDivIds) . '"]';
+    $emptySeatDivId = "disablecopnp{$i}ccn";
+    echo "<button id='{$emptySeatDivId}' type='button' onclick='changePlayerState(\"{$emptySeatDivId}\", {$pcDivIds})'>Add Player</button>";
+    echo "<button id='resetcopnp{$i}ccn' type='button' onclick='resetDivs({$pcDivIds})'>Reset</button>";
+    unset ($pcDivIds);
+    echo "Player $i <br>";
+
   }
-  $pcDivIds = '["' . implode('" , "', $pcDivIds) . '"]';
-  $emptySeatDivId = "disablecopnp{$i}ccn";
-  echo "<button id='{$emptySeatDivId}' type='button' onclick='changePlayerState(\"{$emptySeatDivId}\", {$pcDivIds})'>Add Player</button>";
-  echo "<button id='resetcopnp{$i}ccn' type='button' onclick='resetDivs({$pcDivIds})'>Reset</button>";
-  unset ($pcDivIds);
-  echo "Player $i <br>";
+  ?>
+  <p>copnpnccnresponse: <span id="copnpnccnresponse"></span></p>
 
-}
-?>
-<p>copnpnccnresponse: <span id="copnpnccnresponse"></span></p>
+  <button id="resetcopnpnccn" type="button" onclick="resetcopnpnccn()">Reset</button>
 
-<button id="resetcopnpnccn" type="button" onclick="resetcopnpnccn()">Reset</button>
+
+</div>
 
 </body>
 </html>
