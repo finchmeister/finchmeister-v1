@@ -3,14 +3,29 @@ TODO:
  * Make JS tidy
  * Sidebar
  *  cohu1p
-
 -->
 
 
 <!DOCTYPE html>
+<!-- Last commit: $Id$ -->
+<!-- Version Location: $HeadURL$ -->
 <html>
 <head>
+  <title>Poker Simulator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      position: relative;
+    }
+    #section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}
+    #section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
+    #section3 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
+    #about    {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
+  </style>
   <script>
 
     var coI = 100;
@@ -242,7 +257,7 @@ TODO:
       var data = {
         t:"co",
         p:p,
-        i:i,
+        i:coI,
         p1c1:p1c1,
         p1c2:p1c2,
         cc1:cc1,
@@ -478,7 +493,7 @@ TODO:
 
   </script>
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 
 <!--
 <p><b>Heads Up Simulator (No Opponent)</b></p>
@@ -493,75 +508,110 @@ TODO:
 </form>
 <p>Chance of winning: <span id="txtHint"></span></p>
 -->
-<h1>Poker Sim</h1>
 
-<h2>calculateodds, players=2, player cards=1, community cards=0</h2>
-<?php
-include "../scripts/poker-simulator/generate_card_html.php";
-echo generateCardHTML('cop2pc1cc0c1', 'cop2pc1cc0');
-echo generateCardHTML('cop2pc1cc0c2', 'cop2pc1cc0');
-?>
-<p>cop2pc1cc0response: <span id="cop2pc1cc0response"></span></p>
-
-
-<h2>calculateodds, players=n, player cards=1, community cards=n</h2>
-<?php
-//include "../scripts/poker-simulator/generate_card_html.php";
-// P1 Cards
-echo generateCardHTML('copnp1c1', 'copnp1ccn');
-echo generateCardHTML('copnp1c2', 'copnp1ccn');
-// Community Cards
-echo generateCardHTML('copnp1cc1', 'copnp1ccn');
-echo generateCardHTML('copnp1cc2', 'copnp1ccn');
-echo generateCardHTML('copnp1cc3', 'copnp1ccn');
-echo generateCardHTML('copnp1cc4', 'copnp1ccn');
-echo generateCardHTML('copnp1cc5', 'copnp1ccn');
-// No of Players
-echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
-?>
-<button id="resetcopnp1ccn" type="button" onclick="resetcopnp1ccn()">Reset</button>
-
-<p>copnp1ccnresponse: <span id="copnp1ccnresponse"></span></p>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Poker Simulator</a>
+    </div>
+    <div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="#section1">Preflop - You vs 1 Player</a></li>
+          <li><a href="#section2">You vs n Players</a></li>
+          <li><a href="#section3">You vs n Players</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
 
 
-<h2>calculateodds, players=n, player cards=n, community cards=n</h2>
-<!--copnpnccn-->
-<div id="copnpnccn">
+<div id="section1" class="container-fluid">
+  <h1>calculateodds, players=2, player cards=1, community cards=0</h1>
+  <?php
+  include "../scripts/poker-simulator/generate_card_html.php";
+  echo generateCardHTML('cop2pc1cc0c1', 'cop2pc1cc0');
+  echo generateCardHTML('cop2pc1cc0c2', 'cop2pc1cc0');
+  ?>
+  <p>cop2pc1cc0response: <span id="cop2pc1cc0response"></span></p>
+</div>
+
+
+<div id="section2" class="container-fluid">
+  <h1>calculateodds, players=n, player cards=1, community cards=n</h1>
+
   <?php
   //include "../scripts/poker-simulator/generate_card_html.php";
   // P1 Cards
-  echo generateCardHTML('copnp1c1ccn', 'copnpnccn');
-  echo generateCardHTML('copnp1c2ccn', 'copnpnccn');
+  echo generateCardHTML('copnp1c1', 'copnp1ccn');
+  echo generateCardHTML('copnp1c2', 'copnp1ccn');
   // Community Cards
-  echo generateCardHTML('copnpncc1', 'copnpnccn');
-  echo generateCardHTML('copnpncc2', 'copnpnccn');
-  echo generateCardHTML('copnpncc3', 'copnpnccn');
-  echo generateCardHTML('copnpncc4', 'copnpnccn');
-  echo generateCardHTML('copnpncc5', 'copnpnccn');
-  echo '<br>';
-
-  // Create the card dropdowns and buttons for players p2<=
-  for($i=2; $i<=9; $i++) {
-    $pcDivIds = [];
-    for($j = 1; $j <=2; $j++) {
-      $divId = "copnp{$i}c{$j}ccn";
-      echo generateCardHTML($divId, 'copnpnccn', 'disabled="true"');
-      $pcDivIds[] = $divId;
-    }
-    $pcDivIds = '["' . implode('" , "', $pcDivIds) . '"]';
-    $emptySeatDivId = "disablecopnp{$i}ccn";
-    echo "<button id='{$emptySeatDivId}' type='button' onclick='changePlayerState(\"{$emptySeatDivId}\", {$pcDivIds})'>Add Player</button>";
-    echo "<button id='resetcopnp{$i}ccn' type='button' onclick='resetDivs({$pcDivIds})'>Reset</button>";
-    unset ($pcDivIds);
-    echo "Player $i <br>";
-
-  }
+  echo generateCardHTML('copnp1cc1', 'copnp1ccn');
+  echo generateCardHTML('copnp1cc2', 'copnp1ccn');
+  echo generateCardHTML('copnp1cc3', 'copnp1ccn');
+  echo generateCardHTML('copnp1cc4', 'copnp1ccn');
+  echo generateCardHTML('copnp1cc5', 'copnp1ccn');
+  // No of Players
+  echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
   ?>
-  <p>copnpnccnresponse: <span id="copnpnccnresponse"></span></p>
+  <button id="resetcopnp1ccn" type="button" onclick="resetcopnp1ccn()">Reset</button>
 
-  <button id="resetcopnpnccn" type="button" onclick="resetcopnpnccn()">Reset</button>
+  <p>copnp1ccnresponse: <span id="copnp1ccnresponse"></span></p>
+</div>
 
 
+<div id="section3" class="container-fluid">
+<h1>calculateodds, players=n, player cards=n, community cards=n</h1>
+  <!--copnpnccn-->
+  <div id="copnpnccn">
+    <?php
+    //include "../scripts/poker-simulator/generate_card_html.php";
+    // P1 Cards
+    echo generateCardHTML('copnp1c1ccn', 'copnpnccn');
+    echo generateCardHTML('copnp1c2ccn', 'copnpnccn');
+    // Community Cards
+    echo generateCardHTML('copnpncc1', 'copnpnccn');
+    echo generateCardHTML('copnpncc2', 'copnpnccn');
+    echo generateCardHTML('copnpncc3', 'copnpnccn');
+    echo generateCardHTML('copnpncc4', 'copnpnccn');
+    echo generateCardHTML('copnpncc5', 'copnpnccn');
+    echo '<br>';
+
+    // Create the card dropdowns and buttons for players p2<=
+    for($i=2; $i<=9; $i++) {
+      $pcDivIds = [];
+      for($j = 1; $j <=2; $j++) {
+        $divId = "copnp{$i}c{$j}ccn";
+        echo generateCardHTML($divId, 'copnpnccn', 'disabled="true"');
+        $pcDivIds[] = $divId;
+      }
+      $pcDivIds = '["' . implode('" , "', $pcDivIds) . '"]';
+      $emptySeatDivId = "disablecopnp{$i}ccn";
+      echo "<button id='{$emptySeatDivId}' type='button' onclick='changePlayerState(\"{$emptySeatDivId}\", {$pcDivIds})'>Add Player</button>"; //TODO Active/Disabled Buttons BS
+      echo "<button id='resetcopnp{$i}ccn' type='button' onclick='resetDivs({$pcDivIds})'>Reset</button>";
+      unset ($pcDivIds);
+      echo "Player $i <br>";
+
+    }
+    ?>
+    <p>copnpnccnresponse: <span id="copnpnccnresponse"></span></p>
+
+    <button id="resetcopnpnccn" type="button" onclick="resetcopnpnccn()">Reset</button>
+
+
+  </div>
+</div>
+
+<div id="about" class="container-fluid">
+  <h1>About</h1>
+  <p>Written in PHP</p>
 </div>
 
 </body>
