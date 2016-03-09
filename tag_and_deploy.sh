@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Last commit: $Id$
 # Version Location: $HeadURL$
+# Remember to run from ~/rpiwebsite/trunk
 PIIP=finchmeister.co.uk
-VERSION=X_00_05
+VERSION=X_00_06
 
 # Update the version txt file going out to the PI with the new version no.
 echo "${VERSION}" > html/version.txt
@@ -25,4 +26,4 @@ cd rpiwebsite
 svn export file:///Users/jfinch/raspberrypiSVN/tags/${VERSION}
 
 # Rsync the tag to PI
-rsync -r /tmp/rpiwebsite/${VERSION}/html/ pi@${PIIP}:/var/www/html
+rsync -arv --delete /tmp/rpiwebsite/${VERSION}/html/ pi@${PIIP}:/var/www/html

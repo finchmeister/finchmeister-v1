@@ -1,6 +1,8 @@
 Poker simulator - CHARTS - MAKE LOOK NICE
 
-Back up svn to google drive
+Weekly Back up svn to google drive
+Notify me when IP changes
+
 Front Page content
 Button images (
 Members zone (Password protected) Dashboard http://demos.creative-tim.com/light-bootstrap-dashboard/dashboard
