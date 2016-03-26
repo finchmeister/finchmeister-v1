@@ -27,3 +27,5 @@ svn export file:///Users/jfinch/raspberrypiSVN/tags/${VERSION}
 
 # Rsync the tag to PI
 rsync -arv --delete /tmp/rpiwebsite/${VERSION}/html/ pi@${PIIP}:/var/www/html
+# Also sync the scripts outside of document root
+rsync -arv --delete /tmp/rpiwebsite/${VERSION}/secure-php-scripts/ pi@${PIIP}:/var/www/secure-php-scripts

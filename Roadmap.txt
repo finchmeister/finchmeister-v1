@@ -1,4 +1,7 @@
 Poker simulator - CHARTS - MAKE LOOK NICE
+* Move drop downs
+* Java script to describe hands
+* Back story
 
 Weekly Back up svn to google drive
 Notify me when IP changes
@@ -12,7 +15,8 @@ Poker stats analysis
 Facebook integration?
 Instagram integration
 Running stats <- mapmyrunapi
-Beat factory
 Contact us Workbooks integration
-Version number on page (Small HTML page that is updated during deployment)
 PHP 7 (poss http://php-osx.liip.ch/)
+
+SECURITY
+https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet
