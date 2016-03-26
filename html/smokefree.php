@@ -26,8 +26,11 @@ session_start();
     #section1 {
       padding-top:50px;padding-bottom:15px;color: #fff; background-color: #f09f34;
     }
+    #section2 {
+      padding:50px; max-width: 500px;
+    }
     #counter {
-      color: #ff160e; font-size: 80vmin; text-align: center;
+      color: #ff160e; font-size: 40vmax; text-align: center;
     }
 
   </style>
@@ -48,9 +51,10 @@ session_start();
 <?php
 include "scripts/login/header.php";
 include "scripts/smoke-free/smokefreedb.php";
-var_dump($_SESSION);
 
-
+if (isset($_POST['logout'])) {
+  destroySession();
+}
 
 $registering = isset($_POST['email'], $_POST['p']); // TRUE if a user is registering
 if ($registering) {
@@ -58,34 +62,20 @@ if ($registering) {
   $password = $_POST['p'];
 
   if (login($email, $password, $mysqli) == true) {
-    // Login success
+    $validSession = true;
   } else {
     // Login failed
     echo 'Nah m8';
   }
 }
+ if (isset($_POST['lastsmokedate'])) {
+   setLastSmokeDate($_SESSION['user_id'], $_POST['lastsmokedate'], $mysqli);
+ }
 
 if (login_check($mysqli) == true) {
-
-  // Get the last smoke date
-  $daysSinceLastSmoke = getNoOfDaysSinceLastSmoke($_SESSION['user_id'], $mysqli);
-  if (empty($daysSinceLastSmoke)) {
-    // Set the last smoke date with the picker
-    echo <<<EOF
-<form class="form-inline" role="form" method="post" action="smokefree.php">
-  <div class="form-group">
-    <p>Date of last smoke: <input type="text" id="datepicker" name="lastsmoke"></p>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-default">Submit</button>
-  </div>
-</form>
-EOF;
-  } else {
-    // Display the no of days
-    echo '<p id="counter">'. $daysSinceLastSmoke . '</p>';
-  }
-} else {
+  $validSession = true;
+}
+else {
   // Display login form
   echo <<<EOF
 <form class="form-inline" role="form" method="post" action="smokefree.php">
@@ -100,43 +90,37 @@ EOF;
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
 EOF;
+}
 
-  if (isset($_POST['email'], $_POST['p'])) {
-    $email = $_POST['email'];
-    $password = $_POST['p'];
+if ($validSession) {
+  // Get the last smoke date
+  $daysSinceLastSmoke = getNoOfDaysSinceLastSmoke($_SESSION['user_id'], $mysqli);
+  if (empty($daysSinceLastSmoke)) {
+    // Set the last smoke date with the picker
+    echo <<<EOF
+<form class="form-inline" role="form" method="post" action="smokefree.php">
+  <div class="form-group">
+    <p>Date of last smoke: <input type="text" id="datepicker" name="lastsmokedate"></p>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Submit</button>
+  </div>
+</form>
+EOF;
 
-    if (login($email, $password, $mysqli) == true) {
-      // Login success
-      echo 'LOGGED IN m8';
-    } else {
-      // Login failed
-      echo 'Nah m8';
-    }
+
   } else {
-    // The correct POST variables were not sent to this page.
-    echo 'Invalid Request';
+    // Display the no of days
+    echo '<div id="section2" class="container-fluid"><p id="counter">'. $daysSinceLastSmoke . '</p></div>';
   }
 }
-
-
-if (isset($_POST['destroy'])) {
-  destroySession();
-}
-
 ?>
 <form class="form-inline" role="form" method="post">
   <div class="form-group">
-    <button type="submit" name="destroy" class="btn btn-default">DESTROY</button>
+    <button type="submit" name="logout" class="btn btn-default">Destroy session</button>
   </div>
 </form>
 
 </body>
 
 </html>
-TODO
-https://alias.io/2010/01/store-passwords-safely-with-php-and-mysql/
-Real simple login screen
-Create a menu to store the quit date
-Use cookies to store info, login
-http://www.w3schools.com/php/php_cookies.asp
-http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
