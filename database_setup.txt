@@ -6,7 +6,8 @@ GRANT SELECT, INSERT, UPDATE ON `finchmeister`.* TO 'sec_user'@'localhost';
 CREATE TABLE `finchmeister`.`members` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `email` VARCHAR(50) NOT NULL,
-    `password` CHAR(128) NOT NULL
+    `password` CHAR(60) NOT NULL,
+    `created_at` TIMESTAMP
 ) ENGINE = InnoDB;
 
 CREATE TABLE `finchmeister`.`login_attempts` (

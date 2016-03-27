@@ -1,2 +1,9 @@
 sudo cat /var/log/apache2/access_log
 sudo cat /var/log/apache2/error_log
+
+
+Add a new user
+1. Create pword hash in php
+echo password_hash("abc123", PASSWORD_DEFAULT);
+2. login to mysql
+insert into members (id, email, password) values (2, "test@test.com", "$2y$10$R6Oi64Z38h8Y1CMevKhCGe9mT5HwE88hppRnsFxMpRywy4ww8Tzbu");
