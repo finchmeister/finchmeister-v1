@@ -11,8 +11,12 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <title>Beat Factory</title>
     <style>
-        body {
+        /*body {
             position: relative; background-color: #000000;
+        }*/
+        body {
+            padding-bottom: 40px;
+            color: #5a5a5a;
         }
         #section1 {padding-top:50px;padding-bottom:15px;color: #fff; background-color: #1E88E5;}
         .carousel-inner img {
@@ -31,28 +35,49 @@
                 display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
             }
         }
-        #inProgress {
+        .bg-1 {
+            background-color: #bc1594;
             color: #ffffff;
-            text-align: center;
-            font-size: large;
+        }
+        .bg-2 {
+            background-color: #205bbc;
+            color: #ffffff;
+        }
+        /* Featurettes
+------------------------- */
+
+        .featurette-divider {
+            margin: 80px 0; /* Space out the Bootstrap <hr> more */
+        }
+
+        /* Thin out the marketing headings */
+        .featurette-heading {
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        .audioContainer {
+            padding: 30px;
+            display: table;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
 
-<div id="section1" class="container-fluid">
+<!--<div id="section1" class="container-fluid">
     <h1>Welcome to the Beat Factory</h1>
 </div>
 
 <div id="myCarousel" class="carousel slide" data-interval="false">
-    <!-- Indicators -->
+    &lt;!&ndash; Indicators &ndash;&gt;
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
 
-    <!-- Wrapper for slides -->
+    &lt;!&ndash; Wrapper for slides &ndash;&gt;
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <img src="../resources/images/beat-factory/under_your_spell.png" alt="Under Your Spell">
@@ -85,7 +110,7 @@
         </div>
     </div>
 
-    <!-- Left and right controls -->
+    &lt;!&ndash; Left and right controls &ndash;&gt;
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
@@ -94,9 +119,103 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+</div>-->
+
+<!--source http://getbootstrap.com/examples/carousel/#-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="jumbotron" style="padding-top: 98px;">
+    <div class="container text-center">
+        <h1>The Beat Factory</h1>
+        <p>A place where beats come to die...</p>
+    </div>
 </div>
 
-<p id="inProgress">In progress...</p>
+<div class="container" style="padding-top: 80px;">
+    <div class="col-md-12">
+        <p class="lead">Since discovering GarageBand, I've become a music producer, laying down dope-ass beats and face melting guitar on some of my favourite tracks.</p>
+        <p class="lead">You'll only find hurried and under produced songs at The Beat Factory right now, but like the rest of this site, it's in development, so stay tuned for, err..., more tunes!</p>
+        <p class="lead">Welcome to The Beat Factory, <em>enjoy</em>.</p>
+
+    </div>
+</div>
+
+<hr class="featurette-divider">
+
+<!-- START THE FEATURETTES -->
+<div class="container">
+
+
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Panacea. <span class="text-muted">Because jazz is cool.</span></h2>
+            <p class="lead">One day I'd like to play jazz properly, but playing jazz properly is hard, so this will have to do.
+                If you want to hear true jazzy genius, check out the original by <em>Greyboy</em> <a href="https://www.youtube.com/watch?v=y45bjPVlPdc">here</a>. Look out for the saxophone solo in the middle. It's real nice.</p>
+            <div class="audioContainer">
+                <audio controls>
+                    <source src="../music/Panacea%20Cover.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/Jazz-print.jpg" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading">Under Your Spell. <span class="text-muted">A cover from the Drive soundtrack.</span></h2>
+            <p class="lead">The first song to drop from The Beat Factory, <em>Under Your Spell</em> started life as an irritating fumbling mess on the house piano.
+                The next step, of course, was to produce the whole thing in GarageBand and slap a dreamy guitar solo in the middle - this is the story of The Beat Factory. If you can sing this, get in touch.
+            </p>
+            <div class="audioContainer">
+                <audio controls>
+                    <source src="../music/Under%20Your%20Spell%20Cover.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/under_your_spell.png" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Coming soon.</h2>
+            <p class="lead">New additions to The Beat Factory.</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/garageband.png" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+    <!-- /END THE FEATURETTES -->
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; finchmeister.co.uk</p>
+    </footer>
+</div>
+
+
+
+
+
 
 
 </body>
