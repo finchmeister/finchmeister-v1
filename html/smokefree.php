@@ -28,18 +28,14 @@ session_start();
     }
     #membersLogin{
       max-width: 500px;
-    }
-    .container-fluid {
-      padding-top: 70px;
-      padding-bottom: 70px;
+      padding-top: 50px;
     }
     #counter {
-      color: #ff160e; font-size: 400px; text-align: center;
+      color: #ff160e; font-size: 50vmin; text-align: center;
     }
     p {
       margin: 0px;
     }
-
   </style>
   <script>
     $(function() {
@@ -62,6 +58,7 @@ include "scripts/smoke-free/smokefreedb.php";
 if (isset($_POST['logout'])) {
   destroySession();
 }
+$validSession = false;
 
 $registering = isset($_POST['email'], $_POST['p']); // TRUE if a user is registering
 if ($registering) {

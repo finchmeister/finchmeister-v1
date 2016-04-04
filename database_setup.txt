@@ -19,5 +19,13 @@ CREATE TABLE `finchmeister`.`login_attempts` (
 
 CREATE TABLE `finchmeister`.`smokefree` (
     `user_id` INT(11) NOT NULL,
-    `time` DATETIME NOT NULL
+    `time` DATETIME NOT NULL,
+    `created_at` TIMESTAMP
+) ENGINE=InnoDB;
+
+
+CREATE TABLE `finchmeister`.`poker_rankings` (
+    `date` DATE NOT NULL,
+    `position` TINYINT(1) NOT NULL,
+    `name` VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB;

@@ -15,6 +15,7 @@ TODO:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -517,7 +518,7 @@ TODO:
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Poker Simulator</a>
+      <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
     </div>
     <div>
       <div class="collapse navbar-collapse" id="myNavbar">
@@ -532,6 +533,11 @@ TODO:
   </div>
 </nav>
 
+<div class="jumbotron" style="padding-top: 98px;"> <!--TODO make consistent-->
+  <div class="container text-center">
+    <h1>Poker Hand Simulator</h1>
+  </div>
+</div>
 
 <div id="section1" class="container-fluid">
   <h1>calculateodds, players=2, player cards=1, community cards=0</h1>
@@ -561,7 +567,7 @@ TODO:
   // No of Players
   echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
   ?>
-  <button id="resetcopnp1ccn" type="button" onclick="resetcopnp1ccn()">Reset</button>
+  <button id="resetcopnp1ccn" type="button" class="btn btn-default" onclick="resetcopnp1ccn()">Reset</button>
 
   <p>copnp1ccnresponse: <span id="copnp1ccnresponse"></span></p>
 </div>
@@ -611,7 +617,15 @@ TODO:
 
 <div id="about" class="container-fluid">
   <h1>About</h1>
-  <p>Written in PHP</p>
+  <p>
+    The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. What was I expecting to achieve with that hand, even after hitting the top pair? I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
+  </p>
+  <p>
+    So rather than use one of the existing tools to discover this knowledge, I decided to set a challenge and create my own. I wrote this poker simulator in PHP, a language not really suited for heavy numerical simulations, but on larger iterations it certainly works - the results are consistent with other tools out there.
+  </p>
+  <p>
+    There’s quite a lot involved in simulating a poker hand. Working out all the possible 5 card combinations for every player, then calculating what every possible hand is and its value, many, many times is computationally expensive. That, and running this program on budget hardware isn’t the best combination, meaning I’ve had to limit the number of simulations on this demo to something relatively low. The results will vary a bit due to random sampling but you get the idea.
+  </p>
 </div>
 
 </body>
