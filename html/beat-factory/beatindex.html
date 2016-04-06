@@ -19,11 +19,25 @@
             color: #5a5a5a;
         }
         /* Featurettes
-------------------------- */
+       ------------------------- */
 
         .featurette-divider {
-            margin: 80px 0; /* Space out the Bootstrap <hr> more */
+            margin: 40px 0; /* Space out the Bootstrap <hr> more */
         }
+
+
+        /*Ensures the intro is nicely spaced on bigger screens*/
+        @media (min-width: 768px) {
+            .featurette-divider {
+                margin: 80px 0;
+            }
+            #intro {
+                padding-top: 40px;
+            }
+
+        }
+
+
 
         /* Thin out the marketing headings */
         .featurette-heading {
@@ -54,31 +68,59 @@
 <div class="jumbotron" style="padding-top: 98px;">
     <div class="container text-center">
         <h1>The Beat Factory</h1>
-        <p>A place where beats come to die...</p>
+        <p>A place to let music see the light of day.</p>
     </div>
 </div>
 
-<div class="container" style="padding-top: 80px;">
+<!--<div class="container" style="padding-top: 80px;">
     <div class="col-md-12">
         <p class="lead">Since discovering GarageBand, I've become a music producer, laying down dope-ass beats and face melting guitar on some of my favourite tracks.</p>
-        <p class="lead">You'll only find hurried and under produced songs at The Beat Factory right now, but like the rest of this site, it's in development, so stay tuned for, err..., more tunes!</p>
+        <p class="lead">You'll only find hurried and under produced songs at The Beat Factory right now, but like the rest of this site, it's in development, so stay tuned for more tunes.</p>
         <p class="lead">Welcome to The Beat Factory, <em>enjoy</em>.</p>
 
     </div>
 </div>
 
-<hr class="featurette-divider">
+<hr class="featurette-divider">-->
 
 <!-- START THE FEATURETTES -->
 <div class="container">
 
+        <div class="col-md-12">
+            <div id="intro">
+            <p class="lead">Since discovering GarageBand, I've become a music producer, laying down dope-ass beats and face melting guitar on some of my favourite tracks.</p>
+            <p class="lead">You'll only find hurried and under produced songs at The Beat Factory right now, but like the rest of this site, it's in development, so stay tuned for more tunes.</p>
+            <p class="lead">Welcome to The Beat Factory, <em>enjoy</em>.</p>
+
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading">Acoustic Jam. <span class="text-muted">Capo on 4th, 2 takes.</span></h2>
+            <p class="lead">Late night poker jams usually sound a bit like this. Two guitars, a couple of chords and complete improvisation.
+            </p>
+            <div class="audioContainer">
+                <audio controls>
+                    <source src="../music/Acoustic Capo 4 demo.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/Acoustic-Player.png" alt="Placeholder">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
 
 
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">Panacea. <span class="text-muted">Because jazz is cool.</span></h2>
             <p class="lead">One day I'd like to play jazz properly, but playing jazz properly is hard, so this will have to do.
-                If you want to hear true jazzy genius, check out the original by <em>Greyboy</em> <a href="https://www.youtube.com/watch?v=y45bjPVlPdc">here</a>. Look out for the saxophone solo in the middle. It's real nice.</p>
+                If you want to hear true jazzy genius, check out the original by <em>Greyboy</em> <a href="https://www.youtube.com/watch?v=y45bjPVlPdc">here</a>. Look out for the sax solo in the middle. It's real nice.</p>
             <div class="audioContainer">
                 <audio controls>
                     <source src="../music/Panacea%20Cover.mp3" type="audio/mpeg">
@@ -86,7 +128,7 @@
             </div>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/Jazz-print.jpg" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/Jazz-print.jpg" alt="Panacea">
         </div>
     </div>
 
@@ -95,7 +137,7 @@
     <div class="row featurette">
         <div class="col-md-7 col-md-push-5">
             <h2 class="featurette-heading">Under Your Spell. <span class="text-muted">A cover from the Drive soundtrack.</span></h2>
-            <p class="lead">The first song to drop from The Beat Factory, <em>Under Your Spell</em> started life as an irritating fumbling mess on the house piano.
+            <p class="lead">The first song to drop from The Beat Factory, <em>Under Your Spell</em> started life as a fumbling mess on the house piano.
                 The next step, of course, was to produce the whole thing in GarageBand and slap a dreamy guitar solo in the middle - this is the story of The Beat Factory. If you can sing this, get in touch.
             </p>
             <div class="audioContainer">
@@ -105,7 +147,7 @@
             </div>
         </div>
         <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/under_your_spell.png" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/under_your_spell.png" alt="Under Your Spell">
         </div>
     </div>
 
@@ -117,7 +159,7 @@
             <p class="lead">New additions to The Beat Factory.</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/garageband.png" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/garageband.png" alt="GarageBand">
         </div>
     </div>
 
