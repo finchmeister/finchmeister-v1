@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- Last commit: $Id$ -->
+<!-- Version Location: $HeadURL$ -->
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+</head>
+<style>
+    canvas {
+        border: 1px solid red;
+        margin: 50px;
+    }
+</style>
+
+
+<body>
+
+
+
+<!--<canvas id="canvasId" />-->
+
+<script>
+    function drawCanvas(canvasId) {
+        console.log("#" + canvasId);
+        var c = $("#" + canvasId),
+
+                ctx = c[0].getContext('2d');
+
+
+        $(function() {
+            // set width and height
+            ctx.canvas.height = 400;
+            ctx.canvas.width = 800;
+            // draw
+            //draw();
+
+        });
+
+    }
+
+
+
+
+   // drawCanvas('canvasId');
+
+    /*(function(){
+        var c = $("#canvasId"),
+                ctx = c[0].getContext('2d');
+
+
+        $(function(){
+            // set width and height
+            ctx.canvas.height = 600;
+            ctx.canvas.width = 600;
+            // draw
+            draw();
+        });
+    })();*/
+
+</script>
+
+<h1>Hello</h1>
+
+<select onchange="drawCanvas('canvasId')">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+</select>
+<input type="button" id="clear" value="Clear">
+
+<canvas id="canvasId" />
+
+<script>
+    document.getElementById('clear').addEventListener('click', function() {
+        var canvas = document.getElementById('canvasId');
+        var context = canvas.getContext('2d');
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }, false);
+</script>
+
+
+
+</body>
+</html>

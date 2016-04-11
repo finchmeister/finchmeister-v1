@@ -1,22 +1,29 @@
-Poker simulator - CHARTS - MAKE LOOK NICE
+Poker simulator
 * Move drop downs
 * Java script to describe hands
-* Back story
+* Charts
+* Make look nice
 
 Weekly Back up svn to google drive
 Notify me when IP changes
 
 Front Page content
+VIDEO BACKGROUND OR JUMBOTRON
+http://bootsnipp.com/snippets/featured/ful-screen-video-background
+http://thenewcode.com/777/Create-Fullscreen-HTML5-Page-Background-Video
+http://stackoverflow.com/questions/24983429/airbnb-video-header
 Button images (
 Members zone (Password protected) Dashboard http://demos.creative-tim.com/light-bootstrap-dashboard/dashboard
 view-source:https://getbootstrap.com/examples/dashboard/
 Google map <- Pins on map
 Poker stats analysis
-Facebook integration?
-Instagram integration
 Running stats <- mapmyrunapi
 Contact us Workbooks integration
 PHP 7 (poss http://php-osx.liip.ch/)
 
 SECURITY
 https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet
+
+
+Cool Stuff
+https://css-tricks.com/svg-line-animation-works/ <- line animation

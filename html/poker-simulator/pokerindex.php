@@ -3,6 +3,7 @@ TODO:
  * Make JS tidy
  * Sidebar
  *  cohu1p
+ http://www.chartjs.org/docs/#getting-started-include-chart.js
 -->
 
 
@@ -18,6 +19,12 @@ TODO:
   <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
+
+  <!-- BOOTSTRAP SELECT  https://silviomoreto.github.io/bootstrap-select/examples/ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
   <style>
     body {
       position: relative;
@@ -28,6 +35,24 @@ TODO:
     #about    {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
   </style>
   <script>
+
+    function drawCanvas(canvasId) {
+      console.log("#" + canvasId);
+      var c = $("#" + canvasId),
+
+        ctx = c[0].getContext('2d');
+
+
+      $(function(){
+        // set width and height
+        ctx.canvas.height = 400;
+        ctx.canvas.width = 400;
+        // draw
+        //draw();
+
+      });
+
+    }
 
     var coI = 100;
 
@@ -42,100 +67,18 @@ TODO:
       p8:['c1', 'c2']
     };
 
-    // Pass in an array of cards, this will ensure they are unique and will return an error if not.
-    function validateCards(cards) {
-
-    }
-
-
-    function hu1pc0() {
-      var e = document.getElementById("hu1pc0c1"); //This can be simplified with jquery
-      var card1 = e.options[e.selectedIndex].value;
-      var e = document.getElementById("hu1pc0c2");
-      var card2 = e.options[e.selectedIndex].value;
-
-      var playerCardLength = card1.length + card2.length;
-      console.log('card1:' + card1 + ', card2:' + card2);
-      console.log(playerCardLength);
-      if(playerCardLength >= 4) {
-        if (card1 == card2) {
-          console.log('cards dont differ');
-          document.getElementById("jsresponse").innerHTML = "Please pick unique cards";
-          return
-        }
-        console.log('cards differ');
-        document.getElementById("jsresponse").innerHTML = "Two cards selected";
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("jsonresponse").innerHTML = xmlhttp.responseText;
-          }
-        };
-        var params = "t=co&p=2&i=100&p1c1="+card1+"&p1c2="+card2;
-        xmlhttp.open("GET", "../scripts/poker-simulator/poker_simulator_interface.php?" + params, true);
-        xmlhttp.send();
-
-      }
-    }
-
-    function callPokerSim(urlParams) {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          return xmlhttp.responseText;
-        }
-      };
-      xmlhttp.open("GET", "../scripts/poker-simulator/poker_simulator_interface.php?" + urlParams, true);
-      xmlhttp.send();
-    }
-
-    function cohu2pc0() {
-      var card1 = $( "#zhu1pc0c1" ).val();
-      var card2 = $( "#zhu1pc0c2" ).val();
-      //var params = "?t=co&p=2&i=100&p1c1="+card1+"&p1c2="+card2;
-      var params = {
-        "t":"co",
-        "p":2,
-        "i":coI,
-        "p1c1":card1,
-        "p1c2":card2
-      };
-      console.log(params);
-
-      $.ajax({
-        type: 'POST',
-        url: '../scripts/poker-simulator/poker_simulator_interface.php',
-        data: {
-          "t":"co",
-          "p":2,
-          "i":coI,
-          "p1c1":card1,
-          "p1c2":card2
-        },
-        dataType: 'json',
-        success: function (data) {
-          console.log(data);
-          $('#zhu1pc0response').text(data[0]);
-        }
-      });
-
-      /*$("#zhu1pc0response").load(pokerSimURL, params, function( response, status, xhr ) {
-       console.log('response gone');
-       if ( status == "error" ) {
-       var msg = "Sorry but there was an error: ";
-       $( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
-       }
-       });*/
-    }
+    var cop2pc1cc0pieChart = null;
 
     // calculateodds, players=2, player cards=1, community cards=0
-    //
     function cop2pc1cc0() {
       //Get the card values
       var card1 = $( "#cop2pc1cc0c1" ).val();
       var card2 = $( "#cop2pc1cc0c2" ).val();
+      if (isEmpty(card1) ||isEmpty(card2)) {
+        console.log('Player cards must be set');
+        return;
+      }
 
-      //TODO validate cards before request
 
       $.ajax({
         type: 'POST',
@@ -149,24 +92,66 @@ TODO:
         },
         dataType: 'json',
         success: function (data) {
-          console.log(data);
           $('#cop2pc1cc0response').text(JSON.stringify(data));
+          drawCanvas('cop2pc1cc0pie');
+
+          // pie chart data
+          var pieData = [
+            {
+              value: data.p1.win,
+              color: "#46BFBD",
+              highlight: "#5AD3D1",
+              label: "Win"
+            },
+            {
+              value: data.p1.lose,
+              color:"#F7464A",
+              highlight: "#FF5A5E",
+              label: "Lose"
+            },
+
+            {
+              value: data.p1.split,
+              color: "#FDB45C",
+              highlight: "#FFC870",
+              label: "Split"
+            }
+          ];
+          // pie chart options
+          var pieOptions = {
+            segmentShowStroke : false,
+            animateScale : true
+          };
+          // get pie chart canvas
+          var cop2pc1cc0pie= document.getElementById("cop2pc1cc0pie").getContext("2d");
+
+          console.log('cop2pc1cc0pieChart pre');
+          console.log(cop2pc1cc0pieChart);
+
+          // Destory existing piechart if set
+          if(cop2pc1cc0pieChart!=null){
+            console.log('piechart != NULL');
+            cop2pc1cc0pieChart.destroy();
+          }
+
+          /*if(cop2pc1cc0pie!=null){
+            console.log('pie != NULL');
+            cop2pc1cc0pieChart.destroy();
+          }*/
+
+          // draw pie chart
+          cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie).Pie(pieData, pieOptions);
+          console.log('cop2pc1cc0pieChart post');
+          console.log(cop2pc1cc0pieChart);
         }
       });
 
     }
 
 
-
-    function cop2pc1cc0ChartFromJSON(json) {
-
-
-
-    }
-
     function validateUniqueCards(cards) {
       var counts = {};
-      for(var i = 0; i< cards.length; i++) {
+      for(var i = 0; i < cards.length; i++) {
         var num = cards[i];
         if (num == null || 0 === num.length) { continue; }
         counts[num] = counts[num] ? counts[num]+1 : 1;
@@ -199,24 +184,6 @@ TODO:
 
     // calculateodds, players=n, player cards=1, community cards=n
 
-    function copnp1ccnNEW() {
-/*      //Get the card values
-      var p1c1 = $("#copnp1c1").val();
-      var p1c2 = $("#copnp1c2").val();
-      var p1c = [p1c1, p1c2];*/
-      var p1c = [$("#copnp1c1").val(), $("#copnp1c2").val()];
-      var p1c = [p1c1, p1c2];
-      // Community cards
-      var cc1 = $("#copnp1cc1").val();
-      var cc2 = $("#copnp1cc2").val();
-      var cc3 = $("#copnp1cc3").val();
-      var cc4 = $("#copnp1cc4").val();
-      var cc5 = $("#copnp1cc5").val();
-      var communityCards = [cc1, cc2, cc3, cc4, cc5];
-      // Get the no. of players
-      var p = $( "#copnp1ccnp" ).val();
-
-    }
 
     function copnp1ccn() {
       //Get the card values
@@ -280,21 +247,8 @@ TODO:
       });
     }
 
-    function createPlayersCardsArray(commonDivId) {
-
-      var playersCards = {};
-      if ($('#elementId').length > 0) {
-        // exists.
-      }
-
-
-
-
-      var p1c1 = $( "#copnp1c1" ).val();
-      var p1c2 = $( "#copnp1c2" ).val();
-
-    }
-
+    // Final JS function
+    // Calculate Odds
     function copnpnccn() {
       // Fetch an ensure valid no. of players cards are selected
       var playersCards = {};
@@ -389,26 +343,6 @@ TODO:
     }
 
 
-    function calculateOdds(noOfPlayers, playersCards, communityCards) {
-      var p1c1 = playersCards["p1c1"];
-      var p1c2 = playersCards["p1c2"];
-
-
-
-
-      $.ajax({
-        type: 'POST',
-        url: '../scripts/poker-simulator/poker_simulator_interface.php',
-        data: data,
-        dataType: 'json',
-        success: function (data) {
-          console.log(data);
-          $('#copnp1ccnresponse').text(JSON.stringify(data));
-        }
-      });
-    }
-
-    //calculateodds, players=n, player cards=n, community cards=n
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
@@ -483,9 +417,10 @@ TODO:
         copnpnccnCardState[cardDivs[0]] = false;
         copnpnccnCardState[cardDivs[1]] = false;
       }
-      $(selector).text(newValue)
+      $(selector).text(newValue);
       copnpnccn();
     }
+
 
 
 
@@ -547,6 +482,45 @@ TODO:
   echo generateCardHTML('cop2pc1cc0c2', 'cop2pc1cc0');
   ?>
   <p>cop2pc1cc0response: <span id="cop2pc1cc0response"></span></p>
+
+  <!-- pie chart canvas element -->
+  <!--<canvas id="cop2pc1cc0pie"></canvas>-->
+  <canvas id="cop2pc1cc0pie" width="250" height="250"></canvas>
+
+ <!-- <script>
+    // pie chart data
+    var pieData = [
+      {
+        value: 300,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+      },
+      {
+        value: 50,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Green"
+      },
+      {
+        value: 100,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Yellow"
+      }
+    ];
+    // pie chart options
+    var pieOptions = {
+      segmentShowStroke : false,
+      animateScale : true
+    };
+    // get pie chart canvas
+    var countries= document.getElementById("countries").getContext("2d");
+    // draw pie chart
+    new Chart(countries).Pie(pieData, pieOptions);
+
+  </script>-->
+
 </div>
 
 
@@ -618,7 +592,7 @@ TODO:
 <div id="about" class="container-fluid">
   <h1>About</h1>
   <p>
-    The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. What was I expecting to achieve with that hand, even after hitting the top pair? I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
+    The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting the top pair, what was I expecting to achieve with that hand? I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
   </p>
   <p>
     So rather than use one of the existing tools to discover this knowledge, I decided to set a challenge and create my own. I wrote this poker simulator in PHP, a language not really suited for heavy numerical simulations, but on larger iterations it certainly works - the results are consistent with other tools out there.

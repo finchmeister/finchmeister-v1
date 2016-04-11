@@ -103,7 +103,7 @@ if ($validSession) {
   // Get the last smoke date
   $daysSinceLastSmoke = getNoOfDaysSinceLastSmoke($_SESSION['user_id'], $mysqli);
   $reset = isset($_POST['resetCounter']);
-  if (empty($daysSinceLastSmoke) || $reset) {
+  if (empty($daysSinceLastSmoke) &&  $daysSinceLastSmoke !== 0 || $reset) {
     // Set the last smoke date with the picker
     echo <<<EOF
 <div id="reset" class="container-fluid text-center">
