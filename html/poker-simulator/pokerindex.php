@@ -29,10 +29,44 @@ TODO:
     body {
       position: relative;
     }
-    #section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}
+    #section1 {
+      height: auto;
+      color: #fff;
+      background-color: #1E88E5;
+      padding-bottom: 50px;
+      padding-top: 30px;
+    }
     #section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
     #section3 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
     #about    {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
+
+    .charts {
+      text-align: center;
+    }
+
+    th {
+      text-align: center;
+    }
+
+    .tableDiv {
+      padding-right: 10%;
+      padding-left: 10%;
+    }
+
+
+    #headsUpCards {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cardButton {
+      margin-left: 2px;
+      margin-right: 4px;
+    }
+
+
+
+
   </style>
   <script>
 
@@ -45,8 +79,8 @@ TODO:
 
       $(function(){
         // set width and height
-        ctx.canvas.height = 400;
-        ctx.canvas.width = 400;
+        ctx.canvas.height = 250;
+        ctx.canvas.width = 250;
         // draw
         //draw();
 
@@ -92,8 +126,15 @@ TODO:
         },
         dataType: 'json',
         success: function (data) {
-          $('#cop2pc1cc0response').text(JSON.stringify(data));
-          drawCanvas('cop2pc1cc0pie');
+
+          var winP = Math.round(data["p1"]["winPercent"] * 100) + '%';
+          var loseP = Math.round((1 - data["p1"]["winPercent"] - data["p1"]["splitPercent"]) * 100) + '%';
+          var splitP = Math.round(data["p1"]["splitPercent"] * 100) + '%';
+
+
+          $('#cop2pc1cc0WinP').html(winP);
+          $('#cop2pc1cc0LoseP').html(loseP);
+          $('#cop2pc1cc0SplitP').html(splitP);
 
           // pie chart data
           var pieData = [
@@ -125,8 +166,6 @@ TODO:
           // get pie chart canvas
           var cop2pc1cc0pie= document.getElementById("cop2pc1cc0pie").getContext("2d");
 
-          console.log('cop2pc1cc0pieChart pre');
-          console.log(cop2pc1cc0pieChart);
 
           // Destory existing piechart if set
           if(cop2pc1cc0pieChart!=null){
@@ -475,17 +514,73 @@ TODO:
 </div>
 
 <div id="section1" class="container-fluid">
-  <h1>calculateodds, players=2, player cards=1, community cards=0</h1>
-  <?php
-  include "../scripts/poker-simulator/generate_card_html.php";
-  echo generateCardHTML('cop2pc1cc0c1', 'cop2pc1cc0');
-  echo generateCardHTML('cop2pc1cc0c2', 'cop2pc1cc0');
-  ?>
-  <p>cop2pc1cc0response: <span id="cop2pc1cc0response"></span></p>
+  <!--<h1>calculateodds, players=2, player cards=1, community cards=0</h1>-->
+
+  <div class="container">
+
+
+
+    <div class="row">
+
+      <div class="col-xs-12">
+        <h1>Heads Up</h1>
+      </div>
+      </div>
+      <div class="row">
+
+      <div class="col-sm-6">
+        <div id="headsUpSelect">
+          <p class="lead">Select your cards:</p>
+          <div class="col-xs-12">
+            <div id="headsUpCards">
+              <?php
+              include "../scripts/poker-simulator/generate_card_html.php";
+              echo generateCardHTML('cop2pc1cc0c1', 'cop2pc1cc0');
+              echo generateCardHTML('cop2pc1cc0c2', 'cop2pc1cc0');
+              ?>
+            </div>
+          </div>
+        </div>
+
+        <p class="lead">Results:</p>
+        <div class="col-xs-12 ">
+
+
+
+          <div class="tableDiv">
+            <table class="table text-center">
+              <thead>
+              <tr>
+                <th>Win</th>
+                <th>Lose</th>
+                <th>Split</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td id="cop2pc1cc0WinP"></td>
+                <td id="cop2pc1cc0LoseP"></td>
+                <td id="cop2pc1cc0SplitP"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-sm-6 charts">
+        <canvas id="cop2pc1cc0pie" width="246" height="246"></canvas>
+      </div>
+
+    </div>
+
+  </div>
+
 
   <!-- pie chart canvas element -->
   <!--<canvas id="cop2pc1cc0pie"></canvas>-->
-  <canvas id="cop2pc1cc0pie" width="250" height="250"></canvas>
 
  <!-- <script>
     // pie chart data
@@ -595,7 +690,7 @@ TODO:
     The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting the top pair, what was I expecting to achieve with that hand? I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
   </p>
   <p>
-    So rather than use one of the existing tools to discover this knowledge, I decided to set a challenge and create my own. I wrote this poker simulator in PHP, a language not really suited for heavy numerical simulations, but on larger iterations it certainly works - the results are consistent with other tools out there.
+    So rather than use one of the existing tools to discover this knowledge, I decided to create my own. I wrote this poker simulator in PHP, a language not really suited for heavy numerical simulations, but on larger iterations it certainly works - the results are consistent with other tools out there.
   </p>
   <p>
     There’s quite a lot involved in simulating a poker hand. Working out all the possible 5 card combinations for every player, then calculating what every possible hand is and its value, many, many times is computationally expensive. That, and running this program on budget hardware isn’t the best combination, meaning I’ve had to limit the number of simulations on this demo to something relatively low. The results will vary a bit due to random sampling but you get the idea.
