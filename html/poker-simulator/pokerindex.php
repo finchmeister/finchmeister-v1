@@ -30,15 +30,22 @@ TODO:
       position: relative;
     }
     #section1 {
+      background-color: #1E88E5;
+    }
+    #section2 {
+      background-color: #9921bb;
+    }
+    #section3 {
+      background-color: #ff9800;
+    }
+    #about    {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
+
+    .mainSection {
       height: auto;
       color: #fff;
-      background-color: #1E88E5;
       padding-bottom: 50px;
       padding-top: 30px;
     }
-    #section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
-    #section3 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
-    #about    {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
 
     .charts {
       text-align: center;
@@ -63,6 +70,36 @@ TODO:
       margin-left: 2px;
       margin-right: 4px;
     }
+
+    .cards {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      /*text-align: center;*/
+    }
+
+    .resetButton {
+      width: 115px;
+    }
+    .resetButtonDiv {
+      text-align: center;
+    }
+
+    #copnp1ccnpieDiv {
+      padding-top: 50px;
+    }
+
+    @media (min-width: 768px) {
+      #copnp1ccnpieDiv {
+        padding-top: 253px;
+      }
+    }
+    @media (min-width: 992px) {
+      #copnp1ccnpieDiv {
+        padding-top: 220px;
+
+      }
+    }
+
 
 
 
@@ -102,6 +139,7 @@ TODO:
     };
 
     var cop2pc1cc0pieChart = null;
+    var copnp1ccnpieChart = null;
 
     // calculateodds, players=2, player cards=1, community cards=0
     function cop2pc1cc0() {
@@ -180,8 +218,6 @@ TODO:
 
           // draw pie chart
           cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie).Pie(pieData, pieOptions);
-          console.log('cop2pc1cc0pieChart post');
-          console.log(cop2pc1cc0pieChart);
         }
       });
 
@@ -219,6 +255,19 @@ TODO:
       var cardsAtTurn    = !isEmpty(ccObj["cc1"]) && !isEmpty(ccObj["cc2"]) && !isEmpty(ccObj["cc3"]) && !isEmpty(ccObj["cc4"]) &&  isEmpty(ccObj["cc5"]);
       var cardsAtRiver   = !isEmpty(ccObj["cc1"]) && !isEmpty(ccObj["cc2"]) && !isEmpty(ccObj["cc3"]) && !isEmpty(ccObj["cc4"]) && !isEmpty(ccObj["cc5"]);
       return (cardsAtPreFlop || cardsAtFlop || cardsAtTurn || cardsAtRiver);
+    }
+
+    function findPointInGame(cc1, cc2, cc3, cc4, cc5) {
+      if (cc1.length > 0 && cc2.length > 0 && cc3.length > 0) {
+        if (cc4.length > 0) {
+          if (cc5.length > 0) {
+            return 'River';
+          }
+          return 'Turn';
+        }
+        return 'Flop';
+      }
+      return 'Preflop';
     }
 
     // calculateodds, players=n, player cards=1, community cards=n
@@ -259,6 +308,20 @@ TODO:
       // Get the no. of players
       var p = $( "#copnp1ccnp" ).val();
 
+      //
+
+      var pointInGame = findPointInGame(cc1, cc2, cc3, cc4, cc5);
+      var opponents = ' Opponents';
+      if (p == 2) {
+        opponents = ' Opponent';
+      }
+
+      console.log(pointInGame);
+      var title = '<h1>' + pointInGame + ' You vs ' + (p - 1) + opponents + '</h1>';
+      console.log(title);
+
+
+      $("#copnp1ccnTitle").html(title);
 
       // Prepare the params
       var data = {
@@ -282,6 +345,62 @@ TODO:
         success: function (data) {
           console.log(data);
           $('#copnp1ccnresponse').text(JSON.stringify(data));
+
+          var winP = Math.round(data["p1"]["winPercent"] * 100) + '%';
+          var loseP = Math.round((1 - data["p1"]["winPercent"] - data["p1"]["splitPercent"]) * 100) + '%';
+          var splitP = Math.round(data["p1"]["splitPercent"] * 100) + '%';
+
+
+          $('#copnp1ccnWinP').html(winP);
+          $('#copnp1ccnLoseP').html(loseP);
+          $('#copnp1ccnSplitP').html(splitP);
+
+          // pie chart data
+          var pieData = [
+            {
+              value: data.p1.win,
+              color: "#46BFBD",
+              highlight: "#5AD3D1",
+              label: "Win"
+            },
+            {
+              value: data.p1.lose,
+              color:"#F7464A",
+              highlight: "#FF5A5E",
+              label: "Lose"
+            },
+
+            {
+              value: data.p1.split,
+              color: "#FDB45C",
+              highlight: "#FFC870",
+              label: "Split"
+            }
+          ];
+          // pie chart options
+          var pieOptions = {
+            segmentShowStroke : false,
+            animateScale : true
+          };
+          // get pie chart canvas
+          var copnp1ccnpie= document.getElementById("copnp1ccnpie").getContext("2d");
+
+
+          // Destory existing piechart if set
+          if(copnp1ccnpieChart!=null){
+            console.log('piechart != NULL');
+            copnp1ccnpieChart.destroy();
+          }
+
+          /*if(cop2pc1cc0pie!=null){
+           console.log('pie != NULL');
+           cop2pc1cc0pieChart.destroy();
+           }*/          console.log('copnp1ccnpieChart');
+
+
+          console.log(copnp1ccnpieChart);
+          // draw pie chart
+          copnp1ccnpieChart = new Chart(copnp1ccnpie).Pie(pieData, pieOptions);
         }
       });
     }
@@ -513,20 +632,16 @@ TODO:
   </div>
 </div>
 
-<div id="section1" class="container-fluid">
-  <!--<h1>calculateodds, players=2, player cards=1, community cards=0</h1>-->
+<div id="section1" class="mainSection">
 
   <div class="container">
-
-
-
-    <div class="row">
-
+    <!--<div class="row">-->
       <div class="col-xs-12">
-        <h1>Heads Up</h1>
+        <!--<h1>calculateodds, players=2, player cards=1, community cards=0</h1>-->
+        <h1>Preflop Heads Up</h1>
       </div>
-      </div>
-      <div class="row">
+     <!-- </div>-->
+      <!--<div class="row">-->
 
       <div class="col-sm-6">
         <div id="headsUpSelect">
@@ -544,9 +659,6 @@ TODO:
 
         <p class="lead">Results:</p>
         <div class="col-xs-12 ">
-
-
-
           <div class="tableDiv">
             <table class="table text-center">
               <thead>
@@ -565,84 +677,248 @@ TODO:
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 charts">
+        <canvas id="cop2pc1cc0pie" width="300" height="300"></canvas>
+      </div>
+    <!--</div>-->
+  </div>
+
+</div>
+
+<!--new section-->
+
+<div id="section2" class="mainSection">
+  <div class="container">
+    <div class="col-sm-8">
+      <div id="copnp1ccnTitle"><h1>calculateodds, players=n, player cards=1, community cards=n</h1></div>
+      <div class="row">
+        <div class="col-lg-7">
+          <div id="copnp1ccnCards" class="cards">
+            <p class="lead">Select your cards:</p>
+            <?php
+            // P1 Cards
+            echo generateCardHTML('copnp1c1', 'copnp1ccn');
+            echo generateCardHTML('copnp1c2', 'copnp1ccn');
+            ?>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="cards">
+
+
+          <p class="lead">Select no. of opponents:</p>
+          <?php
+          echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
+          ?>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+
+          <div class="col-lg-7 cards flopCards">
+            <p class="lead">Select the flop cards:</p>
+            <?php
+            // Community Cards
+            echo generateCardHTML('copnp1cc1', 'copnp1ccn');
+            echo generateCardHTML('copnp1cc2', 'copnp1ccn');
+            echo generateCardHTML('copnp1cc3', 'copnp1ccn');
+            ?>
+          </div>
+          <div class="col-lg-5 cards">
+            <p class="lead">Select the turn & river cards:</p>
+            <div class="turnriver">
+              <?php
+              echo generateCardHTML('copnp1cc4', 'copnp1ccn');
+              echo generateCardHTML('copnp1cc5', 'copnp1ccn');
+              ?>
+            </div>
+          </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 cards">
+
+          <p class="lead">Results:</p>
+
+
+        </div>
+
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+          <div class="tableDiv">
+            <table class="table text-center">
+              <thead>
+              <tr>
+                <th>Win</th>
+                <th>Lose</th>
+                <th>Split</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td id="copnp1ccnWinP"></td>
+                <td id="copnp1ccnLoseP"></td>
+                <td id="copnp1ccnSplitP"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="resetButtonDiv">
+            <button id="resetcopnp1ccn" type="button" class="btn btn-default resetButton" onclick="resetcopnp1ccn()">Reset</button>
+          </div>
+        </div>
+        <div class="col-md-2">
 
         </div>
 
       </div>
 
-      <div class="col-sm-6 charts">
-        <canvas id="cop2pc1cc0pie" width="246" height="246"></canvas>
-      </div>
 
     </div>
+    <div class="col-sm-4 charts" id="copnp1ccnpieDiv">
+      <canvas id="copnp1ccnpie" width="246" height="246"></canvas>
+    </div>
+
 
   </div>
 
+</div>
+<!--end of new section-->
 
-  <!-- pie chart canvas element -->
-  <!--<canvas id="cop2pc1cc0pie"></canvas>-->
 
- <!-- <script>
-    // pie chart data
-    var pieData = [
-      {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-      },
-      {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      }
-    ];
-    // pie chart options
-    var pieOptions = {
-      segmentShowStroke : false,
-      animateScale : true
-    };
-    // get pie chart canvas
-    var countries= document.getElementById("countries").getContext("2d");
-    // draw pie chart
-    new Chart(countries).Pie(pieData, pieOptions);
+<div id="section3" class="mainSection">
+  <div class="container">
+    <div class="col-sm-8">
+      <div id="copnpnccnTitle"><h1>calculateodds, players=n, player cards=n, community cards=n</h1></div>
+      <div class="row">
+        <div class="col-lg-7">
+          <div id="copnpnccnCards" class="cards">
+            <p class="lead">Select your cards:</p>
+            <?php
+            // P1 Cards
+            echo generateCardHTML('copnp1c1ccn', 'copnpnccn');
+            echo generateCardHTML('copnp1c2ccn', 'copnpnccn');
+            ?>
+          </div>
+        </div>
+        <div class="col-lg-5">
 
-  </script>-->
+        </div>
+      </div>
+
+      <div class="row">
+
+
+          <div class="col-lg-7 cards flopCards">
+            <p class="lead">Select the flop cards:</p>
+            <?php
+            // Community Cards
+            echo generateCardHTML('copnpncc1', 'copnpnccn');
+            echo generateCardHTML('copnpncc2', 'copnpnccn');
+            echo generateCardHTML('copnpncc3', 'copnpnccn');
+            ?>
+          </div>
+          <div class="col-lg-5 cards">
+            <p class="lead">Select the turn & river cards:</p>
+            <div class="turnriver">
+              <?php
+              echo generateCardHTML('copnpncc4', 'copnpnccn');
+              echo generateCardHTML('copnpncc5', 'copnpnccn');
+              ?>
+            </div>
+          </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="lead">Select players' cards:</p>
+          Player 2:
+          <?php
+          echo generateCardHTML('copnpncc4', 'copnpnccn');
+          echo generateCardHTML('copnpncc5', 'copnpnccn');
+          ?>
+        </div>
+        <div class="col-xs-12">
+          Player 3:
+          <?php
+          echo generateCardHTML('copnpncc4', 'copnpnccn');
+          echo generateCardHTML('copnpncc5', 'copnpnccn');
+          ?>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-12 cards">
+
+          <p class="lead">Results:</p>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+          <div class="tableDiv">
+            <table class="table text-center">
+              <thead>
+              <tr>
+                <th>Win</th>
+                <th>Lose</th>
+                <th>Split</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td id="copnp1ccnWinP"></td>
+                <td id="copnp1ccnLoseP"></td>
+                <td id="copnp1ccnSplitP"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="resetButtonDiv">
+            <button id="resetcopnp1ccn" type="button" class="btn btn-default resetButton" onclick="resetcopnp1ccn()">Reset</button>
+          </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <div class="col-sm-4 charts" >
+      <canvas id="copnp1ccnpie" width="246" height="246"></canvas>
+    </div>
+
+
+  </div>
 
 </div>
+<!--end of new section-->
 
 
-<div id="section2" class="container-fluid">
-  <h1>calculateodds, players=n, player cards=1, community cards=n</h1>
 
-  <?php
-  //include "../scripts/poker-simulator/generate_card_html.php";
-  // P1 Cards
-  echo generateCardHTML('copnp1c1', 'copnp1ccn');
-  echo generateCardHTML('copnp1c2', 'copnp1ccn');
-  // Community Cards
-  echo generateCardHTML('copnp1cc1', 'copnp1ccn');
-  echo generateCardHTML('copnp1cc2', 'copnp1ccn');
-  echo generateCardHTML('copnp1cc3', 'copnp1ccn');
-  echo generateCardHTML('copnp1cc4', 'copnp1ccn');
-  echo generateCardHTML('copnp1cc5', 'copnp1ccn');
-  // No of Players
-  echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
-  ?>
-  <button id="resetcopnp1ccn" type="button" class="btn btn-default" onclick="resetcopnp1ccn()">Reset</button>
-
-  <p>copnp1ccnresponse: <span id="copnp1ccnresponse"></span></p>
-</div>
-
-
-<div id="section3" class="container-fluid">
+<div id="section6" class="container-fluid">
 <h1>calculateodds, players=n, player cards=n, community cards=n</h1>
   <!--copnpnccn-->
   <div id="copnpnccn">
