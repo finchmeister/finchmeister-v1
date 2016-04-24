@@ -100,6 +100,11 @@ TODO:
       }
     }
 
+    /* Make a media query
+    .addPlayerResetButtons {
+      text-align: center;
+    }
+*/
 
 
 
@@ -388,17 +393,9 @@ TODO:
 
           // Destory existing piechart if set
           if(copnp1ccnpieChart!=null){
-            console.log('piechart != NULL');
             copnp1ccnpieChart.destroy();
           }
 
-          /*if(cop2pc1cc0pie!=null){
-           console.log('pie != NULL');
-           cop2pc1cc0pieChart.destroy();
-           }*/          console.log('copnp1ccnpieChart');
-
-
-          console.log(copnp1ccnpieChart);
           // draw pie chart
           copnp1ccnpieChart = new Chart(copnp1ccnpie).Pie(pieData, pieOptions);
         }
@@ -504,15 +501,25 @@ TODO:
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
-    // Just blanks all the cards
+    // Resets the cards, pie, table and title
     function resetcopnp1ccn() {
       var divs = ["copnp1c1", "copnp1c2", "copnp1cc1", "copnp1cc2", "copnp1cc3", "copnp1cc4", "copnp1cc5"];
+      // Destory existing piechart if set
+      if(copnp1ccnpieChart!=null){
+        copnp1ccnpieChart.destroy();
+      }
+      $('#copnp1ccnWinP').html('');
+      $('#copnp1ccnLoseP').html('');
+      $('#copnp1ccnSplitP').html('');
+      $("#copnp1ccnTitle").html('<h1>Preflop You vs 1 Opponent</h1>');
+
+      $('#copnp1ccnp').selectpicker('val', '2');
       resetDivs(divs);
     }
 
     // Reloads the entire copnpnccn div
     function resetcopnpnccn() {
-      $('#copnpnccn').load('pokerindex.php' +  ' #copnpnccn');
+      //$('#copnpnccn').load('pokerindex.php' +  ' #copnpnccn');
     }
 
     /**
@@ -525,7 +532,7 @@ TODO:
       }
       for(var i = 0; i< divs.length; i++) {
         var selector = "#" + divs[i];
-        $(selector + " option:eq(1)").prop('selected', true);
+        $(selector).selectpicker('val', '');
       }
     }
 
@@ -535,7 +542,8 @@ TODO:
       }
       for(var i = 0; i< divs.length; i++) {
         var selector = "#" + divs[i];
-        $(selector).attr("disabled", true);
+        $(selector).prop('disabled', true);
+        $(selector).selectpicker('refresh');
       }
     }
 
@@ -545,7 +553,8 @@ TODO:
       }
       for(var i = 0; i< divs.length; i++) {
         var selector = "#" + divs[i];
-        $(selector).attr("disabled", false);
+        $(selector).prop('disabled', false);
+        $(selector).selectpicker('refresh');
       }
     }
 
@@ -561,21 +570,29 @@ TODO:
      // var cardDivs = [cardDivs[0].replace('ccn', 'c1ccn'), cardDivs[1].replace('ccn', 'c2ccn')];
       var selector = "#" + buttonDiv;
       var newValue = "";
-      var state = $(selector).text();
-      if (state == 'Add Player') {
+      var classAdd = "";
+      var classRemove = "";
+      var state = $(selector).html();
+      if (state == '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>') {
         enableDivs(cardDivs);
-        newValue = "Sit Out";
+        newValue = '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>';
         copnpnccnCardState[cardDivs[0]] = true;
         copnpnccnCardState[cardDivs[1]] = true;
+        var classAdd = "btn-danger";
+        var classRemove = "btn-success";
       }
       else {
         resetDivs(cardDivs);
         disableDivs(cardDivs);
-        newValue = "Add Player";
+        newValue = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
         copnpnccnCardState[cardDivs[0]] = false;
         copnpnccnCardState[cardDivs[1]] = false;
+        var classAdd = "btn-success";
+        var classRemove = "btn-danger";
       }
-      $(selector).text(newValue);
+      $(selector).html(newValue);
+      $(selector).addClass(classAdd);
+      $(selector).removeClass(classRemove);
       copnpnccn();
     }
 
@@ -681,7 +698,7 @@ TODO:
       </div>
 
       <div class="col-sm-6 charts">
-        <canvas id="cop2pc1cc0pie" width="300" height="300"></canvas>
+        <canvas id="cop2pc1cc0pie" width="275" height="275"></canvas>
       </div>
     <!--</div>-->
   </div>
@@ -693,7 +710,7 @@ TODO:
 <div id="section2" class="mainSection">
   <div class="container">
     <div class="col-sm-8">
-      <div id="copnp1ccnTitle"><h1>calculateodds, players=n, player cards=1, community cards=n</h1></div>
+      <div id="copnp1ccnTitle"><h1>Preflop You vs 1 Opponent</h1></div>
       <div class="row">
         <div class="col-lg-7">
           <div id="copnp1ccnCards" class="cards">
@@ -754,10 +771,10 @@ TODO:
 
       <div class="row">
 
-        <div class="col-md-2">
+        <!--<div class="col-md-2">
 
-        </div>
-        <div class="col-md-8">
+        </div>-->
+        <div class="col-md-8 col-md-offset-2">
           <div class="tableDiv">
             <table class="table text-center">
               <thead>
@@ -780,12 +797,18 @@ TODO:
             <button id="resetcopnp1ccn" type="button" class="btn btn-default resetButton" onclick="resetcopnp1ccn()">Reset</button>
           </div>
         </div>
-        <div class="col-md-2">
+        <!--<div class="col-md-2">
 
-        </div>
+        </div>-->
 
       </div>
+      <!--<div class="row">
+        <div class="col-lg-12">
+          <div class="alert alert-danger" role="alert">Warnibng</div>
 
+        </div>
+      </div>
+-->
 
     </div>
     <div class="col-sm-4 charts" id="copnp1ccnpieDiv">
@@ -848,17 +871,29 @@ TODO:
           <p class="lead">Select players' cards:</p>
           Player 2:
           <?php
-          echo generateCardHTML('copnpncc4', 'copnpnccn');
-          echo generateCardHTML('copnpncc5', 'copnpnccn');
+          echo generateCardHTML('copnp2c1ccn', 'copnpnccn');
+          echo generateCardHTML('copnp2c2ccn', 'copnpnccn');
           ?>
-        </div>
+
+            <button id='disablecopnp2ccn' type='button' class='btn btn-default btn-danger' onclick='changePlayerState("disablecopnp2ccn", ["copnp2c1ccn" , "copnp2c2ccn"])'><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            <button id='resetcopnp2ccn' type='button' class='btn btn-default' onclick='resetDivs(["copnp2c1ccn","copnp2c2ccn"])'>Reset</button>
+
+          </div>
         <div class="col-xs-12">
           Player 3:
           <?php
-          echo generateCardHTML('copnpncc4', 'copnpnccn');
-          echo generateCardHTML('copnpncc5', 'copnpnccn');
+          echo generateCardHTML('copnp3c1ccn', 'copnpnccn', 'disabled');
+          echo generateCardHTML('copnp3c2ccn', 'copnpnccn', 'disabled');
           ?>
+
+          <button id='disablecopnp3ccn' type='button' class='btn btn-default btn-success' onclick='changePlayerState("disablecopnp3ccn", ["copnp3c1ccn" , "copnp3c2ccn"])'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          <button id='resetcopnp3ccn' type='button' class='btn btn-default' onclick='resetDivs(["copnp3c1ccn","copnp3c2ccn"])'>Reset</button>
+
         </div>
+        <div class="col-xs-12">
+          <p>TODO add players</p>
+        </div>
+
       </div>
 
 
@@ -945,8 +980,8 @@ TODO:
       }
       $pcDivIds = '["' . implode('" , "', $pcDivIds) . '"]';
       $emptySeatDivId = "disablecopnp{$i}ccn";
-      echo "<button id='{$emptySeatDivId}' type='button' onclick='changePlayerState(\"{$emptySeatDivId}\", {$pcDivIds})'>Add Player</button>"; //TODO Active/Disabled Buttons BS
-      echo "<button id='resetcopnp{$i}ccn' type='button' onclick='resetDivs({$pcDivIds})'>Reset</button>";
+      echo "<button id='{$emptySeatDivId}' type='button' class='btn btn-default' onclick='changePlayerState(\"{$emptySeatDivId}\", {$pcDivIds})'>Add Player</button>"; //TODO Active/Disabled Buttons BS
+      echo "<button id='resetcopnp{$i}ccn' type='button' class='btn btn-default' onclick='resetDivs({$pcDivIds})'>Reset</button>";
       unset ($pcDivIds);
       echo "Player $i <br>";
 
