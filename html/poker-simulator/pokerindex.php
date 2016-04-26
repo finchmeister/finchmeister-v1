@@ -45,6 +45,7 @@ TODO:
       color: #fff;
       padding-bottom: 50px;
       padding-top: 30px;
+      margin: -10px
     }
 
     .charts {
@@ -88,6 +89,12 @@ TODO:
       padding-top: 50px;
     }
 
+    @media (min-width: 332px) {
+      .mainSection {
+        margin: 0px;
+      }
+
+    }
     @media (min-width: 768px) {
       #copnp1ccnpieDiv {
         padding-top: 253px;
@@ -99,6 +106,7 @@ TODO:
 
       }
     }
+
 
     /* Make a media query
     .addPlayerResetButtons {
@@ -593,13 +601,51 @@ TODO:
       $(selector).html(newValue);
       $(selector).addClass(classAdd);
       $(selector).removeClass(classRemove);
+
+      // TODO sort this mess out
+      var $window = $(window);
+      var $cardButton = $('.cardButton');
+      var width = '';
+      if ($window.width() < 467) {
+        width = '65px';
+      } else {
+        width = '115px';
+      }
+      $cardButton.css('width', width);
+      $cardButton.attr('data-width', width);
+
+
       copnpnccn();
     }
 
+    $(document).ready(function(){
+      var $window = $(window);
+
+      function resize() {
+        var $cardButton = $('.cardButton');
+        var width = '';
+        if ($window.width() < 467) {
+          width = '65px';
+        } else {
+          width = '115px';
+        }
+        $cardButton.css('width', width);
+        $cardButton.attr('data-width', width);
+      }
+      $window
+        .resize(resize)
+        .trigger('resize');
+    });
 
 
-
-
+    /*$('.cardButton').on('loaded.bs.select', function (e) {
+      if ($window.width() < 467) {
+        $('.cardButton').css('width', '65px');
+        console.log('select loadsmall');
+      } else {
+        $('.cardButton').css('width', '115px');
+      }
+    });*/
 
 
   </script>
@@ -869,30 +915,42 @@ TODO:
       <div class="row">
         <div class="col-xs-12">
           <p class="lead">Select players' cards:</p>
-          Player 2:
+          P2:
           <?php
           echo generateCardHTML('copnp2c1ccn', 'copnpnccn');
           echo generateCardHTML('copnp2c2ccn', 'copnpnccn');
           ?>
 
-            <button id='disablecopnp2ccn' type='button' class='btn btn-default btn-danger' onclick='changePlayerState("disablecopnp2ccn", ["copnp2c1ccn" , "copnp2c2ccn"])'><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            <button id='disablecopnp2ccn' type='button' class='btn btn-default disabled btn-danger'><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
             <button id='resetcopnp2ccn' type='button' class='btn btn-default' onclick='resetDivs(["copnp2c1ccn","copnp2c2ccn"])'>Reset</button>
 
           </div>
-        <div class="col-xs-12">
-          Player 3:
+        <!--<div class="col-xs-12">
+          P3:
           <?php
           echo generateCardHTML('copnp3c1ccn', 'copnpnccn', 'disabled');
           echo generateCardHTML('copnp3c2ccn', 'copnpnccn', 'disabled');
           ?>
-
           <button id='disablecopnp3ccn' type='button' class='btn btn-default btn-success' onclick='changePlayerState("disablecopnp3ccn", ["copnp3c1ccn" , "copnp3c2ccn"])'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
           <button id='resetcopnp3ccn' type='button' class='btn btn-default' onclick='resetDivs(["copnp3c1ccn","copnp3c2ccn"])'>Reset</button>
+        </div>-->
+        <?php
 
-        </div>
-        <div class="col-xs-12">
-          <p>TODO add players</p>
-        </div>
+        $html = '';
+        for ($i=3; $i<=9; $i++) {
+          $html .= '<div class="col-xs-12">';
+          $html .= "P{$i}: ";
+          $html .= generateCardHTML("copnp{$i}c1ccn", 'copnpnccn', 'disabled');
+          $html .= generateCardHTML("copnp{$i}c2ccn", 'copnpnccn', 'disabled');
+          $html .= <<<HTML
+          <button id='disablecopnp{$i}ccn' type='button' class='btn btn-default btn-success' onclick='changePlayerState("disablecopnp{$i}ccn", ["copnp{$i}c1ccn" , "copnp{$i}c2ccn"])'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          <button id='resetcopnp{$i}ccn' type='button' class='btn btn-default' onclick='resetDivs(["copnp{$i}c1ccn","copnp{$i}c2ccn"])'>Reset</button>
+          </div>
+HTML;
+        }
+        echo $html;
+        ?>
+
 
       </div>
 
@@ -994,6 +1052,8 @@ TODO:
 
   </div>
 </div>
+
+
 
 <div id="about" class="container-fluid">
   <h1>About</h1>
