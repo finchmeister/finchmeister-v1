@@ -19,7 +19,8 @@ TODO:
   <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.bundle.js"></script>
 
   <!-- BOOTSTRAP SELECT  https://silviomoreto.github.io/bootstrap-select/examples/ -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
@@ -38,7 +39,9 @@ TODO:
     #section3 {
       background-color: #ff9800;
     }
-    #about    {padding-top:50px;height:500px;color: #fff; background-color: #009688;}
+    #about    {
+      background-color: #009688;
+    }
 
     .mainSection {
       height: auto;
@@ -153,6 +156,7 @@ TODO:
 
     var cop2pc1cc0pieChart = null;
     var copnp1ccnpieChart = null;
+    var copnpnccnpieChart = null;
 
     // calculateodds, players=2, player cards=1, community cards=0
     function cop2pc1cc0() {
@@ -229,8 +233,41 @@ TODO:
             cop2pc1cc0pieChart.destroy();
           }*/
 
+          // TODO are charts 2.0 worth it?
+          pieData = {
+            labels: [
+              "Win",
+              "Lose",
+              "Split"
+            ],
+            datasets: [
+              {
+                data: [data.p1.win, data.p1.lose, data.p1.split],
+                backgroundColor: [
+                  "#5AD3D1",
+                  "#F7464A",
+                  "#FDB45C"
+                ],
+                hoverBackgroundColor: [
+                  "#5AD3D1",
+                  "#F7464A",
+                  "#FDB45C"
+                ]
+              }]
+          };
+          pieOptions = {
+            segmentShowStroke : false,
+            animateScale : true
+
+          };
+
           // draw pie chart
-          cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie).Pie(pieData, pieOptions);
+          //cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie).Pie(pieData, pieOptions);
+          cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie, {
+            type: 'pie',
+            data: pieData,
+            options: pieOptions
+          });
         }
       });
 
@@ -509,6 +546,7 @@ TODO:
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
+    // SECTION 2
     // Resets the cards, pie, table and title
     function resetcopnp1ccn() {
       var divs = ["copnp1c1", "copnp1c2", "copnp1cc1", "copnp1cc2", "copnp1cc3", "copnp1cc4", "copnp1cc5"];
@@ -521,13 +559,53 @@ TODO:
       $('#copnp1ccnSplitP').html('');
       $("#copnp1ccnTitle").html('<h1>Preflop You vs 1 Opponent</h1>');
 
-      $('#copnp1ccnp').selectpicker('val', '2');
+      $('#copnp1ccnp').selectpicker('val', '2'); // No of players
       resetDivs(divs);
     }
 
+    // SECTION 3
     // Reloads the entire copnpnccn div
     function resetcopnpnccn() {
-      //$('#copnpnccn').load('pokerindex.php' +  ' #copnpnccn');
+
+      // Community Cards reset
+      var divs = ["copnpncc1", "copnpncc2", "copnpncc3", "copnpncc4", "copnpncc5"];
+      var disablePlayerCardDivs = [];
+      var resetPlayerButtonDivs = [];
+      for (i = 1; i <= 9; i++) {
+        divs.push("copnp" + i + "c1ccn", "copnp" + i + "c2ccn");
+        // Deal with the players cards
+        if (i > 2) {
+          disablePlayerCardDivs.push("copnp" + i + "c1ccn", "copnp" + i + "c2ccn");
+          resetPlayerButtonDivs.push("#disablecopnp" + i + "ccn");
+        }
+      }
+      var buttonResetSelector = resetPlayerButtonDivs.join(resetPlayerButtonDivs);
+      resetDivs(divs); // Reset all card divs
+      disableDivs(disablePlayerCardDivs); // Reset the player card divs
+
+      // Destroy existing piechart if set
+      if(copnpnccnpieChart!=null){
+        copnpnccnpieChart.destroy();
+      }
+      // Clear the table
+      $('#copnpnccnWinP').html('');
+      $('#copnpnccnLoseP').html('');
+      $('#copnpnccnSplitP').html('');
+      $("#copnpnccnTitle").html('<h1>Preflop 2 Players</h1>');
+
+      $('#copnpnccnp').selectpicker('val', '2'); // Reset No. of players
+
+      // Reset the buttons
+      var newValue = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
+       /* copnpnccnCardState[cardDivs[0]] = false; // TODO what is this?
+        copnpnccnCardState[cardDivs[1]] = false;*/
+      var classAdd = "btn-success";
+      var classRemove = "btn-danger";
+
+      // Update buttons
+      $(buttonResetSelector).html(newValue);
+      $(buttonResetSelector).addClass(classAdd);
+      $(buttonResetSelector).removeClass(classRemove);
     }
 
     /**
@@ -586,8 +664,8 @@ TODO:
         newValue = '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>';
         copnpnccnCardState[cardDivs[0]] = true;
         copnpnccnCardState[cardDivs[1]] = true;
-        var classAdd = "btn-danger";
-        var classRemove = "btn-success";
+        classAdd = "btn-danger";
+        classRemove = "btn-success";
       }
       else {
         resetDivs(cardDivs);
@@ -595,8 +673,8 @@ TODO:
         newValue = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
         copnpnccnCardState[cardDivs[0]] = false;
         copnpnccnCardState[cardDivs[1]] = false;
-        var classAdd = "btn-success";
-        var classRemove = "btn-danger";
+        classAdd = "btn-success";
+        classRemove = "btn-danger";
       }
       $(selector).html(newValue);
       $(selector).addClass(classAdd);
@@ -613,7 +691,6 @@ TODO:
       }
       $cardButton.css('width', width);
       $cardButton.attr('data-width', width);
-
 
       copnpnccn();
     }
@@ -871,7 +948,8 @@ TODO:
 <div id="section3" class="mainSection">
   <div class="container">
     <div class="col-sm-8">
-      <div id="copnpnccnTitle"><h1>calculateodds, players=n, player cards=n, community cards=n</h1></div>
+      <!--<div id="copnpnccnTitle"><h1>calculateodds, players=n, player cards=n, community cards=n</h1></div>-->
+      <div id="copnpnccnTitle"><h1>Preflop 2 Players</h1></div>
       <div class="row">
         <div class="col-lg-7">
           <div id="copnpnccnCards" class="cards">
@@ -980,15 +1058,15 @@ HTML;
               </thead>
               <tbody>
               <tr>
-                <td id="copnp1ccnWinP"></td>
-                <td id="copnp1ccnLoseP"></td>
-                <td id="copnp1ccnSplitP"></td>
+                <td id="copnpnccnWinP"></td>
+                <td id="copnpnccnLoseP"></td>
+                <td id="copnpnccnSplitP"></td>
               </tr>
               </tbody>
             </table>
           </div>
           <div class="resetButtonDiv">
-            <button id="resetcopnp1ccn" type="button" class="btn btn-default resetButton" onclick="resetcopnp1ccn()">Reset</button>
+            <button id="resetcopnpnccn" type="button" class="btn btn-default resetButton" onclick="resetcopnpnccn()">Reset</button>
           </div>
         </div>
         <div class="col-md-2">
@@ -1000,7 +1078,7 @@ HTML;
 
     </div>
     <div class="col-sm-4 charts" >
-      <canvas id="copnp1ccnpie" width="246" height="246"></canvas>
+      <canvas id="copnpnccnpie" width="246" height="246"></canvas>
     </div>
 
 
@@ -1055,7 +1133,7 @@ HTML;
 
 
 
-<div id="about" class="container-fluid">
+<div id="about" class="container-fluid mainSection">
   <h1>About</h1>
   <p>
     The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting the top pair, what was I expecting to achieve with that hand? I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
@@ -1067,6 +1145,14 @@ HTML;
     There’s quite a lot involved in simulating a poker hand. Working out all the possible 5 card combinations for every player, then calculating what every possible hand is and its value, many, many times is computationally expensive. That, and running this program on budget hardware isn’t the best combination, meaning I’ve had to limit the number of simulations on this demo to something relatively low. The results will vary a bit due to random sampling but you get the idea.
   </p>
 </div>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>&copy; finchmeister.co.uk</p>
+  </footer>
+
 
 </body>
 </html>
