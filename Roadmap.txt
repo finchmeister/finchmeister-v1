@@ -4,6 +4,8 @@ Poker simulator
 * Charts
 * Make look nice
 
+https://labs.spotify.com/puzzles/
+
 Weekly Back up svn to google drive
 Notify me when IP changes
 
