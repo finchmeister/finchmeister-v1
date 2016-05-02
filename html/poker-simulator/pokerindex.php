@@ -19,8 +19,7 @@ TODO:
   <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
 
   <!-- BOOTSTRAP SELECT  https://silviomoreto.github.io/bootstrap-select/examples/ -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
@@ -110,6 +109,10 @@ TODO:
       }
     }
 
+    .hideRow {
+      display:none;
+    }
+
 
     /* Make a media query
     .addPlayerResetButtons {
@@ -154,11 +157,13 @@ TODO:
       p8:['c1', 'c2']
     };
 
+    // Initialise the charts
     var cop2pc1cc0pieChart = null;
     var copnp1ccnpieChart = null;
     var copnpnccnpieChart = null;
 
     // calculateodds, players=2, player cards=1, community cards=0
+    // Section 1
     function cop2pc1cc0() {
       //Get the card values
       var card1 = $( "#cop2pc1cc0c1" ).val();
@@ -167,11 +172,10 @@ TODO:
         console.log('Player cards must be set');
         return;
       }
-
-
       $.ajax({
         type: 'POST',
         url: '../scripts/poker-simulator/poker_simulator_interface.php',
+        //url: 'https://secure.workbooks.com/process/=kDM2gDN/poker_sim',
         data: {
           "t":"co",
           "p":2,
@@ -179,6 +183,7 @@ TODO:
           "p1c1":card1,
           "p1c2":card2
         },
+        //dataType: 'jsonp', // 'jsonp' For cross site scripting
         dataType: 'json',
         success: function (data) {
 
@@ -228,46 +233,8 @@ TODO:
             cop2pc1cc0pieChart.destroy();
           }
 
-          /*if(cop2pc1cc0pie!=null){
-            console.log('pie != NULL');
-            cop2pc1cc0pieChart.destroy();
-          }*/
-
-          // TODO are charts 2.0 worth it?
-          pieData = {
-            labels: [
-              "Win",
-              "Lose",
-              "Split"
-            ],
-            datasets: [
-              {
-                data: [data.p1.win, data.p1.lose, data.p1.split],
-                backgroundColor: [
-                  "#5AD3D1",
-                  "#F7464A",
-                  "#FDB45C"
-                ],
-                hoverBackgroundColor: [
-                  "#5AD3D1",
-                  "#F7464A",
-                  "#FDB45C"
-                ]
-              }]
-          };
-          pieOptions = {
-            segmentShowStroke : false,
-            animateScale : true
-
-          };
-
           // draw pie chart
-          //cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie).Pie(pieData, pieOptions);
-          cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie, {
-            type: 'pie',
-            data: pieData,
-            options: pieOptions
-          });
+          cop2pc1cc0pieChart = new Chart(cop2pc1cc0pie).Pie(pieData, pieOptions);
         }
       });
 
@@ -321,8 +288,7 @@ TODO:
     }
 
     // calculateodds, players=n, player cards=1, community cards=n
-
-
+    // Section 2
     function copnp1ccn() {
       //Get the card values
       var p1c1 = $( "#copnp1c1" ).val();
@@ -366,9 +332,7 @@ TODO:
         opponents = ' Opponent';
       }
 
-      console.log(pointInGame);
       var title = '<h1>' + pointInGame + ' You vs ' + (p - 1) + opponents + '</h1>';
-      console.log(title);
 
 
       $("#copnp1ccnTitle").html(title);
@@ -447,7 +411,7 @@ TODO:
       });
     }
 
-    // Final JS function
+    // Section 3
     // Calculate Odds
     function copnpnccn() {
       // Fetch an ensure valid no. of players cards are selected
@@ -457,11 +421,11 @@ TODO:
       for (i = 1; i <= 9; i++) {
         for (j = 1; j <=2; j++) {
           var playerCardIndex = "p" + i + "c" + j;
-          var divId = "copn" + playerCardIndex + "ccn";
-          if (copnpnccnCardState[divId] || i == 1) {
-            // Ensure the cards are not sat out, otherwise don't add them to the players cards obj
-            // Don't do the check on the first set of cards, these are mandatory.
-            playersCards[playerCardIndex] = $( "#" + divId ).val();
+          var divId = "#copn" + playerCardIndex + "ccn";
+          var div = $(divId);
+          var parentDiv = div.parent();
+          if (parentDiv.hasClass("disabled") == false) { // Find if cards enabled by looking at class of parent div
+            playersCards[playerCardIndex] = div.val();
           }
         }
         var currentPlayerCards = playersCards["p" + i + "c1"] + playersCards["p" + i + "c2"];
@@ -470,7 +434,14 @@ TODO:
           cardsSelected = false;
           console.log("player " + i + " needs all cards selected");
         }
+        if (currentPlayerCards.length >= 4) {
+          // Two cards are selected, add the corresponding row to the table
+          var tableRowId = '#copnpnccnTR' + "p" + i;
+          $(tableRowId).removeClass('hideRow');
+        }
       }
+      console.log('playerCards');
+      console.log(playersCards);
       if (!cardsSelected) {
         console.log('All players must have cards selected');
         return;
@@ -537,8 +508,67 @@ TODO:
         success: function (data) {
           console.log(data);
           $('#copnpnccnresponse').text(JSON.stringify(data));
+
+          var labels = [];
+          var win = [];
+          var lose = [];
+          var split = [];
+
+          $.each(data, function (player, result) {
+
+            var winP = Math.round(result["winPercent"] * 100) + '%';
+            var loseP = Math.round((1 - result["winPercent"] - result["splitPercent"]) * 100) + '%';
+            var splitP = Math.round(result["splitPercent"] * 100) + '%';
+
+            $('#copnpnccn' + player + 'WinP').html(winP);
+            $('#copnpnccn' + player + 'LoseP').html(loseP);
+            $('#copnpnccn' + player + 'SplitP').html(splitP);
+
+            labels.push(player.toUpperCase());
+            win.push(result["winPercent"]);
+            lose.push(1 - result["winPercent"] - result["splitPercent"]);
+            split.push(result["splitPercent"]);
+
+          });
+
+          var copnpnccnpie = document.getElementById("copnpnccnpie").getContext("2d");
+
+          var ChartData = {
+            labels: labels,
+            datasets: [
+              {
+                label: "Win",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: win
+              },
+              {
+                label: "Lose",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: lose
+              },
+              {
+                label: "Split",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: split
+              }
+            ]
+          };
+
+          var myBarChart = new Chart(copnpnccnpie).Bar(ChartData, {});
+
         }
       });
+
+
 
     }
 
@@ -588,17 +618,15 @@ TODO:
         copnpnccnpieChart.destroy();
       }
       // Clear the table
-      $('#copnpnccnWinP').html('');
-      $('#copnpnccnLoseP').html('');
-      $('#copnpnccnSplitP').html('');
+      $('#copnpnccnp1WinP').html('');
+      $('#copnpnccnp1LoseP').html('');
+      $('#copnpnccnp1SplitP').html('');
       $("#copnpnccnTitle").html('<h1>Preflop 2 Players</h1>');
 
       $('#copnpnccnp').selectpicker('val', '2'); // Reset No. of players
 
       // Reset the buttons
       var newValue = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
-       /* copnpnccnCardState[cardDivs[0]] = false; // TODO what is this?
-        copnpnccnCardState[cardDivs[1]] = false;*/
       var classAdd = "btn-success";
       var classRemove = "btn-danger";
 
@@ -616,9 +644,16 @@ TODO:
       if (!Array.isArray(divs)) {
         var divs = [divs];
       }
-      for(var i = 0; i< divs.length; i++) {
+      for (var i = 0; i< divs.length; i++) {
         var selector = "#" + divs[i];
         $(selector).selectpicker('val', '');
+        // Deal with table rows in copnpnccn (section 3)
+        var copnpnccnDiv = /copnp[2-9]c[1-2]ccn/g.test(selector);
+        if (copnpnccnDiv) {
+          var playerNo = /p[2-9]/.exec(selector);
+          var tableRowId = '#copnpnccnTR' + playerNo[0];
+          $(tableRowId).addClass('hideRow');
+        }
       }
     }
 
@@ -644,8 +679,6 @@ TODO:
       }
     }
 
-    // Initialise the variable out of the scope of the function
-    var copnpnccnCardState = {};
 
     /**
      * On click of the button will disable/enable the cards.
@@ -662,8 +695,6 @@ TODO:
       if (state == '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>') {
         enableDivs(cardDivs);
         newValue = '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>';
-        copnpnccnCardState[cardDivs[0]] = true;
-        copnpnccnCardState[cardDivs[1]] = true;
         classAdd = "btn-danger";
         classRemove = "btn-success";
       }
@@ -671,8 +702,6 @@ TODO:
         resetDivs(cardDivs);
         disableDivs(cardDivs);
         newValue = '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>';
-        copnpnccnCardState[cardDivs[0]] = false;
-        copnpnccnCardState[cardDivs[1]] = false;
         classAdd = "btn-success";
         classRemove = "btn-danger";
       }
@@ -691,7 +720,6 @@ TODO:
       }
       $cardButton.css('width', width);
       $cardButton.attr('data-width', width);
-
       copnpnccn();
     }
 
@@ -1051,17 +1079,28 @@ HTML;
             <table class="table text-center">
               <thead>
               <tr>
+                <th></th>
                 <th>Win</th>
                 <th>Lose</th>
                 <th>Split</th>
               </tr>
               </thead>
-              <tbody>
-              <tr>
-                <td id="copnpnccnWinP"></td>
-                <td id="copnpnccnLoseP"></td>
-                <td id="copnpnccnSplitP"></td>
-              </tr>
+              <tbody> <!--Yes naming convention got a bit nasty here-->
+              <?php
+              for ($i = 1; $i <= 9; $i++) {
+                $tableRowDivId = "copnpnccnTRp$i";
+                $tableCellDivIdPrefix = "copnpnccnp$i";
+                if ($i > 1) { $class = "hideRow"; }
+                echo <<<HTML
+                <tr id="{$tableRowDivId}" class="{$class}">
+                  <td>P{$i}</td>
+                  <td id="{$tableCellDivIdPrefix}WinP"></td>
+                  <td id="{$tableCellDivIdPrefix}LoseP"></td>
+                  <td id="{$tableCellDivIdPrefix}SplitP"></td>
+                </tr>
+HTML;
+              }
+              ?>
               </tbody>
             </table>
           </div>
