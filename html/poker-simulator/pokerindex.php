@@ -24,6 +24,8 @@ TODO:
   <!-- BOOTSTRAP SELECT  https://silviomoreto.github.io/bootstrap-select/examples/ -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
 
   <style>
     body {
@@ -40,6 +42,12 @@ TODO:
     }
     #about    {
       background-color: #009688;
+      text-align: justify;
+    }
+
+    .jumbotron {
+      padding-top: 98px;
+      margin-bottom: 0px;
     }
 
     .mainSection {
@@ -52,6 +60,7 @@ TODO:
 
     .charts {
       text-align: center;
+      align-self: center;
     }
 
     th {
@@ -87,7 +96,7 @@ TODO:
       text-align: center;
     }
 
-    #copnp1ccnpieDiv {
+    #copnp1ccnpieDiv, #copnpnccnpieDiv {
       padding-top: 50px;
     }
 
@@ -101,11 +110,15 @@ TODO:
       #copnp1ccnpieDiv {
         padding-top: 253px;
       }
+      #section3container{
+        display: flex;
+        justify-content: center;
+
+      }
     }
     @media (min-width: 992px) {
       #copnp1ccnpieDiv {
         padding-top: 220px;
-
       }
     }
 
@@ -113,6 +126,16 @@ TODO:
       display:none;
     }
 
+    .inputFeedback {
+      text-align: center;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      padding-top: 10px;
+    }
 
     /* Make a media query
     .addPlayerResetButtons {
@@ -162,6 +185,23 @@ TODO:
     var copnp1ccnpieChart = null;
     var copnpnccnpieChart = null;
 
+    var loadingHTML = '<div class="alert alert-info inputFeedback" role="alert">' +
+      '<i class="fa fa-spinner fa-spin fa-fw margin-bottom"></i> Loading... </div>';
+
+    function generateWarningHTML(warnings) {
+      console.log('warnings');
+      console.log(warnings);
+      var warningHTML = '<div class="alert alert-danger inputFeedback" role="alert" style="text-align: left">' +
+        '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>' +
+          '<b> Unable to return results:</b><ul>';
+      //Add each error to the warnings array
+      $.each( warnings, function( index, value ){
+        warningHTML += '<li>' + value + '</li>';
+      });
+      warningHTML += '</ul> </div>';
+      return warningHTML;
+    }
+
     // calculateodds, players=2, player cards=1, community cards=0
     // Section 1
     function cop2pc1cc0() {
@@ -172,6 +212,9 @@ TODO:
         console.log('Player cards must be set');
         return;
       }
+
+      $('#cop2pc1cc0MainDiv').html('<canvas id="cop2pc1cc0pie" width="275" height="275"></canvas>');
+
       $.ajax({
         type: 'POST',
         url: '../scripts/poker-simulator/poker_simulator_interface.php',
@@ -301,40 +344,44 @@ TODO:
       var cc4 = $( "#copnp1cc4" ).val();
       var cc5 = $( "#copnp1cc5" ).val();
       var communityCards = [cc1, cc2, cc3, cc4, cc5];
+      var warnings = [];
       // Validate player cards set
       if (isEmpty(p1c1) ||isEmpty(p1c2)) {
-        console.log('Player cards must be set');
-        return;
+        console.log('Your cards must be set');
+        warnings.push('Your cards must be set');
       }
       //Validate correct no. of cards select
       var ccCardsValid = validateCommunityCardsArray(communityCards);
       console.log(ccCardsValid);
       if (!(ccCardsValid)) {
-        console.log('Community cards not valid');
-        return;
-        //TODO RETURN MESSAGE
+        console.log('Community cards are not valid');
+        warnings.push('Community cards are not valid');
       }
       // Validate uniqueness
       var allCards = communityCards.concat(p1c);
       if(!validateUniqueCards(allCards)) {
         console.log('Cards must be unique');
-        return;
-        //TODO RETURN MESSAGE
+        warnings.push('Cards must be unique');
       }
+      // We have an error
+
+      if (warnings.length > 0) {
+        $('#copnp1ccnFeedback').html(generateWarningHTML(warnings));
+        return;
+      }
+      else {
+        // Good to go so show loading HTML
+        $('#copnp1ccnFeedback').html(loadingHTML)
+      }
+
       // Get the no. of players
       var p = $( "#copnp1ccnp" ).val();
-
-      //
-
       var pointInGame = findPointInGame(cc1, cc2, cc3, cc4, cc5);
       var opponents = ' Opponents';
       if (p == 2) {
         opponents = ' Opponent';
       }
-
-      var title = '<h1>' + pointInGame + ' You vs ' + (p - 1) + opponents + '</h1>';
-
-
+      var title = '<h1>' + pointInGame + ', You vs ' + (p - 1) + opponents + '</h1>';
       $("#copnp1ccnTitle").html(title);
 
       // Prepare the params
@@ -358,7 +405,8 @@ TODO:
         dataType: 'json',
         success: function (data) {
           console.log(data);
-          $('#copnp1ccnresponse').text(JSON.stringify(data));
+          $('#copnp1ccnFeedback').html('');
+          $('#copnp1ccnpieMainDiv').html('<div id="copnp1ccnpieDiv"><canvas id="copnp1ccnpie" width="246" height="246"></canvas></div>');
 
           var winP = Math.round(data["p1"]["winPercent"] * 100) + '%';
           var loseP = Math.round((1 - data["p1"]["winPercent"] - data["p1"]["splitPercent"]) * 100) + '%';
@@ -417,6 +465,7 @@ TODO:
       // Fetch an ensure valid no. of players cards are selected
       var playersCards = {};
       var cardsSelected = true;
+      var warnings = [];
 
       for (i = 1; i <= 9; i++) {
         for (j = 1; j <=2; j++) {
@@ -432,7 +481,10 @@ TODO:
         if (currentPlayerCards.length != 0 && currentPlayerCards.length < 4) {
           // Two cards not selected here
           cardsSelected = false;
-          console.log("player " + i + " needs all cards selected");
+          //console.log("player " + i + " needs all cards selected");
+          if (i > 1) { // Only show this warning for other players
+            warnings.push("P" + i + "'s cards must both be set");
+          }
         }
         if (currentPlayerCards.length >= 4) {
           // Two cards are selected, add the corresponding row to the table
@@ -442,17 +494,15 @@ TODO:
       }
       console.log('playerCards');
       console.log(playersCards);
-      if (!cardsSelected) {
+      /*if (!cardsSelected) {
         console.log('All players must have cards selected');
         return;
-        //TODO message
-      }
+      }*/
 
       // P1 must have cards set to continue
-      if (isEmpty(playersCards["p1c1"]) && isEmpty(playersCards["p1c2"])) {
-        console.log('Player one must have cards selected');
-        return;
-        //TODO message
+      if (isEmpty(playersCards["p1c1"]) || isEmpty(playersCards["p1c2"])) {
+        console.log('You must have cards selected');
+        warnings.unshift('Your cards must be set');
       }
 
       // Fetch and ensure the correct no. of community cards are select
@@ -465,9 +515,8 @@ TODO:
       console.log(communityCards);
       var ccValid = validateCommunityCards(communityCards);
       if (!ccValid) {
-        console.log('Community cards not valid');
-        return;
-        //TODO RETURN MESSAGE
+        console.log('Community cards are not valid');
+        warnings.push('Community cards are not valid');
       }
 
       // Validate all cards for uniqueness
@@ -478,15 +527,23 @@ TODO:
       if (!validateUniqueCards(allCardsArray)) {
         // Cards not unique
         console.log('Cards must be unique');
-        return;
-        //TODO return message
+        warnings.push('Cards must be unique');
       }
 
       // Now get the no of players
       var p = Object.keys(playersCards).length/2;
-      if (p < 2) {
+      /*if (p < 2) {
         console.log('There must be at least 2 players');
         return;
+      }*/
+
+      if (warnings.length > 0) {
+        $('#copnpnccnFeedback').html(generateWarningHTML(warnings));
+        return;
+      }
+      else {
+        // Good to go so show loading HTML
+        $('#copnpnccnFeedback').html(loadingHTML);
       }
 
       // Prepare the params
@@ -498,7 +555,17 @@ TODO:
 
       $.extend(data, playersCards, communityCards);
       console.log('data');
-      console.log(data)
+      console.log(data);
+
+      var pointInGame = findPointInGame(communityCards['cc1'], communityCards['cc2'], communityCards['cc3'], communityCards['cc4'], communityCards['cc5']);
+      var opponents = ' Opponents';
+      if (p == 2) {
+        opponents = ' Opponent';
+      }
+      var title = '<h1>' + pointInGame + ', You vs ' + (p - 1) + opponents + '</h1>';
+      $("#copnpnccnTitle").html(title);
+
+      $('#copnpnccnpieMainDiv').html('<div id=copnpnccnpieDiv><canvas id="copnpnccnpie" width="246" height="246"></canvas></div>');
 
       $.ajax({
         type: 'POST',
@@ -507,13 +574,13 @@ TODO:
         dataType: 'json',
         success: function (data) {
           console.log(data);
-          $('#copnpnccnresponse').text(JSON.stringify(data));
-
+          $('#copnpnccnFeedback').html('');
           var labels = [];
           var win = [];
           var lose = [];
           var split = [];
 
+          // Get all the data we need
           $.each(data, function (player, result) {
 
             var winP = Math.round(result["winPercent"] * 100) + '%';
@@ -525,11 +592,16 @@ TODO:
             $('#copnpnccn' + player + 'SplitP').html(splitP);
 
             labels.push(player.toUpperCase());
-            win.push(result["winPercent"]);
-            lose.push(1 - result["winPercent"] - result["splitPercent"]);
-            split.push(result["splitPercent"]);
+            win.push(Math.round(result["winPercent"] * 100));
+            lose.push(Math.round((1 - result["winPercent"] - result["splitPercent"]) * 100));
+            split.push(Math.round(result["splitPercent"] * 100));
 
-          });
+          }); // End of each
+
+          // Destory existing chart if set
+          if(copnpnccnpieChart!=null){
+            copnpnccnpieChart.destroy();
+          }
 
           var copnpnccnpie = document.getElementById("copnpnccnpie").getContext("2d");
 
@@ -538,33 +610,38 @@ TODO:
             datasets: [
               {
                 label: "Win",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
+                fillColor: "#46BFBD",
+                //strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "#5AD3D1",
+                //highlightStroke: "rgba(220,220,220,1)",
                 data: win
               },
               {
                 label: "Lose",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
+                fillColor: "#F7464A",
+                //strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "#FF5A5E",
+                //highlightStroke: "rgba(151,187,205,1)",
                 data: lose
               },
               {
                 label: "Split",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
+                fillColor: "#FDB45C",
+                //strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "#FFC870",
+                //highlightStroke: "rgba(151,187,205,1)",
                 data: split
               }
             ]
           };
 
-          var myBarChart = new Chart(copnpnccnpie).Bar(ChartData, {});
+          var ChartOptions = {
+            scaleFontColor: "#ffffff",
+            scaleShowGridLines : false,
+            barShowStroke: false
+          };
 
+          copnpnccnpieChart = new Chart(copnpnccnpie).Bar(ChartData, ChartOptions);
         }
       });
 
@@ -584,10 +661,12 @@ TODO:
       if(copnp1ccnpieChart!=null){
         copnp1ccnpieChart.destroy();
       }
-      $('#copnp1ccnWinP').html('');
-      $('#copnp1ccnLoseP').html('');
+      $('#copnp1ccnWinP, #copnp1ccnLoseP, #copnp1ccnSplitP, #copnp1ccnFeedback, #copnp1ccnpieMainDiv').html('');
+      /*$('#copnp1ccnLoseP').html('');
       $('#copnp1ccnSplitP').html('');
-      $("#copnp1ccnTitle").html('<h1>Preflop You vs 1 Opponent</h1>');
+      $('#copnp1ccnFeedback').html('');*/
+      $("#copnp1ccnTitle").html('<h1>Preflop, You vs 1 Opponent</h1>');
+
 
       $('#copnp1ccnp').selectpicker('val', '2'); // No of players
       resetDivs(divs);
@@ -620,9 +699,9 @@ TODO:
       // Clear the table
       $('#copnpnccnp1WinP').html('');
       $('#copnpnccnp1LoseP').html('');
+      $('#copnpnccnpieMainDiv').html('');
       $('#copnpnccnp1SplitP').html('');
-      $("#copnpnccnTitle").html('<h1>Preflop 2 Players</h1>');
-
+      $("#copnpnccnTitle").html('<h1>Preflop, 2 Players</h1>');
       $('#copnpnccnp').selectpicker('val', '2'); // Reset No. of players
 
       // Reset the buttons
@@ -665,6 +744,7 @@ TODO:
         var selector = "#" + divs[i];
         $(selector).prop('disabled', true);
         $(selector).selectpicker('refresh');
+        resizeButtonsForSmallScreens();
       }
     }
 
@@ -709,21 +789,11 @@ TODO:
       $(selector).addClass(classAdd);
       $(selector).removeClass(classRemove);
 
-      // TODO sort this mess out
-      var $window = $(window);
-      var $cardButton = $('.cardButton');
-      var width = '';
-      if ($window.width() < 467) {
-        width = '65px';
-      } else {
-        width = '115px';
-      }
-      $cardButton.css('width', width);
-      $cardButton.attr('data-width', width);
+      resizeButtonsForSmallScreens();
       copnpnccn();
     }
 
-    $(document).ready(function(){
+    function resizeButtonsForSmallScreens() {
       var $window = $(window);
 
       function resize() {
@@ -740,6 +810,10 @@ TODO:
       $window
         .resize(resize)
         .trigger('resize');
+    }
+
+    $(document).ready(function(){
+      resizeButtonsForSmallScreens();
     });
 
 
@@ -784,17 +858,17 @@ TODO:
     <div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="#section1">Preflop - You vs 1 Player</a></li>
+          <!--<li><a href="#section1">Preflop - You vs 1 Player</a></li>
           <li><a href="#section2">You vs n Players</a></li>
           <li><a href="#section3">You vs n Players</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="#about">About</a></li>-->
         </ul>
       </div>
     </div>
   </div>
 </nav>
 
-<div class="jumbotron" style="padding-top: 98px;"> <!--TODO make consistent-->
+<div class="jumbotron">
   <div class="container text-center">
     <h1>Poker Hand Simulator</h1>
   </div>
@@ -806,7 +880,7 @@ TODO:
     <!--<div class="row">-->
       <div class="col-xs-12">
         <!--<h1>calculateodds, players=2, player cards=1, community cards=0</h1>-->
-        <h1>Preflop Heads Up</h1>
+        <h1>Preflop, Heads Up</h1>
       </div>
      <!-- </div>-->
       <!--<div class="row">-->
@@ -848,8 +922,7 @@ TODO:
         </div>
       </div>
 
-      <div class="col-sm-6 charts">
-        <canvas id="cop2pc1cc0pie" width="275" height="275"></canvas>
+      <div class="col-sm-6 charts" id="cop2pc1cc0MainDiv">
       </div>
     <!--</div>-->
   </div>
@@ -861,7 +934,7 @@ TODO:
 <div id="section2" class="mainSection">
   <div class="container">
     <div class="col-sm-8">
-      <div id="copnp1ccnTitle"><h1>Preflop You vs 1 Opponent</h1></div>
+      <div id="copnp1ccnTitle"><h1>Preflop, You vs 1 Opponent</h1></div>
       <div class="row">
         <div class="col-lg-7">
           <div id="copnp1ccnCards" class="cards">
@@ -910,14 +983,15 @@ TODO:
       </div>
 
       <div class="row">
-        <div class="col-lg-12 cards">
-
-          <p class="lead">Results:</p>
-
-
+        <!--Alerts go here-->
+        <div class="col-xs-12" id="copnp1ccnFeedback">
         </div>
+      </div>
 
-
+      <div class="row">
+        <div class="col-lg-12 cards">
+          <p class="lead">Results:</p>
+        </div>
       </div>
 
       <div class="row">
@@ -948,25 +1022,12 @@ TODO:
             <button id="resetcopnp1ccn" type="button" class="btn btn-default resetButton" onclick="resetcopnp1ccn()">Reset</button>
           </div>
         </div>
-        <!--<div class="col-md-2">
-
-        </div>-->
-
       </div>
-      <!--<div class="row">
-        <div class="col-lg-12">
-          <div class="alert alert-danger" role="alert">Warnibng</div>
-
-        </div>
-      </div>
--->
+    </div>
+    <!--jquery draws the canvas-->
+    <div class="col-sm-4 charts" id="copnp1ccnpieMainDiv">
 
     </div>
-    <div class="col-sm-4 charts" id="copnp1ccnpieDiv">
-      <canvas id="copnp1ccnpie" width="246" height="246"></canvas>
-    </div>
-
-
   </div>
 
 </div>
@@ -974,10 +1035,10 @@ TODO:
 
 
 <div id="section3" class="mainSection">
-  <div class="container">
+  <div class="container" id="section3container">
     <div class="col-sm-8">
       <!--<div id="copnpnccnTitle"><h1>calculateodds, players=n, player cards=n, community cards=n</h1></div>-->
-      <div id="copnpnccnTitle"><h1>Preflop 2 Players</h1></div>
+      <div id="copnpnccnTitle"><h1>Preflop, 2 Players</h1></div>
       <div class="row">
         <div class="col-lg-7">
           <div id="copnpnccnCards" class="cards">
@@ -1061,6 +1122,12 @@ HTML;
       </div>
 
 
+      <div class="row">
+        <!--Alerts go here-->
+        <div class="col-xs-12" id="copnpnccnFeedback">
+
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-lg-12 cards">
@@ -1116,8 +1183,7 @@ HTML;
 
 
     </div>
-    <div class="col-sm-4 charts" >
-      <canvas id="copnpnccnpie" width="246" height="246"></canvas>
+    <div class="col-sm-4 charts" id="copnpnccnpieMainDiv">
     </div>
 
 
@@ -1126,72 +1192,33 @@ HTML;
 </div>
 <!--end of new section-->
 
-
-
-<div id="section6" class="container-fluid">
-<h1>calculateodds, players=n, player cards=n, community cards=n</h1>
-  <!--copnpnccn-->
-  <div id="copnpnccn">
-    <?php
-    //include "../scripts/poker-simulator/generate_card_html.php";
-    // P1 Cards
-    echo generateCardHTML('copnp1c1ccn', 'copnpnccn');
-    echo generateCardHTML('copnp1c2ccn', 'copnpnccn');
-    // Community Cards
-    echo generateCardHTML('copnpncc1', 'copnpnccn');
-    echo generateCardHTML('copnpncc2', 'copnpnccn');
-    echo generateCardHTML('copnpncc3', 'copnpnccn');
-    echo generateCardHTML('copnpncc4', 'copnpnccn');
-    echo generateCardHTML('copnpncc5', 'copnpnccn');
-    echo '<br>';
-
-    // Create the card dropdowns and buttons for players p2<=
-    for($i=2; $i<=9; $i++) {
-      $pcDivIds = [];
-      for($j = 1; $j <=2; $j++) {
-        $divId = "copnp{$i}c{$j}ccn";
-        echo generateCardHTML($divId, 'copnpnccn', 'disabled="true"');
-        $pcDivIds[] = $divId;
-      }
-      $pcDivIds = '["' . implode('" , "', $pcDivIds) . '"]';
-      $emptySeatDivId = "disablecopnp{$i}ccn";
-      echo "<button id='{$emptySeatDivId}' type='button' class='btn btn-default' onclick='changePlayerState(\"{$emptySeatDivId}\", {$pcDivIds})'>Add Player</button>"; //TODO Active/Disabled Buttons BS
-      echo "<button id='resetcopnp{$i}ccn' type='button' class='btn btn-default' onclick='resetDivs({$pcDivIds})'>Reset</button>";
-      unset ($pcDivIds);
-      echo "Player $i <br>";
-
-    }
-    ?>
-    <p>copnpnccnresponse: <span id="copnpnccnresponse"></span></p>
-
-    <button id="resetcopnpnccn" type="button" onclick="resetcopnpnccn()">Reset</button>
-
-
+<div id="about" class="mainSection">
+  <div class="container">
+    <div class="col-xs-12">
+      <h1>About</h1>
+      <p>
+        The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting the top pair, I wasn't sure what I was expecting to achieve with that hand. I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
+      </p>
+      <p>
+        Rather than use one of the existing tools to discover this knowledge, I thought it would be fun to create my own. I wrote this poker simulator in PHP, a language not really suited for these kind of numerical simulations, but on larger iterations it certainly works - the results are consistent with other tools out there.
+      </p>
+      <p>
+        There’s quite a lot involved in simulating a poker hand. Working out all the possible 5 card combinations for every player, then calculating what every possible hand is and its value, many, many times is computationally expensive. That, and running this program on budget hardware isn’t the best combination, meaning I’ve had to limit the number of simulations on this demo to something relatively low. The results will vary a bit due to random sampling but you get the idea.
+      </p>
+    </div>
   </div>
 </div>
 
 
 
-<div id="about" class="container-fluid mainSection">
-  <h1>About</h1>
-  <p>
-    The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting the top pair, what was I expecting to achieve with that hand? I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
-  </p>
-  <p>
-    So rather than use one of the existing tools to discover this knowledge, I decided to create my own. I wrote this poker simulator in PHP, a language not really suited for heavy numerical simulations, but on larger iterations it certainly works - the results are consistent with other tools out there.
-  </p>
-  <p>
-    There’s quite a lot involved in simulating a poker hand. Working out all the possible 5 card combinations for every player, then calculating what every possible hand is and its value, many, many times is computationally expensive. That, and running this program on budget hardware isn’t the best combination, meaning I’ve had to limit the number of simulations on this demo to something relatively low. The results will vary a bit due to random sampling but you get the idea.
-  </p>
-</div>
-
-
   <!-- FOOTER -->
-  <footer>
-    <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>&copy; finchmeister.co.uk</p>
-  </footer>
 
+  <footer class="container">
+    <div class="col-xs-12">
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p>&copy; 2016 - finchmeister.co.uk</p>
+    </div>
+  </footer>
 
 </body>
 </html>
