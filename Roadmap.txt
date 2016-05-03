@@ -1,8 +1,3 @@
-Poker simulator
-* Move drop downs
-* Java script to describe hands
-* Charts
-* Make look nice
 
 https://labs.spotify.com/puzzles/
 
@@ -29,3 +24,4 @@ https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet
 
 Cool Stuff
 https://css-tricks.com/svg-line-animation-works/ <- line animation
+http://codular.com/oauth-authentication-with-instagram <- instagram integration

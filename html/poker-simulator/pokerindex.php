@@ -107,19 +107,18 @@ TODO:
 
     }
     @media (min-width: 768px) {
-      #copnp1ccnpieDiv {
+      /*#copnp1ccnpieDiv {
         padding-top: 253px;
-      }
-      #section3container{
+      }*/
+      #section3container, #section2container{
         display: flex;
         justify-content: center;
-
       }
     }
     @media (min-width: 992px) {
-      #copnp1ccnpieDiv {
-        padding-top: 220px;
-      }
+      /*#copnp1ccnpieDiv {
+        padding-top: 140px;
+      }*/
     }
 
     .hideRow {
@@ -932,7 +931,7 @@ TODO:
 <!--new section-->
 
 <div id="section2" class="mainSection">
-  <div class="container">
+  <div class="container" id="section2container">
     <div class="col-sm-8">
       <div id="copnp1ccnTitle"><h1>Preflop, You vs 1 Opponent</h1></div>
       <div class="row">
@@ -948,12 +947,17 @@ TODO:
         </div>
         <div class="col-lg-5">
           <div class="cards">
-
-
           <p class="lead">Select no. of opponents:</p>
-          <?php
-          echo generateNoOfPlayersHTML('copnp1ccnp', 'copnp1ccn');
-          ?>
+            <select class="selectpicker" id="copnp1ccnp" data-width="234px" onchange="copnp1ccn()">
+              <option selected value="2">1</option>
+              <option value="3">2</option>
+              <option value="4">3</option>
+              <option value="5">4</option>
+              <option value="6">5</option>
+              <option value="7">6</option>
+              <option value="8">7</option>
+              <option value="9">8</option>
+            </select>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@
 /*
  * Heads up 1 player
  * Heads up 1 player & cards shown
- *
+ * https://secure.workbooks.com/process/=kDM2gDN/poker_sim?t=co&p1c1=Ks&p1c2=5d&p=2&i=100
  *
  *
  *
@@ -18,13 +18,22 @@ header('Content-Type: application/json');
 include 'poker_simulator_core.php';
 
 const NO_OF_ITERATIONS = 100;
+const OUTSOURCED = true;
+const BASE_URL = 'https://secure.workbooks.com/process/=kDM2gDN/poker_sim';
 $DEBUG = FALSE;
 
 debug($_REQUEST);
 
 // Calculate odds
 if ($_REQUEST['t'] == 'co') {
-  echo calculateOddsFromRequest();
+  if (OUTSOURCED) {
+    // Construct the URL from params and create a get request to outsourced server
+    $params = http_build_query($_POST);
+    $url = BASE_URL . '?' . $params;
+    echo file_get_contents($url);
+  } else { // Run locally
+    echo calculateOddsFromRequest();
+  }
 }
 
 function calculateOddsFromRequest(){

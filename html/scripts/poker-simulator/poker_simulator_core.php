@@ -147,10 +147,6 @@ class CardFunctions {
   }
 
   public static function returnNumber($value) {
-    /*if(is_numeric($value)) {//Only want to return valid numbers
-
-
-    }*/
     switch ($value) {
       case 'J':
         return 11;
@@ -594,8 +590,6 @@ class ReturnOrderedHandAndHandValue {
 
   public static function flush($hand) {
     $hand = HandEvaluation::findFlush($hand);
-    /*$highCardOfFlush[0] = $hand[0];
-    $handValue = 5 + CardFunctions::calculateDecimalHandValue($highCardOfFlush);*/
     $handValue = 5 + CardFunctions::calculateDecimalHandValue($hand);
     $handAndHandValue = self::createHandAndHandValueArray($hand, $handValue, 'Flush');
     return $handAndHandValue;
@@ -967,8 +961,7 @@ class PokerSimulation {
    * @param int $iterations
    * @return mixed
    */
-  public static function calculateOdds($playersCards, $shownCards = FALSE, $noOfPlayers = FALSE, $iterations = 1){
-
+  public static function calculateOdds($playersCards, $shownCards = FALSE, $noOfPlayers = FALSE, $iterations = 1) {
 
     $noOfPlayersPassed = count($playersCards);
 
@@ -1153,10 +1146,6 @@ class StatisticsFunctions{
 } //End of statistics class
 
 //Loop through every combination of hands with the current hand and sort the best hand
-//Todo need to know if the hand contains players cards or not
-//Todo need a way of ranking splits between players
-
-
 
 
 #$sharedCards = ['Qs','Kh', '7c', '5c'  ];

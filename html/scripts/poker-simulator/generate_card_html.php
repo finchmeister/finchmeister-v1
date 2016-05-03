@@ -145,7 +145,7 @@ HTML;
 function generateNoOfPlayersHTML($divId, $functionName) {
   // Note the value that is submitted is the total number of players, the value shown is the number of opponents
   $html = <<<HTML
-<select id="{$divId}" class="selectpicker" data-width="234px" onchange="{$functionName}()">
+<select class="selectpicker" id="{$divId}" data-width="234px" onchange="{$functionName}()">
   <option selected value="2">1</option>
   <option value="3">2</option>
   <option value="4">3</option>
