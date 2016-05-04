@@ -1,12 +1,10 @@
 <!--
 TODO:
- * Make JS tidy
- * Sidebar
- *  cohu1p
- http://www.chartjs.org/docs/#getting-started-include-chart.js
+ * Tidy source/document
+ * Loading time
+ * Jazz up jumbotron
+ * Consider navbar non-stick
 -->
-
-
 <!DOCTYPE html>
 <!-- Last commit: $Id$ -->
 <!-- Version Location: $HeadURL$ -->
@@ -46,7 +44,7 @@ TODO:
     }
 
     .jumbotron {
-      padding-top: 98px;
+      padding-top: 80px;
       margin-bottom: 0px;
     }
 
@@ -815,34 +813,9 @@ TODO:
       resizeButtonsForSmallScreens();
     });
 
-
-    /*$('.cardButton').on('loaded.bs.select', function (e) {
-      if ($window.width() < 467) {
-        $('.cardButton').css('width', '65px');
-        console.log('select loadsmall');
-      } else {
-        $('.cardButton').css('width', '115px');
-      }
-    });*/
-
-
   </script>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-
-<!--
-<p><b>Heads Up Simulator (No Opponent)</b></p>
-<form>
-    Enter your cards pre flop: <input type="text" onkeyup="showHint(this.value)">
-</form>
-<p>Chance of winning: <span id="txtHint"></span></p>
-
-<p><b>Heads Up Simulator (1 Opponent)</b></p>
-<form>
-    Enter your cards pre flop: <input type="text" onkeyup="showHint(this.value)">
-</form>
-<p>Chance of winning: <span id="txtHint"></span></p>
--->
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -1201,14 +1174,18 @@ HTML;
     <div class="col-xs-12">
       <h1>About</h1>
       <p>
-        The idea to make this came one poker night after I was thrown off a hand with top pair. I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting the top pair, I wasn't sure what I was expecting to achieve with that hand. I was curious to know how many times K5 would have won in that situation or even just pre-flop, I knew it wasn’t a great hand but statistically how bad was it?
+        The idea to make this came one poker night after I was thrown off a hand with top pair (cheers Bodes!). I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting top pair, it didn’t feel right to keep betting into it. I became curious and wanted to know how many times K5 would win, I knew it wasn’t a great hand but mathematically how bad was it? Should I have stayed in?
       </p>
       <p>
-        Rather than use one of the existing tools to discover this knowledge, I thought it would be fun to create my own. I wrote this poker simulator in PHP, a language not really suited for these kind of numerical simulations, but on larger iterations it certainly works - the results are consistent with other tools out there.
+        So rather than use one of the existing tools to discover my odds, I knew it would be possible to create my own. I wrote this poker simulator in PHP, a slow, interpreted language designed for web applications that wouldn't be the first choice for numerical simulations like this, but it's easy to develop in, familiar and gets the job done. Whilst not as fast, on larger iterations the results seem pretty consistent with other tools out there.
       </p>
       <p>
-        There’s quite a lot involved in simulating a poker hand. Working out all the possible 5 card combinations for every player, then calculating what every possible hand is and its value, many, many times is computationally expensive. That, and running this program on budget hardware isn’t the best combination, meaning I’ve had to limit the number of simulations on this demo to something relatively low. The results will vary a bit due to random sampling but you get the idea.
+        As it turns out, simulating a poker hand is quite involved. We have to work out all the possible 5 card combinations for every player given what cards are shown (or could be shown), go through every combination and determine the value of the hand, find the strongest, then compare this against every other player, <em>n</em> times. The combinatorics get out of hand... quick, making each simulation computationally expensive where the cost only increases as the number of players increases. To get results in a reasonable time, I’ve capped the number of iterations for each simulation to 100. This is a relatively low number, so repeating the same simulation is likely to return slightly different results but you get the idea <i class="fa fa-smile-o" aria-hidden="true"></i>. I could cap it at 1000 iterations to return results with more precision but you'd be waiting 10 times as long!
       </p>
+      <p>
+        Comments and feedback welcome, if you spot an unusual result, let me know what the hand is and I’ll take a look.
+      </p>
+
     </div>
   </div>
 </div>
