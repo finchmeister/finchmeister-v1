@@ -580,6 +580,10 @@ TODO:
           // Get all the data we need
           $.each(data, function (player, result) {
 
+            if(player == 'timeTaken') {
+              return true;
+            }
+
             var winP = Math.round(result["winPercent"] * 100) + '%';
             var loseP = Math.round((1 - result["winPercent"] - result["splitPercent"]) * 100) + '%';
             var splitP = Math.round(result["splitPercent"] * 100) + '%';

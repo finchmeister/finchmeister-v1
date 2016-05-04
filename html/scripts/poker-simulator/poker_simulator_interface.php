@@ -19,10 +19,13 @@ include 'poker_simulator_core.php';
 
 const NO_OF_ITERATIONS = 100;
 const OUTSOURCED = true;
+const MASSIVELY_PARALLEL = 5; // No of parallel requests to run, comment out to run in series
 const BASE_URL = 'https://secure.workbooks.com/process/=kDM2gDN/poker_sim';
 $DEBUG = FALSE;
 
 debug($_REQUEST);
+
+$start = microtime(1);
 
 // Calculate odds
 if ($_REQUEST['t'] == 'co') {
@@ -30,10 +33,69 @@ if ($_REQUEST['t'] == 'co') {
     // Construct the URL from params and create a get request to outsourced server
     $params = http_build_query($_POST);
     $url = BASE_URL . '?' . $params;
-    echo file_get_contents($url);
+    //$url = 'https://secure.workbooks.com/process/=kDM2gDN/poker_sim?t=co&p1c1=Ks&p1c2=5d&p=2&i=100';
+
+    if (MASSIVELY_PARALLEL > 1) {
+      $mh = curl_multi_init();
+      $conn = [];
+      // Prepare the parallel requests
+      for ($i = 0; $i < MASSIVELY_PARALLEL; $i++) {
+        $conn[$i] = curl_init($url);
+        curl_setopt($conn[$i], CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($conn[$i], CURLOPT_HEADER, 0);
+        curl_multi_add_handle($mh, $conn[$i]);
+      }
+      $active = null;
+      // Execute
+      do {
+        $status = curl_multi_exec($mh, $active);
+        $info = curl_multi_info_read($mh);
+      } while ($status === CURLM_CALL_MULTI_PERFORM || $active);
+
+      $multiResponse = [];
+      for ($i = 0; $i < MASSIVELY_PARALLEL; $i++) {
+        $http_code = curl_getinfo($conn[$i], CURLINFO_HTTP_CODE);
+        if ($http_code == 200) { // If OK add the response to the
+          $multiResponse[$i] = json_decode(curl_multi_getcontent($conn[$i]), 1);
+        }
+        curl_close($conn[$i]);
+      }
+      curl_multi_close($mh);
+      $aggregateResponse = aggregateParallelData($multiResponse);
+      $response = json_encode($aggregateResponse);
+    }
+    // Run simple parallel
+    else {
+      $response = file_get_contents($url);
+    }
   } else { // Run locally
-    echo calculateOddsFromRequest();
+    $response = calculateOddsFromRequest();
   }
+  $end = microtime(1);
+  $timeTaken = round($end - $start, 3);
+  $response = json_decode($response, 1);
+  $response['timeTaken'] = $timeTaken;
+  echo json_encode($response);
+}
+
+function aggregateParallelData($parallelData) {
+  foreach ($parallelData as $data) {
+    foreach ($data as $player => $results) {
+      foreach ($results as $outcome => $value) {
+        if (!isset($result[$player][$outcome])) {
+          $result[$player][$outcome] = 0;
+        }
+        $result[$player][$outcome] += $value;
+      }
+    }
+  }
+  // Correct the aggregate % data
+  foreach ($result as $player => $results) {
+    $total = $result[$player]['win'] + $result[$player]['split'] +$result[$player]['lose'];
+    $result[$player]['winPercent'] = $result[$player]['win']/$total;
+    $result[$player]['splitPercent'] = $result[$player]['split']/$total;
+  }
+  return $result;
 }
 
 function calculateOddsFromRequest(){
