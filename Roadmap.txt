@@ -1,8 +1,16 @@
+FONTS
+
+Beat Factory <- https://www.google.com/fonts#ReviewPlace:refine/Collection:Pacifico|Contrail+One|Cabin+Sketch|Goudy+Bookletter+1911|Rochester|Mr+Dafoe|Seaweed+Script|IM+Fell+Double+Pica
+http://www.eaglefonts.com/freshscript-ttf-75666.htm
+Clean URLS
 
 https://labs.spotify.com/puzzles/
 
 Weekly Back up svn to google drive
 Notify me when IP changes
+
+http://www.phing.info/ <- automated build
+http://www.phptherightway.com/ <- just read
 
 Front Page content
 VIDEO BACKGROUND OR JUMBOTRON

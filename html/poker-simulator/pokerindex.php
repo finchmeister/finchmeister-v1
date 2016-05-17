@@ -1,9 +1,7 @@
 <!--
 TODO:
  * Tidy source/document
- * Loading time
  * Jazz up jumbotron
- * Consider navbar non-stick
 -->
 <!DOCTYPE html>
 <!-- Last commit: $Id$ -->
@@ -14,7 +12,6 @@ TODO:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
@@ -44,7 +41,10 @@ TODO:
     }
 
     .jumbotron {
-      padding-top: 80px;
+      margin-bottom: 0px;
+    }
+
+    .navbar {
       margin-bottom: 0px;
     }
 
@@ -821,14 +821,14 @@ TODO:
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
+      </button>-->
       <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
     </div>
     <div>

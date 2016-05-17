@@ -6,25 +6,47 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Yesteryear">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <title>Beat Factory</title>
     <style>
+
+
         /*body {
             position: relative; background-color: #000000;
         }*/
         body {
             padding-bottom: 40px;
-            color: #5a5a5a;
+            color: #ffffff;
+            background: black none repeat scroll 0% 0%;
+            text-align: justify;
         }
         /* Featurettes
        ------------------------- */
 
         .featurette-divider {
             margin: 40px 0; /* Space out the Bootstrap <hr> more */
+            border-top: 1px solid #ba38af;
         }
 
+        .jumbotron {
+            font-family: 'Yesteryear', Fallback, sans-serif;
+            /*color: rgb(247, 21, 149);*/
+            color: antiquewhite;
+            /*background: #000000;*/
+            background: url('../resources/images/beat-factory/80smiami.jpg') no-repeat 50% 70%;
+            background-size: cover;
+            height: 350px;
+            text-shadow: -1px 0 white, 0 1px white,
+            1px 0 white, 0 -1px white
+        }
+
+        @media (min-width: 500px) {
+            .jumbotron h1 {
+                font-size: 56px;
+            }
+        }
 
         /*Ensures the intro is nicely spaced on bigger screens*/
         @media (min-width: 768px) {
@@ -34,6 +56,15 @@
             #intro {
                 padding-top: 40px;
             }
+            .jumbotron h1 {
+                font-size: 83px;
+            }
+            .jumbotron p {
+                font-size: 25px;
+            }
+            .featurette-heading {
+                font-size: 40px;
+            }
         }
 
         /* Thin out the marketing headings */
@@ -41,19 +72,37 @@
             font-weight: 300;
             line-height: 1;
             letter-spacing: -1px;
+            color: #f71595;
+            font-family: 'Yesteryear', Fallback, sans-serif;
+
         }
         .audioContainer {
             padding: 30px;
             display: table;
             margin: 0 auto;
         }
+
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .lead {
+            /*color: #ffffff;*/
+
+        }
+
+        .text-muted {
+            color: #a464ab
+        }
+
+
     </style>
 </head>
 <body>
 
 <!--source http://getbootstrap.com/examples/carousel/#-->
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
@@ -62,10 +111,10 @@
     </div>
 </nav>
 
-<div class="jumbotron" style="padding-top: 98px;">
+<div class="jumbotron">
     <div class="container text-center">
         <h1>The Beat Factory</h1>
-        <p>A place to let music see the light of day.</p>
+        <!--<p>A place to let music see the light of day.</p>-->
     </div>
 </div>
 
