@@ -15,6 +15,7 @@ TODO:
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Contrail+One">
 
   <!-- BOOTSTRAP SELECT  https://silviomoreto.github.io/bootstrap-select/examples/ -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
@@ -25,6 +26,7 @@ TODO:
   <style>
     body {
       position: relative;
+
     }
     #section1 {
       background-color: #1E88E5;
@@ -41,7 +43,11 @@ TODO:
     }
 
     .jumbotron {
+      color: #ffffff;
       margin-bottom: 0px;
+      background: url('../resources/images/poker.jpg') no-repeat 50% 65%;
+      background-size: cover;
+      text-shadow: #444 0 1px 1px;
     }
 
     .navbar {
@@ -105,18 +111,16 @@ TODO:
 
     }
     @media (min-width: 768px) {
-      /*#copnp1ccnpieDiv {
-        padding-top: 253px;
-      }*/
+      .jumbotron {
+        padding-top: 88px;
+        padding-bottom: 88px;
+      }
       #section3container, #section2container{
         display: flex;
         justify-content: center;
       }
     }
     @media (min-width: 992px) {
-      /*#copnp1ccnpieDiv {
-        padding-top: 140px;
-      }*/
     }
 
     .hideRow {
@@ -132,6 +136,10 @@ TODO:
 
     footer {
       padding-top: 10px;
+    }
+
+    h1, h2, h3 {
+      font-family: "Contrail One", Fallback, "sans-serif";
     }
 
     /* Make a media query
@@ -215,7 +223,6 @@ TODO:
       $.ajax({
         type: 'POST',
         url: '../scripts/poker-simulator/poker_simulator_interface.php',
-        //url: 'https://secure.workbooks.com/process/=kDM2gDN/poker_sim',
         data: {
           "t":"co",
           "p":2,
@@ -223,7 +230,6 @@ TODO:
           "p1c1":card1,
           "p1c2":card2
         },
-        //dataType: 'jsonp', // 'jsonp' For cross site scripting
         dataType: 'json',
         success: function (data) {
 
@@ -645,12 +651,7 @@ TODO:
           copnpnccnpieChart = new Chart(copnpnccnpie).Bar(ChartData, ChartOptions);
         }
       });
-
-
-
     }
-
-
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
 
@@ -663,9 +664,6 @@ TODO:
         copnp1ccnpieChart.destroy();
       }
       $('#copnp1ccnWinP, #copnp1ccnLoseP, #copnp1ccnSplitP, #copnp1ccnFeedback, #copnp1ccnpieMainDiv').html('');
-      /*$('#copnp1ccnLoseP').html('');
-      $('#copnp1ccnSplitP').html('');
-      $('#copnp1ccnFeedback').html('');*/
       $("#copnp1ccnTitle").html('<h1>Preflop, You vs 1 Opponent</h1>');
 
 
