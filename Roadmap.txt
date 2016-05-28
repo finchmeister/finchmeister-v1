@@ -1,8 +1,8 @@
 FONTS
 
-Beat Factory <- https://www.google.com/fonts#ReviewPlace:refine/Collection:Pacifico|Contrail+One|Cabin+Sketch|Goudy+Bookletter+1911|Rochester|Mr+Dafoe|Seaweed+Script|IM+Fell+Double+Pica
-http://www.eaglefonts.com/freshscript-ttf-75666.htm
 Clean URLS
+
+Script to add rankings
 
 https://labs.spotify.com/puzzles/
 
@@ -14,6 +14,11 @@ http://www.phptherightway.com/ <- just read
 
 Front Page content
 VIDEO BACKGROUND OR JUMBOTRON
+Parallax https://ihatetomatoes.net/how-to-create-a-parallax-scrolling-website/
+http://scrollmagic.io/examples/advanced/parallax_sections.html
+http://keithclark.co.uk/articles/practical-css-parallax/
+
+
 http://bootsnipp.com/snippets/featured/ful-screen-video-background
 http://thenewcode.com/777/Create-Fullscreen-HTML5-Page-Background-Video
 http://stackoverflow.com/questions/24983429/airbnb-video-header

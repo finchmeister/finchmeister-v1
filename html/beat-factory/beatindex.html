@@ -101,8 +101,40 @@
             color: #a464ab
         }
 
+        /*.featurette-divider, .featurette {
+            opacity:0;
+        }*/
+
+
     </style>
 </head>
+<script>
+
+/*
+    $(document).ready(function() {
+
+        *//* Every time the window is scrolled ... *//*
+
+        //fadeIn();
+        $(window).scroll( function fadeIn() {
+            *//* Check the location of each desired element *//*
+            $('.featurette-divider, .featurette').each( function(i){
+
+                var bottom_of_object = $(this).position().top + $(this).outerHeight();
+                var bottom_of_window = $(window).scrollTop() + $(window).height();
+
+                *//* If the object is completely visible in the window, fade it it *//*
+                if( bottom_of_window > bottom_of_object ){
+
+                    $(this).animate({'opacity':'1'},500);
+
+                }
+
+            });
+        });
+
+    });*/
+</script>
 <body>
 
 <!--source http://getbootstrap.com/examples/carousel/#-->
@@ -127,7 +159,7 @@
 <div class="container">
 
     <div id="intro">
-        <p class="lead">Welcome to <em>The Beat Factory</em>, a place where recordings with not much thought or production see the light of day.</p>
+        <p class="lead">Welcome to <em>The Beat Factory</em>.</p>
     </div>
 
     <hr class="featurette-divider">
@@ -135,12 +167,13 @@
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">Beat Factory Jam <span class="text-muted">ft. Old-J</span></h2>
-            <p class="lead">First Raw collaboration.</p>
+            <p class="lead">First Raw collaboration. 50+ minutes of straight up jamming.</p>
             <div class="audioContainer">
                 <audio controls>
                     <source src="../music/Beat%20Factory%20Jam%201.mp3" type="audio/mpeg">
                 </audio>
             </div>
+            Recorded: 28<sup>th</sup> April 2016
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/guitarjam.jpg" alt="First Jam">
@@ -159,14 +192,14 @@
                     <source src="../music/Acoustic Capo 4 demo.mp3" type="audio/mpeg">
                 </audio>
             </div>
+            Recorded: 5<sup>th</sup> April 2016
         </div>
         <div class="col-md-5 col-md-pull-7">
-            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/Acoustic-Player.png" alt="Acoustic">
+            <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/acousticart.jpg" alt="Acoustic">
         </div>
     </div>
 
     <hr class="featurette-divider">
-
 
     <div class="row featurette">
         <div class="col-md-7">
@@ -178,6 +211,7 @@
                     <source src="../music/Panacea%20Cover.mp3" type="audio/mpeg">
                 </audio>
             </div>
+            Recorded: 23<sup>rd</sup> March 2016
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/Jazz-print.jpg" alt="Panacea">
@@ -197,6 +231,7 @@
                     <source src="../music/Under%20Your%20Spell%20Cover.mp3" type="audio/mpeg">
                 </audio>
             </div>
+            Recorded: 12<sup>th</sup> February 2016
         </div>
         <div class="col-md-5 col-md-pull-7">
             <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/under_your_spell.png" alt="Under Your Spell">

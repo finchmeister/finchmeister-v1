@@ -2,14 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Finchmeister</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Contrail+One">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Yesteryear">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width">
+    <title>A pure CSS parallax demo with navgation and smooth scrolling by Keith Clark</title>
     <style>
 
         /* demo styles
@@ -36,7 +30,7 @@
 
 
         /* demo nav bar
-        ---------------------------------------------
+        --------------------------------------------- */
 
         .nav {
             position: fixed;
@@ -61,7 +55,6 @@
         .nav a:not(:hover) {
             text-decoration: none;
         }
-        */
 
 
         /* slide layout
@@ -96,25 +89,28 @@
         /* slide backgrounds */
 
         #slide-1 .slide__bg {
-            background: url('../resources/images/index/avoriaznight.jpg') no-repeat center fixed; /*TODO COMPRESS IMAGE*/
-            color: #ffffff;
-
-            /*background-image: repeating-linear-gradient(
+            background-image: repeating-linear-gradient(
                     rgb(102, 204, 102),
                     rgb(102, 204, 102) 30px,
                     rgb(92, 184, 92) 30px,
                     rgb(92, 184, 92) 60px
-            );*/
+            );
         }
         #slide-2 .slide__bg {
-            background-color: #000000;
+            background-image: repeating-linear-gradient(
+                    45deg,
+                    rgb(133, 173, 230),
+                    rgb(133, 173, 230) 30px,
+                    rgb(113, 153, 210) 30px,
+                    rgb(113, 153, 210) 60px
+            );
         }
         #slide-3 .slide__bg {
-            background-image: repeating-linear-gradient(90deg,
-                    #1E88E5,
-                    #9921bb,
-                    #ff9800,
-                    #009688
+            background-image: repeating-linear-gradient(
+                    rgb(153, 216, 101),
+                    rgb(153, 216, 101) 30px,
+                    rgb(133, 196, 81) 30px,
+                    rgb(133, 196, 81) 60px
             );
         }
         #slide-4 .slide__bg {
@@ -148,7 +144,7 @@
         /* misc
         --------------------------------------------- */
 
-        /*.demo__info {
+        .demo__info {
             position: fixed;
             width: 100%;
             bottom: 0;
@@ -157,7 +153,7 @@
             background: rgba(255,255,255,.5);
             padding: 0.5em;
             z-index: 100;
-        }*/
+        }
 
 
         /* Large screen layout
@@ -179,9 +175,9 @@
                 -webkit-order: 1;
                 order: 1;
             }
-            /*.nav {
+            .nav {
                 display: block;
-            }*/
+            }
 
             /* parallax */
             @supports ((perspective: 1px) and (not (-webkit-overflow-scrolling: touch))) {
@@ -236,100 +232,6 @@
                 }
             }
         }
-
-        /*Slide colors BE VERY CAREFUL*/
-
-        .firstP {
-            opacity: 0; /*TODO get rid of this*/
-        }
-        
-        .white__text {
-            color: #ffffff;
-        }
-
-        .beatfactory__text {
-            color: #ffffff;
-        }
-        #slide-1-title {
-            -webkit-animation: .5s .25s fade backwards ease-out;
-            animation: .5s .25s fade backwards ease-out;
-        }
-        #slide-2-title {
-            color: #f71595;
-            font-family: 'Yesteryear', Fallback, sans-serif;
-        }
-        #slide-3-title {
-            color: #ffffff;
-            font-family: "Contrail One", Fallback, "sans-serif";
-        }
-
-        .slide__image img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /*Potentially change this*/
-        @-webkit-keyframes fade {
-            from {
-                /*transform: translateY(.25em);*/
-                opacity:0
-            }
-        }
-        @keyframes fade {
-            from {
-                /*transform: translateY(.25em);*/
-                opacity:0
-            }
-        }
-
-
-        /*BEAT FACTORY SLIDERS*//*
-        .beatfactory_img_slide {
-            position:absolute;
-        }
-
-        .beatfactory_img_slide:nth-child(1) {
-            -webkit-animation: fade 20s 15s infinite;
-            z-index:10;
-        }
-
-        .beatfactory_img_slide:nth-child(2) {
-            -webkit-animation: fade 20s 10s infinite;
-            z-index:10;
-        }
-
-        .beatfactory_img_slide:nth-child(3) {
-            -webkit-animation: fade 20s 5s infinite;
-            z-index:10;
-        }
-
-        .beatfactory_img_slide:nth-child(4) {
-            -webkit-animation: fade 20s 0s infinite;
-            z-index:10;
-        }
-
-        @-webkit-keyframes fade {
-            0%{
-                opacity: 1;
-            }
-            15% {
-                opacity:1;
-            }
-            25%{
-                opacity: 0;
-            }
-            90% {
-                opacity:0;
-            }
-            100% {
-                opacity:1;
-            }
-        }*/
-
-
-
-
     </style>
 </head>
 
@@ -344,17 +246,14 @@
             <use xlink:href="#p" transform="rotate(15)" x="175" y="50"/>
             <use xlink:href="#p" transform="rotate(-5)" x="5" y="25"/>
         </g>
-
-
-
     </defs>
 </svg>
 
-<!--<div class="demo__info">
+<div class="demo__info">
     Pure CSS parallax scrolling with navigation and CSS scrolling with scroll-behavior: smooth by Keith Clark. Please read the <a href="../">blog post</a> for more information.
-</div>-->
+</div>
 
-<!--<nav>
+<nav>
     <ul class="nav">
         <li><a href="#slide-1">Slide 1</a></li>
         <li><a href="#slide-2">Slide 2</a></li>
@@ -363,76 +262,32 @@
         <li><a href="#slide-5">Slide 5</a></li>
         <li><a href="#slide-6">Slide 6</a></li>
     </ul>
-</nav>-->
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Finchmeister</a> <!--Logo here-->
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
-    </div>
 </nav>
 
-
 <div class="slides">
-    <div class="slide white__text" id="slide-1">
+    <div class="slide" id="slide-1">
         <div class="slide__bg"></div>
         <div class="slide__content">
             <div class="slide__text">
-                <h1 id="slide-1-title">finchmeister.co.uk</h1>
-                <p>Welcome to finchmeister.co.uk, a personal website</p>
+                <h1 id="slide-1-title">Slide 1 title</h1>
+                <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
             </div>
             <div class="slide__image">
-                <svg viewBox="0 0 400 425" width="400" height="425" class="firstP"><use xlink:href="#polaroid"/></svg>
+                <svg viewBox="0 0 400 425" width="400" height="425"><use xlink:href="#polaroid"/></svg>
             </div>
         </div>
     </div>
 
     <div class="slide" id="slide-2">
         <div class="slide__bg"></div>
-        <div class="slide__content beatfactory__text">
+        <div class="slide__content">
             <div class="slide__text">
-                <h1 id="slide-2-title">The Beat Factory</h1>
+                <h1 id="slide-2-title">Slide 2 title</h1>
                 <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
                 <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
             </div>
             <div class="slide__image">
-
-                <!--
-                http://jsfiddle.net/5zx43/1/
-                <img src="http://simplewishphotography.com/wp-content/uploads/2013/11/Nature-Photography-Healing-Your-Body.jpg" class="beatfactory_img_slide" alt="" />
-                <img src="http://f9vision.com/wp-content/uploads/2014/02/Beautiful-Images-of-Nature-Facebook1-300x300.jpg" class="beatfactory_img_slide" alt="" />
-                <img src="https://lh3.ggpht.com/jxaV3lR5hbep2BzH6YIRkhQC7872M4kRNfXd24csoO1CrWG7FtHaLjOOrfWpQWJb=w300" class="beatfactory_img_slide" alt="" />
-                <img src="http://www.yondaphotography.com/wp-content/uploads/2014/01/Nature-Photography-Techniques-For-Beginners.jpg" class="beatfactory_img_slide" alt="" />-->
-                <img src="../resources/images/beat-factory/acousticart.jpg" class="img-responsive" alt="" />
-
-
-                <!--Get images to transition slideshow-->
-                <!--<svg viewBox="0 0 400 425" width="400" height="425"><use xlink:href="#polaroid"/></svg>-->
+                <svg viewBox="0 0 400 425" width="400" height="425"><use xlink:href="#polaroid"/></svg>
             </div>
         </div>
     </div>
@@ -441,13 +296,12 @@
         <div class="slide__bg"></div>
         <div class="slide__content">
             <div class="slide__text">
-                <h1 id="slide-3-title">Poker Hand Simulator</h1>
+                <h1 id="slide-3-title">Slide 3 title</h1>
                 <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
                 <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
             </div>
-            <div class="slide__image" id="playing_card__image">
-                <img src="../resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
-                <!--<svg viewBox="0 0 400 425" width="400" height="425"><use xlink:href="#polaroid"/></svg>-->
+            <div class="slide__image">
+                <svg viewBox="0 0 400 425" width="400" height="425"><use xlink:href="#polaroid"/></svg>
             </div>
         </div>
     </div>
@@ -492,5 +346,13 @@
     </div>
 
 </div>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-10812217-1', 'auto');
+    ga('send', 'pageview');
+</script>
 </body>
 </html>

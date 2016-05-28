@@ -142,13 +142,6 @@ TODO:
       font-family: "Contrail One", Fallback, "sans-serif";
     }
 
-    /* Make a media query
-    .addPlayerResetButtons {
-      text-align: center;
-    }
-*/
-
-
 
 
   </style>

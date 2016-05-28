@@ -27,5 +27,9 @@ CREATE TABLE `finchmeister`.`smokefree` (
 CREATE TABLE `finchmeister`.`poker_rankings` (
     `date` DATE NOT NULL,
     `position` TINYINT(1) NOT NULL,
-    `name` VARCHAR(50) NOT NULL
+    `name` VARCHAR(50) NOT NULL,
+    `winnings` INTEGER,
+    `buyIn` INTEGER,
+    `rebuys` TINYINT(1)
 ) ENGINE=InnoDB;
+
