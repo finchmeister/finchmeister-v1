@@ -34,8 +34,9 @@ function getStats() {
   $queries = [
     'noOfGames' => 'select count(distinct date) as "total" from poker_rankings',
     'gamesWon' => 'select name, count(date) as "total" from poker_rankings where position=1 group by name order by total desc',
+    'gamesWon2' => 'select name, sum(position=1) as "Games Won", count(date) as "Games Played", round(sum(position=1)/count(date),2) as "Win Percent" from poker_rankings group by name order by sum(position=1) desc, count(date)',
     'winnings' => 'select name, sum(winnings) as "total" from poker_rankings where winnings!=0 group by name order by total desc',
-    'net' => 'select name, sum(winnings)-sum(rebuys*buyIn+buyIn) as "total" from poker_rankings group by name order by total desc',
+    'net' => 'select name, sum(winnings)-sum(rebuys*buyIn+buyIn) as "total" from poker_rankings where date>="2016-04-14" group by name order by total desc',
     'rebuys' => 'select name, sum(rebuys) as "total" from poker_rankings where rebuys!=0 group by name order by total desc',
     'gamesPlayed' => 'select name, count(date) as "total" from poker_rankings group by name order by total desc',
     'totalWinnings' => 'select sum(winnings) as "total" from poker_rankings',

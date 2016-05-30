@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<!-- Last commit: $Id$ -->
-<!-- Version Location: $HeadURL$ -->
 <html>
 <!--Credit: http://www.sitepoint.com/understanding-bootstraps-affix-scrollspy-plugins-->
 <head>
@@ -11,15 +9,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-
 </head>
 <style>
-  @import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
+  @import url(http://fonts.googleapis.com/css?family=Lora:400,700);
   body {
-    background: lightblue;
     position: relative;
     line-height: 1.5;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Lora', sans-serif;
+    background: rgb(245, 245, 245);
   }
 
   h1,
@@ -27,23 +24,20 @@
     font-weight: 700;
   }
 
-  h3 span {
-    color: #286090;
-  }
-
   .jumbotron {
     border-radius: 0px;
-    background: #5fb3ce;
+    background: #4CAF50;
     margin-bottom: 0;
+    color: #ffffff;
   }
 
   .jumbotron button {
     margin-top: 10px;
   }
 
-  section {
+  .row, section {
     padding: 40px 0;
-    border-bottom: 1px solid #c1e1ec;
+    border-bottom: 1px solid #B6B6B6;
   }
 
   #web-development,
@@ -56,22 +50,22 @@
   }
 
   .nav {
-    background: #4baac8;
+    background: #FF5252;
   }
 
   .nav a {
-    color: black;
+    color: #ffffff;
     font-style: italic;
   }
 
   .nav li a:hover,
   .nav li a:focus {
-    background: #86c5da;
+    background: #ff4143;
   }
 
   .nav .active {
     font-weight: bold;
-    background: #72bcd4;
+    background: #ff2c2e;
   }
 
   .nav .nav {
@@ -106,7 +100,7 @@
   }
 
   .application {
-    border-top: 1px solid #c1e1ec;
+    border-top: 1px solid #B6B6B6;
   }
 
   .affix-top {
@@ -127,7 +121,7 @@
   }
 
   footer {
-    border-top: 1px solid #c1e1ec;
+    /*border-top: 1px solid #B6B6B6;*/
     height: 50px;
   }
 
@@ -168,7 +162,7 @@ $stats = getStats();
 list($sectionHTML, $navHTML) = createHTMLSectionsAndNav($resultsArray);
 
 function createHTMLTable($tableArray) {
-  $newStyle = $tableArray[0]['winnings'] != null ? 1 : 0;
+  $newStyle = $tableArray[0]['buyIn'] != 0 ? 1 : 0;
   if ($newStyle) {
     $extraHeaders = <<<HTML
                         <th>Winnings</th>
@@ -278,6 +272,11 @@ function createNetTable($class='') {
   foreach ($stats['net'] as &$row) $row['total'] = '£'.$row['total'];
   return createTableHTML($stats['net'], ['Name', 'Total'], $class);
 }
+function createGamesPlayedTable($class='') {
+  global $stats;
+  foreach ($stats['gamesWon2'] as &$row) $row['Win Percent'] = $row['Win Percent'].'%';
+  return createTableHTML($stats['gamesWon2'], ['Name', 'Games Won', 'Games Played', 'Win Percent'], $class);
+}
 
 ?>
 
@@ -298,27 +297,27 @@ function createNetTable($class='') {
       <h2>Stats</h2>
     </div>
     <div class="col-sm-6">
-
+      <h3>Games Played:</h3>
+      <?php echo createGamesPlayedTable(); ?>
+      Total No. Games: <?php echo $stats['noOfGames'][0]['total']; ?>
+    </div>
+    <div class="col-sm-6">
       <h3>Winnings:</h3>
       <?php echo createWinningsTable(); ?>
       Total Won: <?php echo '£'.$stats['totalWinnings'][0]['total']; ?>
-
-
+    </div>
+  </div><!--end of .row-->
+  <div class="row">
+    <div class="col-sm-6">
       <h3>Net:</h3>
       <?php echo createNetTable(); ?>
-
     </div>
     <div class="col-sm-6">
-      <h3>Games Won:</h3>
-      <?php echo createTableHTML($stats['gamesWon'], ['Name', 'Total'], ''); ?>
-      Total No. Games: <?php echo $stats['noOfGames'][0]['total']; ?>
-
       <h3>Rebuys:</h3>
       <?php echo createTableHTML($stats['rebuys'], ['Name', 'Total'], ''); ?>
       Total No. Rebuys: <?php echo $stats['noOfRebuys'][0]['total']; ?>
-
     </div>
-  </div><!--end of .row-->
+  </div>
 
   <div class="row">
 
