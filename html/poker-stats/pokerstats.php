@@ -22,6 +22,7 @@
   h1,
   h2 {
     font-weight: 700;
+    margin-bottom: -20px;
   }
 
   .jumbotron {
@@ -35,9 +36,29 @@
     margin-top: 10px;
   }
 
-  .row, section {
+  .main_table {
+    border-bottom: 1px solid #B6B6B6;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /*padding: 40px 0;*/
+  }
+  
+  @media (min-width:768px) {
+    .row {
+      border-bottom: 1px solid #B6B6B6;
+    }
+    .main_table {
+      border-bottom: 0px
+    }
+  }
+
+  section {
     padding: 40px 0;
     border-bottom: 1px solid #B6B6B6;
+  }
+
+  .results_table {
+    padding: 40px 0;
   }
 
   #web-development,
@@ -296,36 +317,37 @@ function createGamesPlayedTable($class='') {
     <div class="col-sm-12">
       <h2>Stats</h2>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 main_table">
       <h3>Games Played:</h3>
       <?php echo createGamesPlayedTable(); ?>
       Total No. Games: <?php echo $stats['noOfGames'][0]['total']; ?>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 main_table">
       <h3>Winnings:</h3>
       <?php echo createWinningsTable(); ?>
       Total Won: <?php echo '£'.$stats['totalWinnings'][0]['total']; ?>
     </div>
   </div><!--end of .row-->
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-6 main_table">
       <h3>Net:</h3>
       <?php echo createNetTable(); ?>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 main_table">
       <h3>Rebuys:</h3>
       <?php echo createTableHTML($stats['rebuys'], ['Name', 'Total'], ''); ?>
       Total No. Rebuys: <?php echo $stats['noOfRebuys'][0]['total']; ?>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row results_table">
 
     <div class="col-md-3 scrollspy">
       <?php echo $navHTML; ?>
     </div>
 
     <div class="col-md-9">
+      <h2>Results</h2>
       <?php echo $sectionHTML; ?>
     </div>
 
