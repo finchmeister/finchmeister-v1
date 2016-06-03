@@ -26,7 +26,61 @@ function getResultsInArray() {
       ];
     }
   }
+
+  $resultsArray = calculatePoints($resultsArray);
+
   return $resultsArray;
+}
+
+function createPointsStats($resultsArray) {
+
+  $noOfGames = 0;
+  foreach ($resultsArray as $result) {
+    if (!empty($result[0]['points'])) {
+      $noOfGames++;
+      foreach ($result as $row) {
+        if (!empty($row['points'])) {
+          /*if (!isset($totalPoints[$row['name']])) {
+            $totalPoints[$row['name']] = 0;
+          }
+          $totalPoints[$row['name']] += $row['points'];*/
+        }
+        $totalPoints[$row['name']][] = $row['points'];
+      }
+    }
+  }
+  $gamesCounted = floor($noOfGames/2);
+
+  foreach ($totalPoints as $player => &$pointsArray) {
+    $i = $gamesCounted;
+    if (count($pointsArray) >= $gamesCounted) {
+      arsort($pointsArray);
+      $pointsArray = array_values($pointsArray);
+      while (!empty($pointsArray[$i])) {
+        unset($pointsArray[$i]);
+        $i++;
+      }
+    }
+    else {
+      unset($totalPoints[$player]);
+    }
+
+  }
+
+  $rawStats = $totalPoints;
+  $totalPoints = array_map('array_sum', $rawStats);
+  arsort($totalPoints);
+
+  foreach ($totalPoints as $player => $points) {
+    $sortedTotalPoints[] = [$player, $points];
+  }
+
+  return [
+    'noOfGames' => $noOfGames,
+    'gamesCounted' => $gamesCounted,
+    'rawStats' => $rawStats,
+    'totalPoints' => $sortedTotalPoints,
+  ];
 }
 
 function getStats() {
@@ -41,6 +95,7 @@ function getStats() {
     'gamesPlayed' => 'select name, count(date) as "total" from poker_rankings group by name order by total desc',
     'totalWinnings' => 'select sum(winnings) as "total" from poker_rankings',
     'noOfRebuys' => 'select sum(rebuys) as "total" from poker_rankings',
+    'winningsAndNet' => 'select name, sum(winnings) as "total",sum(rebuys*buyIn+buyIn) as "boughtIn",sum(winnings)-sum(rebuys*buyIn+buyIn) as  "net", sum(rebuys) as "rebuys" from poker_rankings where buyIn!=0 group by name order by net desc',
   ];
 
   foreach ($queries as $stat => $query) {
@@ -65,6 +120,21 @@ function getArrayFromQuery($query) {
   return $resultsArray;
 }
 
-//print_r(getStats(getResultsInArray()));
+function calculatePoints($resultsArray) {
+  // Calculate score http://forums.homepokertourney.com/index.php/topic,28150.0.html
+  foreach ($resultsArray as $gameId => &$result) {
+    $b = $result[0]['buyIn'];
+    if ($b == 0) { continue;} // Before cash was recorded
+    $n = count($result);
+    foreach ($result as &$row) {
+      $e = $row['boughtIn'];
+      $f = $row['position'];
+      //echo "n: $n, b: $b, e: $e, f: $f \n";
+      $score = round(sqrt($n * $b * $b / $e)/($f + 1), 2);
+      $row['points'] = $score;
+    }
+  }
+  return $resultsArray;
+}
 
 ?>

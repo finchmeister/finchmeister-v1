@@ -9,6 +9,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <script type="text/javascript" async
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 </head>
 <style>
   @import url(http://fonts.googleapis.com/css?family=Lora:400,700);
@@ -22,6 +25,8 @@
   h1,
   h2 {
     font-weight: 700;
+  }
+  h2 {
     margin-bottom: -20px;
   }
 
@@ -179,6 +184,7 @@ http://codepen.io/SitePoint/pen/GgOzwX
 <?php
 include "../scripts/poker-stats/poker_stats_core.php";
 $resultsArray = getResultsInArray();
+$pointsStats = createPointsStats($resultsArray);
 $stats = getStats();
 list($sectionHTML, $navHTML) = createHTMLSectionsAndNav($resultsArray);
 
@@ -190,6 +196,7 @@ function createHTMLTable($tableArray) {
                         <th>Rebuys</th>
                         <th>Bought In</th>
                         <th>Net</th>
+                        <th>Points</th>
 HTML;
   }
   else {
@@ -213,6 +220,7 @@ HTML;
                         <td>{$row['rebuys']}</td>
                         <td>£{$row['boughtIn']}</td>
                         <td>£{$row['net']}</td>
+                        <td>{$row['points']}</td>
 HTML;
     }
     else {
@@ -288,6 +296,12 @@ function createWinningsTable($class='') {
   return createTableHTML($stats['winnings'], ['Name', 'Total'], $class);
 }
 
+function createWinningsAndNetTable($class='') {
+  global $stats;
+  foreach ($stats['winningsAndNet'] as &$row) list($row['total'], $row['boughtIn'], $row['net']) = ['£'.$row['total'],'£'.$row['boughtIn'],'£'.$row['net'],];
+  return createTableHTML($stats['winningsAndNet'], ['Name', 'Total', 'Bought In', 'Net', 'Rebuys'], $class);
+}
+
 function createNetTable($class='') {
   global $stats;
   foreach ($stats['net'] as &$row) $row['total'] = '£'.$row['total'];
@@ -299,45 +313,108 @@ function createGamesPlayedTable($class='') {
   return createTableHTML($stats['gamesWon2'], ['Name', 'Games Won', 'Games Played', 'Win Percent'], $class);
 }
 
-?>
+function createPointsTable($class='') {
+  global $pointsStats;
+  return createTableHTML($pointsStats['totalPoints'], ['Name', 'Total'], $class);
 
+}
+
+?>
 
 <body data-spy="scroll" data-target=".scrollspy">
 <div class="jumbotron">
   <div class="container">
     <h1>Culver Road Poker Night Results</h1>
-    <h3><span class="fa fa-pencil"></span> Places recorded since Dec '15</h3>
-    <h3><span class="fa fa-pencil"></span> Cash recorded since April '15</h3>
+    <h3><span class="fa fa-pencil"></span> Places recorded since December '15</h3>
+    <h3><span class="fa fa-pencil"></span> Cash recorded since April '16</h3>
   </div>
 </div><!--end of .jumbotron-->
 
 <div class="container">
 
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
       <h2>Stats</h2>
     </div>
-    <div class="col-sm-6 main_table">
-      <h3>Games Played:</h3>
+    <div class="col-md-6 main_table">
+      <h3>All Games Played:</h3>
       <?php echo createGamesPlayedTable(); ?>
       Total No. Games: <?php echo $stats['noOfGames'][0]['total']; ?>
     </div>
-    <div class="col-sm-6 main_table">
+    <!--<div class="col-md-6 main_table">
       <h3>Winnings:</h3>
-      <?php echo createWinningsTable(); ?>
-      Total Won: <?php echo '£'.$stats['totalWinnings'][0]['total']; ?>
-    </div>
-  </div><!--end of .row-->
-  <div class="row">
-    <div class="col-sm-6 main_table">
-      <h3>Net:</h3>
-      <?php echo createNetTable(); ?>
-    </div>
-    <div class="col-sm-6 main_table">
-      <h3>Rebuys:</h3>
-      <?php echo createTableHTML($stats['rebuys'], ['Name', 'Total'], ''); ?>
+      <?php /*echo createWinningsTable(); */?>
+      Total Won: <?php /*echo '£'.$stats['totalWinnings'][0]['total']; */?>
+    </div>-->
+    <div class="col-md-6 main_table">
+      <h3>Cash Winnings:</h3>
+      <?php echo createWinningsAndNetTable(); ?>
+      Total Won: <?php echo '£'.$stats['totalWinnings'][0]['total']; ?> out of <?php echo $pointsStats['noOfGames']; ?> cash recorded games.<br>
       Total No. Rebuys: <?php echo $stats['noOfRebuys'][0]['total']; ?>
     </div>
+
+
+
+  </div><!--end of .row-->
+
+  <!--<div class="row">
+    <div class="col-md-6 main_table">
+      <h3>Net:</h3>
+      <?php /*echo createNetTable(); */?>
+    </div>
+    <div class="col-md-6 main_table">
+      <h3>Rebuys:</h3>
+      <?php /*echo createTableHTML($stats['rebuys'], ['Name', 'Total'], ''); */?>
+      Total No. Rebuys: <?php /*echo $stats['noOfRebuys'][0]['total']; */?>
+    </div>
+  </div>-->
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <h3>Points:</h3>
+    </div>
+    <div class="col-md-6">
+      Points for each player are calculated using <a href="http://forums.homepokertourney.com/index.php/topic,28150.0.html" target="_blank">Dr. Neau's Tournament Formula</a>:
+      $$\text{points} = \dfrac{\sqrt{n \times b \times b  / e}}{f + 1.0} $$
+      where:<br>
+      \(n\) = no. of players <br>
+      \(b\) = buy-in cost  <br>
+      \(e\) = individual player's expense (buy-in + rebuys) <br>
+      \(f\) = individual player's finish. <br><br>
+      <p>
+        Players must have played at least half of the cash recorded games (<?php echo $pointsStats['gamesCounted']; ?>) to be counted and the top <?php echo $pointsStats['gamesCounted']; ?> scores for each player are added up to get the total.
+      </p>
+
+
+    </div>
+
+    <div class="col-md-6">
+
+      <?php echo createPointsTable(); ?>
+    </div>
+
+
+
+
+
+    <!--
+$$\text{score} = \dfrac{\sqrt{n \times b \times b  / e}}{f + 1.0} \\
+
+\begin{align}
+&
+\text{where:} \\
+
+&n = \text{no. of players} \\
+&b = \text{buy-in cost} \\
+&e = \text{individual player's expense (buy-in + rebuys)} \\
+&f = \text{individual player's finish}
+\end{align}
+ $$
+-->
+
+
+
   </div>
 
   <div class="row results_table">
@@ -361,9 +438,5 @@ function createGamesPlayedTable($class='') {
     <p>&copy; 2016 - finchmeister.co.uk</p>
   </div>
 </footer>
-</body>
-
-
-
 </body>
 </html>
