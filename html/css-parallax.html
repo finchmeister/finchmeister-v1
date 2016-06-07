@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Contrail+One">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Yesteryear">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style>
@@ -96,7 +97,7 @@
         /* slide backgrounds */
 
         #slide-1 .slide__bg {
-            background: url('../resources/images/index/avoriaznight.jpg') no-repeat center fixed; /*TODO COMPRESS IMAGE*/
+            background: url('resources/images/index/avoriaznight.jpg') no-repeat center fixed; /*TODO COMPRESS IMAGE*/
             color: #ffffff;
 
             /*background-image: repeating-linear-gradient(
@@ -118,13 +119,7 @@
             );
         }
         #slide-4 .slide__bg {
-            background-image: repeating-linear-gradient(
-                    -45deg,
-                    rgb(133, 193, 230),
-                    rgb(133, 193, 230) 30px,
-                    rgb(113, 173, 210) 30px,
-                    rgb(113, 173, 210) 60px
-            );
+            background-color: #4CAF50;
         }
         #slide-5 .slide__bg {
             background-image: repeating-linear-gradient(
@@ -247,7 +242,7 @@
             color: #ffffff;
         }
 
-        .beatfactory__text {
+        .beatfactory__text, .pokersim__text {
             color: #ffffff;
         }
         #slide-1-title {
@@ -261,6 +256,10 @@
         #slide-3-title {
             color: #ffffff;
             font-family: "Contrail One", Fallback, "sans-serif";
+        }
+        #slide-4-title, {
+            color: #ffffff;
+            font-family: "Lora", Fallback, "sans-serif";
         }
 
         .slide__image img {
@@ -282,6 +281,25 @@
                 opacity:0
             }
         }
+
+
+
+        #beatfactory_button {
+            background-color: #f71595;
+            border-color: #d9157e;
+            color: #ffffff;
+        }
+        #beatfactory_button:hover {
+            background-color: #ff4fb5;
+        }
+
+
+        .pokerstats__text {
+            color: #ffffff;
+            font-family: "Lora", Fallback, "sans-serif";
+        }
+
+
 
 
         /*BEAT FACTORY SLIDERS*//*
@@ -405,6 +423,8 @@
             <div class="slide__text">
                 <h1 id="slide-1-title">finchmeister.co.uk</h1>
                 <p>Welcome to finchmeister.co.uk, a personal website</p>
+                <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
+
             </div>
             <div class="slide__image">
                 <svg viewBox="0 0 400 425" width="400" height="425" class="firstP"><use xlink:href="#polaroid"/></svg>
@@ -417,8 +437,8 @@
         <div class="slide__content beatfactory__text">
             <div class="slide__text">
                 <h1 id="slide-2-title">The Beat Factory</h1>
-                <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
-                <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
+                <p>The Beat Factory is Inspired by an 80's Miami, </p>
+                <a href="beat-factory/beatindex.html" class="btn" id="beatfactory_button" role="button">The Beat Factory</a>
             </div>
             <div class="slide__image">
 
@@ -428,7 +448,7 @@
                 <img src="http://f9vision.com/wp-content/uploads/2014/02/Beautiful-Images-of-Nature-Facebook1-300x300.jpg" class="beatfactory_img_slide" alt="" />
                 <img src="https://lh3.ggpht.com/jxaV3lR5hbep2BzH6YIRkhQC7872M4kRNfXd24csoO1CrWG7FtHaLjOOrfWpQWJb=w300" class="beatfactory_img_slide" alt="" />
                 <img src="http://www.yondaphotography.com/wp-content/uploads/2014/01/Nature-Photography-Techniques-For-Beginners.jpg" class="beatfactory_img_slide" alt="" />-->
-                <img src="../resources/images/beat-factory/acousticart.jpg" class="img-responsive" alt="" />
+                <img src="resources/images/beat-factory/acousticart.jpg" class="img-responsive" alt="" />
 
 
                 <!--Get images to transition slideshow-->
@@ -440,14 +460,15 @@
     <div class="slide" id="slide-3">
         <div class="slide__bg"></div>
         <div class="slide__content">
-            <div class="slide__text">
+            <div class="slide__text pokersim__text">
                 <h1 id="slide-3-title">Poker Hand Simulator</h1>
-                <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
-                <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
+                <p>The home of Poker</p>
+
+                <a href="poker-simulator/pokerindex.php" class="btn btn-default" role="button">Go</a>
+
             </div>
             <div class="slide__image" id="playing_card__image">
-                <img src="../resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
-                <!--<svg viewBox="0 0 400 425" width="400" height="425"><use xlink:href="#polaroid"/></svg>-->
+                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
             </div>
         </div>
     </div>
@@ -455,9 +476,10 @@
     <div class="slide" id="slide-4">
         <div class="slide__bg"></div>
         <div class="slide__content">
-            <div class="slide__text">
-                <h1 id="slide-4-title">Slide 4 title</h1>
-                <p>Bacon ipsum dolor amet alcatra beef meatloaf brisket beef ribs meatball tenderloin shank ball tip ribeye pig pastrami filet mignon. Sirloin tail fatback venison shank salami. Picanha pastrami venison meatball kevin pork chop leberkas. Meatloaf tenderloin leberkas pancetta hamburger cow kielbasa, filet mignon tri-tip beef ribs.</p>
+            <div class="slide__text pokerstats__text">
+                <h1 id="slide-4-title">Culver Road Poker Night Stats</h1>
+                <p>It's always interesting to know .</p>
+                <a href="poker-stats/pokerstats.php" class="btn btn-default" role="button">Poker Stats</a>
             </div>
             <div class="slide__image">
                 <svg viewBox="0 0 400 425" width="400" height="425"><use xlink:href="#polaroid"/></svg>
@@ -493,4 +515,14 @@
 
 </div>
 </body>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-78908802-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </html>

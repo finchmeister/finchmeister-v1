@@ -1169,14 +1169,16 @@ HTML;
     <div class="col-xs-12">
       <h1>About</h1>
       <p>
-        The idea to make this came one poker night after I was thrown off a hand with top pair (cheers Bodes!). I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting top pair, it didn’t feel right to keep betting into it. I became curious and wanted to know how many times K5 would win, I knew it wasn’t a great hand but mathematically how bad was it? Should I have stayed in?
+        The idea to make this came one poker night after I was thrown off a hand with top pair (thanks Bodes!). I had K5 off-suit and hit the king on the flop, but with serious kicker issues, all it took was a pretty small raise for me to fold. Even after hitting top pair, it didn’t feel right to keep betting into it. I became curious and wanted to know how many times K5 would win, I knew it wasn’t a great hand but mathematically how bad was it?
       </p>
       <p>
-        So rather than use one of the existing tools to discover my odds, I knew it would be possible to create my own. I wrote this poker simulator in PHP, a slow, interpreted language designed for web applications that wouldn't be the first choice for numerical simulations like this, but it's easy to develop in, familiar and gets the job done. Whilst not as fast, on larger iterations the results seem pretty consistent with other tools out there.
+        I wrote this poker simulator in PHP, a slow, interpreted language designed for web applications that wouldn't be the first choice for numerical simulations like this, but for me, it's easy to develop in, familiar and gets the job done. Whilst not lightening fast, on larger iterations the results seem pretty consistent with other tools out there.
       </p>
       <p>
-        As it turns out, simulating a poker hand is quite involved. We have to work out all the possible 5 card combinations for every player given what cards are shown (or could be shown), go through every combination and determine the value of the hand, find the strongest, then compare this against every other player, <em>n</em> times. The combinatorics get out of hand... quick, making each simulation computationally expensive where the cost only increases as the number of players increases. To get results in a reasonable time, I’ve capped the number of iterations for each simulation to 100. This is a relatively low number, so repeating the same simulation is likely to return slightly different results but you get the idea <i class="fa fa-smile-o" aria-hidden="true"></i>. I could cap it at 1000 iterations to return results with more precision but you'd be waiting 10 times as long!
-      </p>
+        As it turns out, simulating a poker hand is quite involved. We have to work out all the possible 5 card combinations for every player given what cards are shown (or could be shown), go through every combination and determine the value of the hand, find the strongest, then compare this against every other player, <em>n</em> times. The combinatorics get out of hand. Quick. And the cost only increases as the number of players increases.
+        I've found ways to make this more performant.
+<!--        increases. To get results in a reasonable time, I’ve capped the number of iterations for each simulation to 100. This is a relatively low number, so repeating the same simulation is likely to return slightly different results but you get the idea <i class="fa fa-smile-o" aria-hidden="true"></i>. I could cap it at 1000 iterations to return results with more precision but you'd be waiting 10 times as long!
+-->      </p>
       <p>
         Comments and feedback welcome, if you spot an unusual result, let me know what the hand is and I’ll take a look.
       </p>
@@ -1196,5 +1198,17 @@ HTML;
     </div>
   </footer>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78908802-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
 </body>
+
 </html>

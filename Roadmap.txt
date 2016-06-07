@@ -2,7 +2,11 @@ FONTS
 
 Clean URLS
 
-Script to add rankings
+background: linear-gradient(to bottom right, rgb(58,0,131), rgb(210,0,106)); <-- nice background!
+https://github.com/simov/simplr-smoothscroll
+http://blackrockdigital.github.io/startbootstrap-scrolling-nav/
+http://startbootstrap.com/template-overviews/grayscale/
+
 
 https://labs.spotify.com/puzzles/
 
