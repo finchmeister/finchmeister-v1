@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Creative - Start Bootstrap Theme</title>
+    <title>Finchmeister Home</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -18,11 +18,20 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Pinyon+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Yesteryear">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Contrail+One">
+
+    <!--Font Awesome-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">-->
+    <script src="https://use.fontawesome.com/1f640db781.js"></script>
+
 
 
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="resources/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="https://cssgram-cssgram.netdna-ssl.com/cssgram.min.css">
+    <link rel="stylesheet" href="resources/css/owl-carousel/owl.carousel.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,11 +86,13 @@
             line-height: 1.5;
             margin-bottom: 20px;
         }
-        .bg-primary {
+        .bg-purple-fade {
+            color: white;
             background: linear-gradient(to bottom right, rgb(58,0,131), rgb(210,0,106));
         }
+
         .bg-dark {
-            background-color: #222222;
+            background-color: #000000;
             color: white;
         }
         .text-faded {
@@ -105,9 +116,15 @@
             background-size: cover;
             -o-background-size: cover;
             background-position: center;
+            background-attachment: fixed; /*YES!!!*/
             background-image: url('resources/images/index/avoriaznight.jpg');
             text-align: center;
             color: white;
+        }
+        .header-content2 {
+/*
+            background-image: url('resources/images/avoriaz_panoramic_compressed.jpg');
+*/
         }
         header .header-content {
             position: relative;
@@ -362,6 +379,84 @@
             webkit-tap-highlight-color: #222222;
         }
 
+
+        /*CIRCLE BUTTON*/
+        .btn-circle {
+            width: 50px;
+            height: 50px;
+           /* margin-top: 15px;*/
+          /*  padding: 7px 16px;*/
+            border: 2px solid #fff;
+            border-radius: 100%!important;
+            font-size: 25px;
+            color: #fff;
+            background: 0 0;
+            -webkit-transition: background .3s ease-in-out;
+            -moz-transition: background .3s ease-in-out;
+            transition: background .3s ease-in-out;
+        }
+
+        .btn-circle:hover,
+        .btn-circle:focus {
+            outline: 0;
+            color: #fff;
+            background: rgba(255,255,255,.1);
+        }
+
+        .btn-circle i.animated {
+            -webkit-transition-property: -webkit-transform;
+            -webkit-transition-duration: 1s;
+            -moz-transition-property: -moz-transform;
+            -moz-transition-duration: 1s;
+        }
+
+        .btn-circle:hover i.animated {
+            -webkit-animation-name: pulse;
+            -moz-animation-name: pulse;
+            -webkit-animation-duration: 1.5s;
+            -moz-animation-duration: 1.5s;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            -moz-animation-timing-function: linear;
+        }
+
+        @-webkit-keyframes pulse {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -webkit-transform: scale(1.2);
+                transform: scale(1.2);
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @-moz-keyframes pulse {
+            0% {
+                -moz-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -moz-transform: scale(1.2);
+                transform: scale(1.2);
+            }
+
+            100% {
+                -moz-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+
+
         /*NAV BAR NEW*/
 
         .navbar-custom {
@@ -444,6 +539,165 @@
             }
         }
 
+        #code-logo{
+
+            /*margin: 10px 0 0 10px;*/
+            white-space: nowrap;
+            overflow: hidden;
+            animation: type 4s steps(60, end);
+        }
+
+        #caret{
+            animation: blink 1s infinite;
+        }
+
+        @keyframes type{
+            from { width: 0; }
+        }
+
+
+        @keyframes blink{
+            to{opacity: .0;}
+        }
+
+        /* THE BEAT FACTORY */
+
+        #beat-factory-heading {
+            font-size: 40px;
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -1px;
+            color: #f71595;
+            font-family: 'Yesteryear', Fallback, sans-serif;
+        }
+
+        .beat-factory-text {
+            color: white;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        #beat-factory-button {
+            background-color: rgb(0,212,138);
+            color: white;
+        }
+
+        .beat-factory-image {
+            padding-top: 60px;
+        }
+
+        /* POKER SIM */
+
+        #poker-sim-heading {
+            /*font-size: 40px;
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -1px;
+            color: #f71595;*/
+            color: white;
+            font-family: 'Contrail One', Fallback, sans-serif;
+        }
+
+        .poker-sim-text {
+            /*color: white;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+        }
+
+        .bg-poker-sim {
+            background: linear-gradient(to bottom left, rgb(0, 131, 25), rgb(0, 210, 36));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        aside.cta-quote {
+            color: white;
+            background-color: #222222;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+            padding: 100px 0;
+            text-align: center;
+        }
+        aside.cta-quote span.quote {
+            display: block;
+            font-size: 30px;
+            line-height: 32px;
+            font-weight: 300;
+        }
+        @media (min-width: 768px) {
+            aside.cta-quote {
+                background-attachment: scroll;
+                padding: 150px 0;
+            }
+            aside.cta-quote span.quote {
+                font-size: 36px;
+                line-height: 38px;
+            }
+        }
+        @media (min-width: 992px) {
+            aside.cta-quote {
+                padding: 300px 0; /*Change to make window smaller*/
+            }
+            aside.cta-quote span.quote {
+                font-size: 40px;
+                line-height: 42px;
+            }
+        }
+        @media (min-width: 1025px) {
+            aside.cta-quote {
+                background-attachment: fixed;
+            }
+        }
+
+        footer.footer {
+            /*background-image: linear-gradient(
+                    rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)), url('resources/images/index/readingsunset.jpg');*/
+            color: rgba(255, 255, 255, 0.7);
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+            padding: 50px 0 20px;
+        }
+        footer.footer a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        footer.footer a:hover {
+            color: white;
+        }
+        footer.footer p {
+            font-size: 22px;
+        }
+        footer.footer .contact-details {
+            margin: 75px 0;
+        }
+        footer.footer .social {
+            margin-bottom: 75px;
+        }
+        footer.footer .copyright p.small {
+            font-size: 14px;
+        }
+        @media (min-width: 1025px) {
+            footer.footer {
+                background-position-y: 182px;
+                background-attachment: fixed;
+            }
+        }
+
 
     </style>
 
@@ -494,7 +748,7 @@
                 <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand page-scroll" href="#page-top">
-                <i class="fa fa-terminal"></i>  <span class="light"></span>finchmeister
+                <p id="code-logo"><i class="fa fa-terminal"></i> finchmeister<!--<span id="caret">|</span>--></p>
             </a>
         </div>
 
@@ -509,7 +763,7 @@
                     <a class="page-scroll" href="#about">About</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#download">Download</a>
+                    <a class="page-scroll" href="#projects">Projects</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#contact">Contact</a>
@@ -527,20 +781,89 @@
         <div class="header-content-inner">
             <h1>finchmeister.co.uk</h1>
             <hr>
-            <p>A personal project experimenting in the world of web development hopefully making some useful tools along the away.</p>
-            <!--<a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>-->
+            <!--<p>A personal project experimenting in the world of web development hopefully making some useful tools along the away.</p>-->
+            <p>We want to explore. We’re curious people. Look back over history, people have put their lives at stake to go out and explore … We believe in what we’re doing. Now it’s time to go.</p>
+            <a href="#about" class="btn btn-circle page-scroll">
+                <i class="fa fa-angle-double-down animated"></i>
+            </a>
         </div>
     </div>
 </header>
 
-<section class="bg-primary" id="about">
+<section class="bg-purple-fade" id="about">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <h2 class="section-heading">What you'll find!</h2>
+                <h2 class="section-heading">About</h2>
                 <hr class="light">
-                <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-                <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                <p class="text-faded">"Choose a life. Choose a job. Choose a career. Choose a family. Choose a fucking big television. Choose washing machines, cars, compact disc players and electrical tin openers... Choose DSY and wondering who the fuck you are on a Sunday morning. Choose sitting on that couch watching mind-numbing, spirit crushing game shows, stucking junk food into your mouth. Choose rotting away in the end of it all, pishing your last in a miserable home, nothing more than an embarrassment to the selfish, fucked up brats you spawned to replace yourself, choose your future. Choose life... But why would I want to do a thing like that?" ― Irvine Welsh, Trainspotting</p>
+                <a href="#projects" class="page-scroll btn btn-default btn-xl sr-button">Projects</a>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<div id="projects"> <!--For the header link to work-->
+    <section class="bg-dark" id="beat-factory">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 text-center">
+                    <h2 id="beat-factory-heading" class="section-heading">The Beat Factory</h2>
+                    <hr class="light">
+                    <p class="text-faded beat-factory-text">Blending a raw, uncut bootleg quality with unambitious and underdeveloped source material, <em>The Beat Factory</em> is where I’ve
+                        slapped together recently recorded material made in my bedroom. I have high hopes for The Beat Factory, with more time and imagination, one day it will become great.
+                    </p>
+                    <p class="text-faded beat-factory-text">
+                        Just in case you didn't notice, the theme took inspiration from an 80’s Miami Vice, the music less so.
+                    </p>
+                    <a id="beat-factory-button" href="beat-factory/beatindex.html" class="page-scroll btn btn-default btn-xl sr-button">Go to The Beat Factory</a><!--TODO make hover-->
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+
+                    <!--TODO make a hover linking directly to the song... PHP automate it.-->
+                    <div class="owl-carousel beat-factory-image">
+                        <div class="item"><img src="resources/images/beat-factory/ambivalence.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/guitarjam.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/acousticart.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/Jazz-print.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/under_your_spell.png" class="img-responsive"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div> <!--End of projects div-->
+
+<aside class="cta-quote" style="background-image: url('resources/images/index/glastobackground.JPG');">
+    <div class="container wow fadeIn">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <span class="quote">Persistence is key.</span>
+               <!-- <hr class=" colored">
+                <a class="btn btn-outline-light page-scroll" href="#contact">Contact Us</a>-->
+            </div>
+        </div>
+    </div>
+</aside>
+
+<section class="bg-poker-sim">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
+
+            </div>
+            <div class="col-md-7 col-md-offset-1 text-center">
+                <h2 id="poker-sim-heading" class="section-heading">Poker Hand Simulator</h2>
+                <hr class="light">
+                <p class="text-faded poker-sim-text">Why are you going in with that hand? How bad was that bad beat? etc.. All answers that can be answered by the Poker Hand Simulator. Go get involved.</p>
+                <a id="poker-sim-button" href="poker-simulator/pokerindex.php" class="page-scroll btn btn-default btn-xl sr-button">Go to the Poker Simulator</a><!--TODO make hover-->
+
+
             </div>
         </div>
     </div>
@@ -689,13 +1012,15 @@
 <aside class="bg-dark">
     <div class="container text-center">
         <div class="call-to-action">
-            <h2>Free Download at Start Bootstrap!</h2>
+            <h2>Rule 2: Just because you can doesn't mean you should.</h2>
             <a href="http://startbootstrap.com/template-overviews/creative/" class="btn btn-default btn-xl sr-button">Download Now!</a>
         </div>
     </div>
 </aside>
 
-<section id="contact">
+
+
+<!--<section id="contact">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -713,7 +1038,51 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
+<!--http://stackoverflow.com/questions/20039765/how-to-apply-a-css-3-blur-filter-to-a-background-image-->
+<footer class="footer" id="contact" style="background-image: linear-gradient(
+                    rgba(0, 0, 0, 0.4),
+                    rgba(0, 0, 0, 0.4)), url('resources/images/index/readingsunset.jpg')">
+<!--<footer class="footer">-->
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-4 contact-details">
+                <h4><i class="fa fa-phone"></i> Call</h4>
+                <p>07917724095</p>
+            </div>
+            <div class="col-md-4 contact-details">
+                <h4><i class="fa fa-map-marker"></i> Location</h4>
+                <p>Reading
+                    <br>Berkshire, UK</p>
+            </div>
+            <div class="col-md-4 contact-details">
+                <h4><i class="fa fa-envelope"></i> Email</h4>
+                <p><a href="mailto:thefinchmeister@gmail.com">thefinchmeister@gmail.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="row social">
+            <div class="col-lg-12">
+                <ul class="list-inline">
+                    <li><a href="https://www.facebook.com/thefinchmeister"><i class="fa fa-facebook fa-fw fa-2x"></i></a>
+                    </li>
+                    <li><a href="https://www.instagram.com/finchunit/"><i class="fa fa-instagram fa-fw fa-2x"></i></a>
+                    </li>
+                    <li><a href="https://uk.linkedin.com/in/jonathan-finch-2b195b3b"><i class="fa fa-linkedin fa-fw fa-2x"></i></a>
+                    </li>
+                    <li><a href="https://github.com/finchmeister"><i class="fa fa-github fa-fw fa-2x"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row copyright">
+            <div class="col-lg-12">
+                <p class="small">&copy; finchmeister.co.uk</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -777,6 +1146,30 @@
 
         $(window).scroll(collapseNavbar);
         $(document).ready(collapseNavbar);
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel(
+                    {
+                        autoplay: true,
+                        autoplaySpeed: 1000,
+                        loop:true,
+                        margin:10,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            420:{
+                                items:2
+                            },
+                            600:{
+                                items:3
+                            },
+                            992:{
+                                items:1
+                            }
+                        }
+                    }
+            );
+        });
 
 // jQuery for page scrolling feature - requires jQuery Easing plugin
         $(function() {
@@ -840,6 +1233,7 @@
     })(jQuery); // End of use strict
 
 </script>
+<script src="resources/js/owl-carousel/owl.carousel.min.js"></script>
 
 </body>
 
