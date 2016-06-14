@@ -1,4 +1,14 @@
-FONTS
+
+MAIN PAGE TODO
+* Link to the songs on the TBF slide show DONE!!!!!!
+* Stats words DONE!!
+* Stats chart
+* Poker sim more words
+* Add a carousel for Case studies
+* Add an about section
+* Figure out a layout
+* Originalise footer
+* DISCUS on TBF and PS
 
 Clean URLS
 
@@ -7,6 +17,11 @@ http://blackrockdigital.github.io/startbootstrap-scrolling-nav/
 http://startbootstrap.com/template-overviews/grayscale/
 http://gratisography.com/
 https://codepen.io/rusjames/pen/uAFhE
+
+VIDEO BACKGORUND
+http://designmodo.com/video-background-website/
+view-source:http://theme.nileforest.com/html/mazel-v1.3/02_mazel_onepage/index8-video_youtube.html
+
 
 https://snazzymaps.com/style/2/midnight-commander
 

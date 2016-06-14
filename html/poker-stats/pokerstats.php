@@ -35,6 +35,7 @@
     background: #4CAF50;
     margin-bottom: 0;
     color: #ffffff;
+    margin-top: -20px;
   }
 
   .jumbotron button {
@@ -320,6 +321,15 @@ function createPointsTable($class='') {
 }
 
 ?>
+
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html"><span class="glyphicon glyphicon-home"></span></a>
+    </div>
+
+  </div>
+</nav>
 
 <body data-spy="scroll" data-target=".scrollspy">
 <div class="jumbotron">

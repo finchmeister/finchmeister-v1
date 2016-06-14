@@ -18,7 +18,6 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Pinyon+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Yesteryear">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Contrail+One">
 
@@ -33,6 +32,10 @@
     <link rel="stylesheet" href="https://cssgram-cssgram.netdna-ssl.com/cssgram.min.css">
     <link rel="stylesheet" href="resources/css/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="resources/css/animate.css">
+
+    <!--Video background-->
+    <link href="css/YTPlayer.css" media="all" rel="stylesheet" type="text/css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -111,7 +114,7 @@
         header {
             position: relative;
             width: 100%;
-           /* min-height: auto;*/
+            /* min-height: auto;*/
             -webkit-background-size: cover;
             -moz-background-size: cover;
             background-size: cover;
@@ -123,9 +126,9 @@
             color: white;
         }
         .header-content2 {
-/*
-            background-image: url('resources/images/avoriaz_panoramic_compressed.jpg');
-*/
+            /*
+                        background-image: url('resources/images/avoriaz_panoramic_compressed.jpg');
+            */
         }
         header .header-content {
             position: relative;
@@ -246,7 +249,7 @@
             margin: 0 auto 20px;
         }
         .text-primary {
-            color: #286090;
+            color: #f05f40;
         }
         .no-gutter > [class*='col-'] {
             padding-right: 0;
@@ -385,8 +388,8 @@
         .btn-circle {
             width: 50px;
             height: 50px;
-           /* margin-top: 15px;*/
-          /*  padding: 7px 16px;*/
+            /* margin-top: 15px;*/
+            /*  padding: 7px 16px;*/
             border: 2px solid #fff;
             border-radius: 100%!important;
             font-size: 25px;
@@ -470,7 +473,7 @@
         }
 
         .navbar-custom .navbar-brand {
-           /* font-weight: 700;*/
+            /* font-weight: 700;*/
         }
 
         .navbar-custom .navbar-brand:focus {
@@ -623,43 +626,9 @@
             background: linear-gradient(to bottom left, rgb(15, 33, 110), rgb(0, 180, 210));
         }
 
-        .poker-sim-pic {
-            margin: auto;
-            padding-top: 100px;
-        }
-
-        @media (min-width: 768px) {
-            .poker-sim-pic {
-                padding-top: 0px;
-            }
-        }
-
-        /* POKER STATS */
-
-
-        .poker-stats-text, #poker-stats-heading {
-            color: white;
-            font-family: 'Lora', sans-serif;
-        }
-
-        .bg-poker-stats {
-            /*background: linear-gradient(to bottom left, rgb(0, 131, 25), rgb(0, 210, 36));*/
-            background: #0E0E0E;
-        }
 
 
 
-        /* ABOUT */
-
-
-        .bg-about-me {
-            /*background: linear-gradient(to bottom left, rgb(0, 131, 25), rgb(0, 210, 36));*/
-            background: #0E0E0E;
-        }
-
-        .text-white {
-            color: white;
-        }
 
 
 
@@ -691,7 +660,7 @@
         @media (min-width: 768px) {
             aside.cta-quote {
                 background-attachment: scroll;
-                padding: 150px 0;
+                padding: 100px 0;
             }
             aside.cta-quote span.quote {
                 font-size: 36px;
@@ -700,7 +669,7 @@
         }
         @media (min-width: 992px) {
             aside.cta-quote {
-                padding: 250px 0; /*Change to make window smaller*/
+                padding: 150px 0; /*Change to make window smaller*/
             }
             aside.cta-quote span.quote {
                 font-size: 40px;
@@ -751,6 +720,297 @@
         }
 
 
+        /* START OF VIDEO CSS*/
+        .intro-img,
+        .intro-img-half,
+        .intro-slider,
+        .intro-slider-half,
+        .intro-video {
+            width: 100%;
+            text-align: center;
+        }
+        .intro-img .intro-welcome,
+        .intro-img-half .intro-welcome,
+        .intro-slider .intro-welcome,
+        .intro-slider-half .intro-welcome,
+        .intro-video .intro-welcome {
+            font-size: 20px;
+            margin: 0;
+            font-family: "Pacifico", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .intro-img .brand-heading,
+        .intro-img-half .brand-heading,
+        .intro-slider .brand-heading,
+        .intro-slider-half .brand-heading,
+        .intro-video .brand-heading {
+            font-size: 30px;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+        }
+        .intro-img .intro-body,
+        .intro-img-half .intro-body,
+        .intro-slider .intro-body,
+        .intro-slider-half .intro-body,
+        .intro-video .intro-body {
+            position: relative;
+        }
+        .intro-img .overlay,
+        .intro-img-half .overlay,
+        .intro-slider .overlay,
+        .intro-slider-half .overlay,
+        .intro-video .overlay {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .intro-img .intro-welcome,
+            .intro-slider .intro-welcome,
+            .intro-video .intro-welcome,
+            .intro-img-half .intro-welcome,
+            .intro-slider-half .intro-welcome {
+                font-size: 30px;
+                margin: 0 0 -10px;
+            }
+            .intro-img .brand-heading,
+            .intro-slider .brand-heading,
+            .intro-video .brand-heading,
+            .intro-img-half .brand-heading,
+            .intro-slider-half .brand-heading {
+                font-size: 55px;
+            }
+            .intro-img .intro-body,
+            .intro-slider .intro-body,
+            .intro-video .intro-body,
+            .intro-img-half .intro-body,
+            .intro-slider-half .intro-body {
+                position: absolute;
+                right: 0;
+                left: 0;
+                bottom: 0;
+            }
+            .intro-img .overlay,
+            .intro-slider .overlay,
+            .intro-video .overlay,
+            .intro-img-half .overlay,
+            .intro-slider-half .overlay {
+                display: block;
+                width: 100%;
+                background-color: black;
+                background-image: url('../img/diagonal-noise.png');
+                opacity: 0.3;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+        }
+        @media (min-width: 1025px) {
+            .intro-img .intro-welcome,
+            .intro-slider .intro-welcome,
+            .intro-video .intro-welcome,
+            .intro-img-half .intro-welcome,
+            .intro-slider-half .intro-welcome {
+                font-size: 40px;
+            }
+            .intro-img .brand-heading,
+            .intro-slider .brand-heading,
+            .intro-video .brand-heading,
+            .intro-img-half .brand-heading,
+            .intro-slider-half .brand-heading {
+                font-size: 70px;
+            }
+        }
+        .intro-img,
+        .intro-img-half,
+        .intro-video {
+            height: auto;
+        }
+        .intro-img,
+        .intro-img-half,
+        .intro-video {
+            padding: 100px 0 50px;
+        }
+        .intro-slider,
+        .intro-slider-half {
+            padding: 0;
+            height: 500px;
+        }
+        @media only screen and (min-width: 768px) {
+            .intro-img,
+            .intro-slider,
+            .intro-video,
+            .video-bg {
+                padding: 0;
+                height: 100%;
+                min-height: 0;
+            }
+            .intro-img .overlay,
+            .intro-slider .overlay,
+            .intro-video .overlay,
+            .video-bg .overlay {
+                height: 100%;
+            }
+            .intro-img-half {
+                height: 60%;
+                min-height: 0;
+            }
+            .intro-img-half .overlay {
+                height: 60%;
+                min-height: 0;
+            }
+            .intro-slider-half {
+                height: 60%;
+                min-height: 0;
+            }
+            .intro-slider-half .overlay {
+                height: 100%;
+                min-height: 0;
+            }
+        }
+        @media (min-width: 768px) {
+            .intro-img .intro-body,
+            .intro-video .intro-body {
+                top: 30%;
+            }
+            .intro-img-half .intro-body {
+                top: 15%;
+            }
+            .intro-slider .intro-body {
+                top: 0;
+            }
+            .intro-slider-half .intro-body {
+                top: 0;
+                margin-top: -25px;
+            }
+        }
+        .intro-img,
+        .intro-img-half {
+            background-color: #3e444d;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+        .intro-img .carousel h4,
+        .intro-img-half .carousel h4 {
+            font-size: 16px;
+            height: 50px;
+        }
+        .intro-slider,
+        .intro-slider-half {
+            background-color: #3e444d;
+        }
+        .intro-slider .carousel,
+        .intro-slider-half .carousel {
+            height: 100%;
+        }
+        .intro-slider .carousel h4,
+        .intro-slider-half .carousel h4 {
+            font-size: 22px;
+        }
+        .intro-slider .carousel-inner,
+        .intro-slider-half .carousel-inner {
+            height: 100%;
+        }
+        .intro-slider .item,
+        .intro-slider-half .item {
+            height: 100%;
+        }
+        .intro-slider .carousel-caption,
+        .intro-slider-half .carousel-caption {
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 100px;
+            bottom: 0;
+        }
+        .intro-slider .fill,
+        .intro-slider-half .fill {
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+        @media (min-width: 768px) {
+            .intro-slider .carousel-caption,
+            .intro-slider-half .carousel-caption {
+                width: auto;
+                right: 0;
+                left: 0;
+                top: 30%;
+                bottom: 0;
+            }
+            .intro-slider .carousel h4,
+            .intro-slider-half .carousel h4 {
+                font-size: 26px;
+            }
+            .intro-slider .carousel-caption,
+            .intro-slider-half .carousel-caption {
+                width: auto;
+            }
+        }
+        .video-bg {
+            position: relative;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .intro-video {
+            position: relative;
+            background: no-repeat bottom center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+            z-index: 1;
+        }
+        @media (min-width: 768px) {
+            .intro-video {
+                position: absolute;
+                background: transparent;
+            }
+        }
+        .intro-img .carousel h4,
+        .intro-img-half .carousel h4,
+        .intro-video .carousel h4 {
+            font-size: 16px;
+            height: 50px;
+        }
+        @media (min-width: 768px) {
+            .intro-img .carousel h4,
+            .intro-img-half .carousel h4,
+            .intro-video .carousel h4 {
+                font-size: 22px;
+                height: auto;
+            }
+        }
+        @media (min-width: 1025px) {
+            .intro-img .carousel h4,
+            .intro-img-half .carousel h4,
+            .intro-video .carousel h4 {
+                font-size: 26px;
+                height: auto;
+            }
+        }
+        .intro-dark-bg {
+            color: #f4f5f7;
+        }
+        .intro-light-bg {
+            color: #3e444d;
+        }
+
+        #wrapper {
+            height: 100%;
+            width: 100%;
+        }
+
     </style>
 
 </head>
@@ -793,6 +1053,7 @@
 </nav>-->
 
 <!-- Navigation -->
+<div id="wrapper">
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -828,19 +1089,57 @@
 </nav>
 
 
-<header class="main-screen-content">
+    <div class="player" div id="bgndVideo" data-property="{videoURL:'http://youtu.be/BsekcY04xvQ',containment:'body',autoPlay:true, mute:true, startAt:0, opacity:1}"></div>
+
+
+    <!--<header class="video-bg">
+    <div class="intro-video intro-dark-bg container player" div id="bgndVideo" data-property="{videoURL:'http://youtu.be/BsekcY04xvQ',containment:'body',autoPlay:true, mute:true, startAt:0, opacity:1}">
+        <div class="overlay"></div>
+        <div class="intro-body" data-scrollreveal="move 0 over 1.5s">
+            <div class="container">
+                <a href="#" class="btn btn-primary btn-square btn-lg">Buy This Theme!</a>
+                <br>
+                <br>
+                <h1 class="brand-heading">
+                    A <span class="text-primary">Multipurpose</span><br>One Page <span class="text-primary">Theme</span>
+                </h1>
+                <hr class="light">
+                <div class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <h4>Spectrum is a One Page Website Framework</h4>
+                        </div>
+                        <div class="item">
+                            <h4>Easy to Use and Easy to Customize</h4>
+                        </div>
+                        <div class="item">
+                            <h4>Full Documentation and Support is Included</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-scroll" data-scrollreveal="enter bottom after .6s">
+                    <a href="#about" class="btn btn-scroll-light sink">
+                        <i class="fa fa-angle-double-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>-->
+
+<!--<header class="main-screen-content">
     <div class="header-content">
         <div class="header-content-inner">
             <h1>finchmeister.co.uk</h1>
             <hr>
-            <!--<p>A personal project experimenting in the world of web development hopefully making some useful tools along the away.</p>-->
+            &lt;!&ndash;<p>A personal project experimenting in the world of web development hopefully making some useful tools along the away.</p>&ndash;&gt;
             <p>We want to explore. We’re curious people. Look back over history, people have put their lives at stake to go out and explore … We believe in what we’re doing. Now it’s time to go.</p>
             <a href="#about" class="btn btn-circle page-scroll">
                 <i class="fa fa-angle-double-down animated"></i>
             </a>
         </div>
     </div>
-</header>
+</header>-->
 
 <section class="bg-purple-fade" id="about">
     <div class="container">
@@ -883,11 +1182,11 @@
                         <div class="item"><span class="helper"></span><img src="resources/images/beat-factory/under_your_spell.png" class="img-responsive beat-factory-image-item"></div>
                     </div>-->
                     <div class="owl-carousel beat-factory-image">
-                        <div class="item"><a href="beat-factory/beatindex.html#song-lovers-carving"><img src="resources/images/beat-factory/ambivalence.jpg" class="img-responsive"></a></div>
-                        <div class="item"><a href="beat-factory/beatindex.html#song-beat-factory-jam-1"><img src="resources/images/beat-factory/guitarjam.jpg" class="img-responsive"></a></div>
-                        <div class="item"><a href="beat-factory/beatindex.html#song-acoustic-jam"><img src="resources/images/beat-factory/acousticart.jpg" class="img-responsive"></a></div>
-                        <div class="item"><a href="beat-factory/beatindex.html#song-panacea"><img src="resources/images/beat-factory/Jazz-print.jpg" class="img-responsive"></a></div>
-                        <div class="item"><a href="beat-factory/beatindex.html#song-under-your-spell"><img src="resources/images/beat-factory/under_your_spell.png" class="img-responsive"></a></div>
+                        <div class="item"><img src="resources/images/beat-factory/ambivalence.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/guitarjam.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/acousticart.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/Jazz-print.jpg" class="img-responsive"></div>
+                        <div class="item"><img src="resources/images/beat-factory/under_your_spell.png" class="img-responsive"></div>
                     </div>
 
 
@@ -902,8 +1201,8 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <span class="quote">Persistence is key.</span>
-               <!-- <hr class=" colored">
-                <a class="btn btn-outline-light page-scroll" href="#contact">Contact Us</a>-->
+                <!-- <hr class=" colored">
+                 <a class="btn btn-outline-light page-scroll" href="#contact">Contact Us</a>-->
             </div>
         </div>
     </div>
@@ -912,14 +1211,16 @@
 <section class="bg-poker-sim">
     <div class="container">
         <div class="row">
-            <div class="col-sm-8 col-sm-push-4 text-center wow fadeIn">
+            <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
+                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
+
+            </div>
+            <div class="col-md-7 col-md-offset-1 text-center wow fadeIn">
                 <h2 id="poker-sim-heading" class="section-heading">Poker Hand Simulator</h2>
                 <hr class="light">
                 <p class="text-faded poker-sim-text">Why are you going in with that hand? How bad was that bad beat? etc.. All questions that can be answered by the Poker Hand Simulator. Go get involved.</p>
-                <a id="poker-sim-button" href="poker-simulator/pokerindex.php" class="page-scroll btn btn-default btn-xl sr-button">Go to the Poker Simulator</a>
-            </div>
-            <div class="col-sm-4 col-sm-pull-8 wow fadeIn" data-wow-delay="0.5s">
-                <img src="resources/images/index/pokercards.png" class="img-responsive poker-sim-pic" alt="Poker Simulator">
+                <a id="poker-sim-button" href="poker-simulator/pokerindex.php" class="page-scroll btn btn-default btn-xl sr-button">Go to the Poker Simulator</a><!--TODO make hover-->
+
 
             </div>
         </div>
@@ -941,36 +1242,22 @@
 <section class="bg-poker-stats">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center wow fadeIn">
+            <div class="col-md-7 col-md-offset-1 text-center wow fadeIn">
                 <h2 id="poker-stats-heading" class="section-heading">Culver Road Poker Stats</h2>
-                <hr>
-                <p class="text-faded poker-stats-text">Culver Road's been the scene of chaos, carnage, courageous comebacks and complete capitulation. We've played two poker leagues and roughly 100 games. Here's the stats since December '15.</p>
-                <p class="text-faded poker-stats-text">Just remember, Queens are good.</p>
-                <!--<p class="text-faded poker-stats-text">In loving memory... 2014-2016</p>-->
+                <hr class="light">
+                <p class="text-faded poker-sim-text"></p>
                 <a id="poker-stats-button" href="poker-stats/pokerstats.php" class="page-scroll btn btn-default btn-xl sr-button">Go to the Poker Stats</a>
 
 
             </div>
+
+
+            <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
+                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
+
+            </div>
+
         </div>
-       <!-- <div class="row">
-            <div class="col-md-3 col-sm-6 hidden-xs wow fadeIn" data-wow-delay="0.5s">
-                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
-            </div>
-            <div class="col-md-3 col-sm-6 hidden-xs wow fadeIn" data-wow-delay="0.75s">
-                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
-            </div>
-            <div class="col-md-3 hidden-sm hidden-xs wow fadeIn" data-wow-delay="1s">
-                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
-            </div>
-            <div class="col-md-3 hidden-sm wow fadeIn" data-wow-delay="1.25s">
-                <img src="resources/images/index/pokercards.png" class="img-responsive" alt="Poker Simulator">
-            </div>
-        </div>
--->
-
-
-
-
     </div>
 </section>
 
@@ -990,66 +1277,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Roadmap</h2>
-                <hr class="primary">
-                Here's a list of stuff I plan on doing soon.
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-coffee text-primary sr-icons"></i>
-                    <h3>Client Project</h3>
-                    <p class="text-muted">Website development</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-spotify text-primary sr-icons"></i>
-                    <h3>Spotify Puzzles</h3>
-                    <p class="text-muted">Python challenges https://labs.spotify.com/puzzles/</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-trophy text-primary sr-icons"></i>
-                    <h3>Betfair App</h3>
-                    <p class="text-muted">Market data collection and analysis</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-heartbeat text-primary sr-icons"></i>
-                    <h3>Mapmyrun</h3>
-                    <p class="text-muted">Website Integration</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-music text-primary sr-icons"></i>
-                    <h3>The Beat Factory</h3>
-                    <p class="text-muted">Whatever happens, happens.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x fa-question text-primary sr-icons"></i>
-                    <!--<h3>Whatever</h3>
-                    <p class="text-muted">Whatever happens</p>-->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bg-about-me text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
                 <h2 class="section-heading">About</h2>
                 <hr class="primary">
             </div>
@@ -1057,17 +1284,36 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 text-center">
-                <img src="resources/images/index/marathonme.jpg" class="img-responsive img-circle">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
+                    <h3>Sturdy Templates</h3>
+                    <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+                </div>
             </div>
-            <div class="col-sm-8">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id varius nisl. Vestibulum diam velit, suscipit et neque et, imperdiet posuere ante. Duis interdum congue tortor eget vestibulum. Maecenas convallis ac nunc gravida vehicula. Praesent iaculis fringilla nisi tincidunt tincidunt. Curabitur nec dolor eget nulla cursus finibus. Donec efficitur magna ac augue vulputate, at consectetur tellus commodo. Fusce non faucibus nibh. Curabitur maximus orci at mi accumsan commodo.
-                </p>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-flask text-primary sr-icons"></i>
+                    <h3>Ready to Ship</h3>
+                    <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                    <h3>Up to Date</h3>
+                    <p class="text-muted">We update dependencies to keep things fresh.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box">
+                    <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
+                    <h3>Made with Love</h3>
+                    <p class="text-muted">You have to make your websites with love these days!</p>
+                </div>
             </div>
         </div>
     </div>
-
 </section>
 
 <!--
@@ -1194,12 +1440,12 @@
 <footer class="footer" id="contact" style="background-image: linear-gradient(
                     rgba(0, 0, 0, 0.4),
                     rgba(0, 0, 0, 0.4)), url('resources/images/index/readingsunset.jpg')">
-<!--<footer class="footer">-->
+    <!--<footer class="footer">-->
     <div class="container text-center">
         <div class="row">
             <div class="col-md-4 contact-details">
                 <h4><i class="fa fa-phone"></i> Call</h4>
-                <p>07917724***</p>
+                <p>07917724095</p>
             </div>
             <div class="col-md-4 contact-details">
                 <h4><i class="fa fa-map-marker"></i> Location</h4>
@@ -1223,8 +1469,6 @@
                     </li>
                     <li><a href="https://github.com/finchmeister"><i class="fa fa-github fa-fw fa-2x"></i></a>
                     </li>
-                    <li><a href="https://open.spotify.com/user/thefinchmeister"><i class="fa fa-spotify fa-fw fa-2x"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -1235,7 +1479,7 @@
         </div>
     </div>
 </footer>
-
+</div>
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -1249,15 +1493,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
 
-
 <!-- Custom Theme JavaScript -->
 <script src="resources/js/owl-carousel/owl.carousel.min.js"></script>
 <script src="resources/js/wow/wow.min.js"></script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/stellar.js/0.6.2/jquery.stellar.min.js"></script>-->
-<!--<script src="resources/js/tubular/jquery.tubular.1.0.js"></script>-->
+<script src="resources/js/tubular/jquery.tubular.1.0.js"></script>
+<script src="inc/jquery.mb.YTPlayer.js"></script>
+
+
+
 <script>
     new WOW().init();
-    /*$(window).stellar();*/
 </script>
 <script>
     /*!
@@ -1285,17 +1530,17 @@
         });
 
         /*
-        // Closes the Responsive Menu on Menu Item Click
-        $('.navbar-collapse ul li a:not(.dropdown-toggle)').click(function() {
-            $('.navbar-toggle:visible').click();
-        });
+         // Closes the Responsive Menu on Menu Item Click
+         $('.navbar-collapse ul li a:not(.dropdown-toggle)').click(function() {
+         $('.navbar-toggle:visible').click();
+         });
 
-        // Offset for Main Navigation
-        $('#mainNav').affix({
-            offset: {
-                top: 100
-            }
-        })*/
+         // Offset for Main Navigation
+         $('#mainNav').affix({
+         offset: {
+         top: 100
+         }
+         })*/
 
         // jQuery to collapse the navbar on scroll
         function collapseNavbar() {
@@ -1332,24 +1577,45 @@
                     }
             );
 
+            /*$(".container").fitVids();
+
+            $('.video-bg').tubular({
+                videoId: '9d8wWcJLnFI',
+                mute: true
+            });
+*/
+            $(function(){
+                jQuery("#bgndVideo").YTPlayer();
+            });
+
+
+            $(".video-bg").background({
+                source: {
+                    poster: "",
+                    video: "//www.youtube.com/embed/TGBQazOQfoE"
+                }
+            });
+
+
+
 
         });
 
         /*// Load WOW.js on non-touch devices
-        var isPhoneDevice = "ontouchstart" in document.documentElement;
-        $(document).ready(function() {
-            if (isPhoneDevice) {
-                //mobile
-            } else {
-                //desktop
-                // Initialize WOW.js
-                wow = new WOW({
-                    offset: 50
-                });
-                wow.init();
-            }
-        });
-*/
+         var isPhoneDevice = "ontouchstart" in document.documentElement;
+         $(document).ready(function() {
+         if (isPhoneDevice) {
+         //mobile
+         } else {
+         //desktop
+         // Initialize WOW.js
+         wow = new WOW({
+         offset: 50
+         });
+         wow.init();
+         }
+         });
+         */
 // jQuery for page scrolling feature - requires jQuery Easing plugin
         $(function() {
             $('a.page-scroll').bind('click', function(event) {
