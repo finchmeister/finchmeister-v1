@@ -23,7 +23,8 @@ http://designmodo.com/video-background-website/
 view-source:http://theme.nileforest.com/html/mazel-v1.3/02_mazel_onepage/index8-video_youtube.html
 
 
-https://snazzymaps.com/style/2/midnight-commander
+Design
+http://designmodo.github.io/startup-demo/
 
 https://finchmeister.disqus.com/admin/settings/universalcode/
 https://una.im/CSSgram/ <-- CSS Instagram

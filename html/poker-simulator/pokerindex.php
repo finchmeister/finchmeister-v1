@@ -134,10 +134,6 @@ TODO:
       margin-bottom: 10px;
     }
 
-    footer {
-      padding-top: 10px;
-    }
-
     h1, h2, h3 {
       font-family: "Contrail One", Fallback, "sans-serif";
     }
@@ -1180,14 +1176,40 @@ HTML;
 <!--        increases. To get results in a reasonable time, I’ve capped the number of iterations for each simulation to 100. This is a relatively low number, so repeating the same simulation is likely to return slightly different results but you get the idea <i class="fa fa-smile-o" aria-hidden="true"></i>. I could cap it at 1000 iterations to return results with more precision but you'd be waiting 10 times as long!
 -->      </p>
       <p>
-        Comments and feedback welcome, if you spot an unusual result, let me know what the hand is and I’ll take a look.
+        Comments and feedback welcome, if you spot an unusual result, leave a message below with the details and I’ll take a look.
       </p>
 
     </div>
   </div>
 </div>
+<div class="mainSection">
+  <div class="container">
+    <div class="col-xs-12">
+      <div id="disqus_thread"></div>
+      <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+         */
+        /*
+         var disqus_config = function () {
+         this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+         this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+         };
+         */
+        (function() {  // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement('script');
 
+          s.src = '//finchmeister.disqus.com/embed.js';
 
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
+  </div>
+</div>
 
   <!-- FOOTER -->
 

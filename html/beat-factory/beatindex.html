@@ -7,9 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Yesteryear">
+    <link rel="stylesheet" href="../resources/css/animate.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/1f640db781.js"></script>
+    <!-- Plugin JavaScript -->
+
+
     <title>The Beat Factory</title>
+
     <style>
 
 
@@ -105,36 +111,13 @@
             opacity:0;
         }*/
 
+        footer {
+            padding-top: 25px;
+        }
+
 
     </style>
 </head>
-<script>
-
-/*
-    $(document).ready(function() {
-
-        *//* Every time the window is scrolled ... *//*
-
-        //fadeIn();
-        $(window).scroll( function fadeIn() {
-            *//* Check the location of each desired element *//*
-            $('.featurette-divider, .featurette').each( function(i){
-
-                var bottom_of_object = $(this).position().top + $(this).outerHeight();
-                var bottom_of_window = $(window).scrollTop() + $(window).height();
-
-                *//* If the object is completely visible in the window, fade it it *//*
-                if( bottom_of_window > bottom_of_object ){
-
-                    $(this).animate({'opacity':'1'},500);
-
-                }
-
-            });
-        });
-
-    });*/
-</script>
 <body>
 
 <!--source http://getbootstrap.com/examples/carousel/#-->
@@ -162,9 +145,9 @@
         <p class="lead">Welcome to <em>The Beat Factory</em>.</p>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider wow fadeIn">
 
-    <div class="row featurette">
+    <div class="row featurette wow fadeIn">
         <div class="col-md-7 col-md-push-5" id="song-lovers-carving">
             <h2 class="featurette-heading">Lovers' Carving <span class="text-muted">Bibio Cover.</span></h2>
             <p class="lead">A pleasant finger picking tune painfully recorded on acoustic, layered with a smooth, shimmering chorus effect. I probably should have practised it more... I will re-record it eventually.
@@ -175,16 +158,16 @@
                     <source src="../music/Lovers%20carvings%20-%20bibio%20final.mp3" type="audio/mpeg">
                 </audio>
             </div>
-            Recorded: 30<sup>th</sup> May 2016
+            Recorded: 30<sup>th</sup> May 2016</span>
         </div>
         <div class="col-md-5 col-md-pull-7">
             <img class="featurette-image img-responsive center-block" img src="../resources/images/beat-factory/ambivalence.jpg" alt="">
         </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider wow fadeIn">
 
-    <div class="row featurette">
+    <div class="row featurette wow fadeIn">
         <div class="col-md-7" id="song-beat-factory-jam-1">
             <h2 class="featurette-heading">Beat Factory Jam <span class="text-muted">ft. Old-J.</span></h2>
             <p class="lead">First raw 'studio' recorded collaboration with Jay. 50+ minutes of straight up jamming.</p>
@@ -200,10 +183,10 @@
         </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider wow fadeIn">
 
-    <div class="row featurette">
-        <div class="col-md-7 col-md-push-5" id="song-acoustic-jam">
+    <div class="row featurette wow fadeIn">
+        <div class="col-md-7 col-md-push-5  wow fadeIn" id="song-acoustic-jam">
             <h2 class="featurette-heading">Acoustic Jam. <span class="text-muted">Capo on 4th, 2 takes.</span></h2>
             <p class="lead">Late night poker jams usually sound a bit like this. Two guitars, a couple of chords and complete improvisation.
             </p>
@@ -219,9 +202,9 @@
         </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider wow fadeIn">
 
-    <div class="row featurette">
+    <div class="row featurette wow fadeIn">
         <div class="col-md-7" id="song-panacea">
             <h2 class="featurette-heading">Panacea. <span class="text-muted">Because jazz is cool.</span></h2>
             <p class="lead">One day I'd like to play jazz properly, but playing jazz properly is hard, so this will have to do.
@@ -238,9 +221,9 @@
         </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider wow fadeIn">
 
-    <div class="row featurette">
+    <div class="row featurette wow fadeIn">
         <div class="col-md-7 col-md-push-5" id="song-under-your-spell">
             <h2 class="featurette-heading">Under Your Spell. <span class="text-muted">A cover from the Drive soundtrack.</span></h2>
             <p class="lead">The first song to drop from The Beat Factory, <em>Under Your Spell</em> started life as a fumbling mess on the house piano.
@@ -258,9 +241,9 @@
         </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider wow fadeIn">
 
-    <div class="row featurette">
+    <div class="row featurette wow fadeIn">
         <div class="col-md-7">
             <h2 class="featurette-heading">Coming soon.</h2>
             <p class="lead">New additions to The Beat Factory.</p>
@@ -270,8 +253,11 @@
         </div>
     </div>
 
-    <hr class="featurette-divider">
+    <hr class="featurette-divider wow fadeIn">
     <!-- /END THE FEATURETTES -->
+
+    <div id="disqus_thread" class="wow fadeIn"></div>
+
 
     <!-- FOOTER -->
     <footer>
@@ -282,6 +268,7 @@
 
 
 
+<script src="../resources/js/wow/wow.min.js"></script>
 
 
 <script>
@@ -293,7 +280,30 @@
     ga('create', 'UA-78908802-1', 'auto');
     ga('send', 'pageview');
 
-</script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+     var disqus_config = function () {
+     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     };
+     */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
 
+        s.src = '//finchmeister.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+
+
+    new WOW().init();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<!-- Plugin JavaScript -->
 </body>
 </html>

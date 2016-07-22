@@ -310,7 +310,7 @@ function createNetTable($class='') {
 }
 function createGamesPlayedTable($class='') {
   global $stats;
-  foreach ($stats['gamesWon2'] as &$row) $row['Win Percent'] = $row['Win Percent'].'%';
+  foreach ($stats['gamesWon2'] as &$row) $row['Win Percent'] = $row['Win Percent']. '%';
   return createTableHTML($stats['gamesWon2'], ['Name', 'Games Won', 'Games Played', 'Win Percent'], $class);
 }
 

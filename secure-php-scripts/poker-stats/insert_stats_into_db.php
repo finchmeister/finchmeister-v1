@@ -2,7 +2,7 @@
 // Last commit $Id$
 // Version Location $HeadURL$
 
-include "../database_configuration.php";
+include dirname(__FILE__)."/../database_configuration.php";
 
 date_default_timezone_set('UTC');
 
