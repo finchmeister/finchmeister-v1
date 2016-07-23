@@ -668,6 +668,34 @@
             background: #0E0E0E;
         }
 
+        .culver-door {
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, .0) inset;
+            transition: 1s transform linear;
+            transform-origin: left;
+            cursor: pointer;
+        }
+/*        .thumb
+        {
+            background: url("http://dc428.4shared.com/img/-vayshJ-/s3/ClassDoor.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 147px;
+            height: 274px;
+            position: absolute;
+            box-sizing: border-box;
+            border-radius: 3px;
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, .0) inset;
+            transition: 1s transform linear;
+            transform-origin: left;
+            cursor: pointer;
+        }*/
+
+        .doorOpened
+        {
+            transform: rotateY(-90deg);
+            transform-origin: 8px;
+            transition: .5s linear;
+        }
 
         /*ROADMAP*/
 
@@ -870,14 +898,14 @@
             <hr>
             <!--<p>A personal project experimenting in the world of web development hopefully making some useful tools along the away.</p>-->
             <p>We want to explore. We’re curious people. Look back over history, people have put their lives at stake to go out and explore … We believe in what we’re doing. Now it’s time to go.</p>
-            <a href="#about" class="btn btn-circle page-scroll">
+            <a href="#welcome" class="btn btn-circle page-scroll">
                 <i class="fa fa-angle-double-down animated"></i>
             </a>
         </div>
     </div>
 </header>
 
-<section class="bg-purple-fade" >
+<section class="bg-purple-fade" id="welcome">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center wow fadeIn">
@@ -966,9 +994,8 @@
                 <p class="text-faded poker-sim-text">It calculates the odds of each player winning the hand by running a thousand simulations from the given situation. Go get involved.</p>
                 <a id="poker-sim-button" href="poker-simulator/pokerindex.php" class="page-scroll btn btn-default btn-xl sr-button">Go to the Poker Simulator</a>
             </div>
-            <div class="col-md-4 col-md-pull-8 wow fadeIn" data-wow-delay="0.5s">
+            <div class="col-md-4 col-md-pull-8 wow rollIn" data-wow-delay="0.5s">
                 <img src="resources/images/index/pokercards.png" class="img-responsive poker-sim-pic" alt="Poker Simulator">
-
             </div>
         </div>
     </div>
@@ -997,11 +1024,30 @@
                 <a id="poker-stats-button" href="poker-stats/pokerstats.php" class="page-scroll btn btn-default btn-xl sr-button">Go to the Poker Stats</a>
             </div>
             <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
-                <img src="resources/images/index/culver.png" class="img-responsive poker-sim-pic" alt="Culver">
+                <!--<a href="poker-stats/pokerstats.php">
+                    <img id="culver-door" src="resources/images/index/culver.png" class="img-responsive poker-sim-pic" alt="Culver" onclick="openDoor(this)">
+                </a> -->
+                    <div  onclick="openDoor(this)"><img id="culver-door" src="resources/images/index/culver.png" class="img-responsive poker-sim-pic culver-door" alt="Culver"></div>
+
             </div>
         </div>
     </div>
 </section>
+<script>
+    function openDoor(field) {
+        //$(field).addClass("doorOpened");
+        var y = $(field).find(".culver-door");
+        var x = y.attr("class");
+        if (y.hasClass("doorOpened")) {
+            y.removeClass("doorOpened");
+        }
+        else {
+            $(".culver-door").removeClass("doorOpened");
+            y.addClass("doorOpened");
+        }
+        setTimeout(function () {window.location.href = "poker-stats/pokerstats.php"}, 1000);
+    }
+</script>
 
 <aside class="cta-quote" style="background-image: url('resources/images/index/montenegro.jpg');">
     <div class="container wow fadeIn">
@@ -1086,10 +1132,10 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-4 text-center">
+            <div class="col-sm-4 text-center">
                 <img src="resources/images/index/marathonme.jpg" class="img-responsive img-circle" id="img-profile">
             </div>
-            <div class="col-xs-8">
+            <div class="col-sm-8">
                 <p>
                     Hi, I'm Jo and I hope you enjoyed my experimental coding side project.
                 </p>
