@@ -35,7 +35,7 @@
 
     <!--Font Awesome-->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">-->
-    <script src="https://use.fontawesome.com/1f640db781.js"></script>
+    <script async src="https://use.fontawesome.com/1f640db781.js"></script>
 
 
 
@@ -602,6 +602,23 @@
             }
         }
 
+        .quote-source {
+            font-style: italic;
+        }
+
+        /*.quote.active {
+            transition: height 2s linear;
+        }*/
+
+        /*.quote.active {
+
+            transition: height 2s linear;
+        }
+
+        .quote:not(.active) {
+            height: 800px;
+        }*/
+
         /* THE BEAT FACTORY */
 
         #beat-factory-heading {
@@ -947,42 +964,73 @@
 
                 <div id="quote-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
                     <!-- Indicators -->
-                    <ol class="carousel-indicators">
+                    <!--<ol class="carousel-indicators">
                         <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
                         <li data-target="#quote-carousel" data-slide-to="1"></li>
                         <li data-target="#quote-carousel" data-slide-to="2"></li>
                         <li data-target="#quote-carousel" data-slide-to="3"></li>
-                    </ol>
+                        <li data-target="#quote-carousel" data-slide-to="4"></li>
+                    </ol>-->
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
+
                         <div class="item active quote">
                             <div class="col-md-8 col-md-offset-2">
-                                <p class="text-faded">"Choose Life. Choose a job. Choose a career. Choose a family. Choose a fucking big television, choose washing machines, cars, compact disc players and electrical tin openers. Choose good health, low cholesterol, and dental insurance. Choose fixed interest mortgage repayments. Choose a starter home. Choose your friends. Choose leisurewear and matching luggage. Choose a three-piece suit on hire purchase in a range of fucking fabrics. Choose DIY and wondering who the fuck you are on Sunday morning. Choose sitting on that couch watching mind-numbing, spirit-crushing game shows, stuffing fucking junk food into your mouth. Choose rotting away at the end of it all, pissing your last in a miserable home, nothing more than an embarrassment to the selfish, fucked up brats you spawned to replace yourselves. Choose your future. Choose life... But why would I want to do a thing like that? I chose not to choose life. I chose somethin’ else. And the reasons? There are no reasons. Who needs reasons when you’ve got heroin?" ― Irvine Welsh, Trainspotting</p>
+                                <p class="text-faded">"For, after all, how do we know that two and two make four? Or that the force of gravity works? Or that the past is unchangeable? If both the past and the external world exist only in the mind, and if the mind itself is controllable – what then?"<span class="quote-source"> - George Orwell, 1984</span></p>
+                            </div>
+                        </div>
+
+
+                        <div class="item  quote">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p class="text-faded">"Choose Life. Choose a job. Choose a career. Choose a family. Choose a fucking big television, choose washing machines, cars, compact disc players and electrical tin openers. Choose good health, low cholesterol, and dental insurance. Choose fixed interest mortgage repayments. Choose a starter home. Choose your friends. Choose leisurewear and matching luggage. Choose a three-piece suit on hire purchase in a range of fucking fabrics. Choose DIY and wondering who the fuck you are on Sunday morning. Choose sitting on that couch watching mind-numbing, spirit-crushing game shows, stuffing fucking junk food into your mouth. Choose rotting away at the end of it all, pissing your last in a miserable home, nothing more than an embarrassment to the selfish, fucked up brats you spawned to replace yourselves. Choose your future. Choose life... But why would I want to do a thing like that? I chose not to choose life. I chose somethin’ else. And the reasons? There are no reasons. Who needs reasons when you’ve got heroin?"<span class="quote-source"> ― Irvine Welsh, Trainspotting</span></p>
                             </div>
 
                         </div>
 
                         <div class="item quote">
                             <div class="col-md-8 col-md-offset-2">
-                                <p class="text-faded">"Far out in the uncharted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun. Orbiting this at a distance of roughly ninety-two million miles is an utterly insignificant little blue green planet whose ape-descended life forms are so amazingly primitive that they still think digital watches are a pretty neat idea." ― Douglas Adams, The Hitchhiker's Guide to the Galaxy</p>
+                                <p class="text-faded">"Far out in the uncharted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun. Orbiting this at a distance of roughly ninety-two million miles is an utterly insignificant little blue green planet whose ape-descended life forms are so amazingly primitive that they still think digital watches are a pretty neat idea."<span class="quote-source"> ― Douglas Adams, The Hitchhiker's Guide to the Galaxy</span></p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="item quote">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p class="text-faded">"If I wasn't in the rap game<br>
+                                    I'd probably have a key knee deep in the crack game<br>
+                                    Because the streets is a short stop<br>
+                                    Either you're slingin crack rock or you got a wicked jumpshot<br>
+                                    Shit, it's hard being young from the slums<br>
+                                    eatin five cent gums not knowin where your meals comin from<br>
+                                    And now the shit's gettin crazier and major<br>
+                                    Kids younger than me, they got the Sky grand Pagers<br>
+                                    Goin outta town, blowin up<br>
+                                    Six months later all the dead bodies showin up<br>
+                                    It make me wanna grab the nine and the shottie<br>
+                                    But I gotta go identify the body<br>
+                                    Damn, what happened to the summertime cookouts?<br>
+                                    Everytime I turn around a nigga gettin took out<br>
+                                    Shit, my momma got cancer in her breast<br>
+                                    Don't ask me why I'm motherfuckin stressed, things done changed"<br><span class="quote-source"> ― Notorious B.I.G., Things Done Changed</span></p>
+                            </div>
+                        </div>
+
+                     <!--   <div class="item quote">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p class="text-faded">"Work is the curse of the drinking classes."<span class="quote-source"> ― Oscar Wilde</span></p>
                             </div>
                         </div>
 
                         <div class="item quote">
                             <div class="col-md-8 col-md-offset-2">
-                                <p class="text-faded">"For, after all, how do we know that two and two make four? Or that the force of gravity works? Or that the past is unchangeable? If both the past and the external world exist only in the mind, and if the mind itself is controllable – what then?" - George Orwell, 1984</p>
-                            </div>
-                        </div>
+                                <p class="text-faded">"What does the 'B' in Benoit B. Mandelbrot stand for?</p>
 
-                        <div class="item quote">
-                            <div class="col-md-8 col-md-offset-2">
-                                <p class="text-faded">"Since I don't smoke, I decided to grow a mustache - it is better for the health.
-                                    However, I always carried a jewel-studded cigarette case in which, instead of tobacco, were carefully placed several mustaches, Adolphe Menjou style. I offered them politely to my friends: "Mustache? Mustache? Mustache?"
-                                    Nobody dared to touch them. This was my test regarding the sacred aspect of mustaches."
-                                    ― Salvador Dalí, Dalí's Mustache</p>
+                                <p class="text-faded">Benoit B. Mandelbrot"<span class="quote-source"> ― Anonymous</span></p>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
 
                     <!-- Left and right controls -->
@@ -1057,7 +1105,7 @@
     <div class="container wow fadeIn">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <span class="quote">Persistence is key.</span>
+                <span class="quote">'Persistence is key'</span>
                <!-- <hr class=" colored">
                 <a class="btn btn-outline-light page-scroll" href="#contact">Contact Us</a>-->
             </div>
@@ -1088,7 +1136,7 @@
     <div class="container wow fadeIn">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <span class="quote">Just because you can doesn't mean you should.</span>
+                <span class="quote">'Just because you can doesn't mean you should'</span>
                 <!-- <hr class=" colored">
                  <a class="btn btn-outline-light page-scroll" href="#contact">Contact Us</a>-->
             </div>
@@ -1136,7 +1184,7 @@
     <div class="container wow fadeIn">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <span class="quote">Take what you can get.</span>
+                <span class="quote">'Take what you can get'</span>
                 <!-- <hr class=" colored">
                  <a class="btn btn-outline-light page-scroll" href="#contact">Contact Us</a>-->
             </div>
@@ -1220,7 +1268,15 @@
             </div>
             <div class="col-sm-8">
                 <p>
-                    Hi, I'm Jo and I hope you enjoyed my experimental coding side project.
+                    Hi, I'm Jo and I hope you enjoyed your journey through my website.
+                </p>
+                <p>
+                    I was motivated to build this because I wanted somewhere where I could code stuff I thought would be cool, free of a specification with complete creative control.
+                </p>
+                <p>
+                    I have interests in music, technology, running, poker, data, mathematics, statistics, cooking...
+
+
                 </p>
             </div>
         </div>
@@ -1254,7 +1310,7 @@
                     rgba(0, 0, 0, 0.4)), url('resources/images/index/readingsunset.jpg')">
 <!--<footer class="footer">-->
     <div class="container text-center">
-        <div class="row">
+       <!-- <div class="row">
             <div class="col-md-4 contact-details">
                 <h4><i class="fa fa-phone"></i> Call</h4>
                 <p>07917724***</p>
@@ -1269,7 +1325,7 @@
                 <p><a href="mailto:thefinchmeister@gmail.com">thefinchmeister@gmail.com</a>
                 </p>
             </div>
-        </div>
+        </div>-->
         <div class="row social">
             <div class="col-lg-12">
                 <ul class="list-inline">
@@ -1288,7 +1344,7 @@
         </div>
         <div class="row copyright">
             <div class="col-lg-12">
-                <p class="small">&copy; finchmeister.co.uk</p>
+                <p class="small">&copy; <a href="#page-top">finchmeister.co.uk</a></p>
             </div>
         </div>
     </div>

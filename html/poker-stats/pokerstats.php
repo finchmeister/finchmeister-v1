@@ -337,6 +337,7 @@ function createPointsTable($class='') {
     <h1>Culver Road Poker Night Results</h1>
     <h3><span class="fa fa-pencil"></span> Places recorded since December '15</h3>
     <h3><span class="fa fa-pencil"></span> Cash recorded since April '16</h3>
+    <h3><span class="fa fa-pencil"></span> Last ever game 7th July 2016</h3>
   </div>
 </div><!--end of .jumbotron-->
 
