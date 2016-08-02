@@ -3,7 +3,7 @@
 # Version Location: $HeadURL$
 # Remember to run from ~/rpiwebsite/trunk
 PIIP=www.finchmeister.co.uk
-VERSION=X_03_00
+VERSION=X_03_01
 
 # Update the version txt file going out to the PI with the new version no.
 echo "${VERSION}" > html/version.txt
