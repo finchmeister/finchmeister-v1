@@ -1,5 +1,6 @@
-#RewriteEngine On
+RewriteEngine On
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^([^\.]+)$ $1.php [NC,L]
-##RewriteRule ^thebeatfactory$ beat-factory/beatindex.html [NC,L] # Enable redirect from beat factory
+RewriteRule ^thebeatfactory beat-factory/beatindex.html [NC,L] # Enable redirect from beat factory
+#RewriteRule ^thebeatfactory beat-factory/beatindex.html [NC,L] # Enable redirect from
 #RewriteRule ^/thebeatfactory?$ index.html [NC,L] # Enable redirect from beat factory

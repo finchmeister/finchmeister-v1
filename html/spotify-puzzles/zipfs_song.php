@@ -50,3 +50,5 @@ function zipfsSongs($input) { // TODO validate
 
   return implode("\n", $orderedBestSongs);
 }
+
+echo zipfsSongs($input);
