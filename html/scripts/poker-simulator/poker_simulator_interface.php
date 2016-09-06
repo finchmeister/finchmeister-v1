@@ -18,7 +18,7 @@ header('Content-Type: application/json');
 include 'poker_simulator_core.php';
 
 const NO_OF_ITERATIONS = 100;
-const OUTSOURCED = true;
+const OUTSOURCED = false;
 const MASSIVELY_PARALLEL = 5; // No of parallel requests to run, comment out to run in series
 const BASE_URL = 'https://secure.workbooks.com/process/=kDM2gDN/poker_sim';
 $DEBUG = FALSE;
