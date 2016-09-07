@@ -3,6 +3,19 @@
 // Last commit $Id$
 // Version Location $HeadURL$
 
+/*$start = microtime(1);
+$j = 0;
+for ($i = 0; $i < 10000000; $i++) {
+  if ($i % 3) {
+    $j++;
+  }
+}
+$end = microtime(1);
+$timeTaken = round($end - $start, 3);
+echo "Time taken for $i iterations = $timeTaken";
+exit(0);*/
+
+
 include 'poker_simulator_core.php';
 
 const BASE_URL = 'https://secure.workbooks.com/process/=kDM2gDN/poker_sim';
@@ -121,12 +134,12 @@ function calculateOddsFromRequest($bob){
   $results = PokerSimulation::calculateOdds($hands, $shownCards, $noOfPlayers, $iterations);
   return json_encode($results);
 }
-
-
+/*
+echo date_default_timezone_get();
+exit(0);*/
 //----ACTUAL BENCHMARK
-
-const NO_OF_ITERATIONS = 1000;
-const TEST_WB = true;
+const NO_OF_ITERATIONS = 100;
+const TEST_WB = false;
 // Benchmarking the poker sim locally
 $urlParams = 't=co&p=5&p1c1=Ad&p1c2=As&p2c1=&p2c2=&p3c1=&p3c2=&p4c1=&p4c2=&p5c1=&p5c2=&cc1=2c&cc2=3c&cc3=4c&cc4=&cc5=';
 $bob = [];
