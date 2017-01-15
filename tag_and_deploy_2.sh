@@ -6,6 +6,9 @@
 HOST=finchmeister.co.uk
 VERSION=X_03_02
 USER=jfinch
+#SVNREPODIR=file:///Users/jfinch/raspberrypiSVN # Linux rig
+SVNREPODIR=file:///Users/jfinch/PersonalProjects/finchmeister1/website_repository # MBP
+
 
 # Update the version txt file going out to the PI with the new version no.
 echo "${VERSION}" > html/version.txt
@@ -14,7 +17,7 @@ echo "${VERSION}" > html/version.txt
 svn commit -m "Commit prior to deployment of ${VERSION} to PI"
 
 # Create the branch
-svn --parents copy file:///Users/jfinch/raspberrypiSVN/trunk file:///Users/jfinch/raspberrypiSVN/tags/${VERSION} -m "Deployment of ${VERSION} to Droplet"
+svn --parents copy ${SVNREPODIR}/trunk ${SVNREPODIR}/tags/${VERSION} -m "Deployment of ${VERSION} to Droplet"
 
 # Reset the LOCAL version txt file
 echo "Bleeding edge dev code - version last deployed to server: ${VERSION}" > html/version.txt
@@ -28,7 +31,7 @@ fi
 cd rpiwebsite
 
 # Export the tag into it
-svn export file:///Users/jfinch/raspberrypiSVN/tags/${VERSION}
+svn export ${SVNREPODIR}/tags/${VERSION}
 
 # Rsync the tag to PI
 rsync -arv --delete /tmp/rpiwebsite/${VERSION}/html/ ${USER}@${HOST}:/var/www/html
