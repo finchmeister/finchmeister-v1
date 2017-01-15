@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0cdd77eb-1830-4704-a35a-fd48fbfa5507" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html/resources/images/poker-sim" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html/resources/images/poker-sim/pokerbanner.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backup.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test_latest_version.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/raspberrypiwebsite.iml" afterPath="$PROJECT_DIR$/.idea/raspberrypiwebsite.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/index.html" afterPath="$PROJECT_DIR$/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/poker-simulator/pokerindex.php" afterPath="$PROJECT_DIR$/html/poker-simulator/pokerindex.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tag_and_deploy_2.sh" afterPath="$PROJECT_DIR$/tag_and_deploy_2.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/version.txt" afterPath="$PROJECT_DIR$/html/version.txt" />
     </list>
     <ignored path="raspberrypiwebsite.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tag_and_deploy_2.sh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tag_and_deploy_2.sh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tag_and_deploy_2.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="9" selection-end-column="87" />
+            <state relative-caret-position="297">
+              <caret line="29" column="2" lean-forward="true" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -108,17 +99,17 @@
         <entry file="file://$PROJECT_DIR$/html/poker-simulator/pokerindex.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="550">
-              <caret line="1231" column="9" lean-forward="true" selection-start-line="1231" selection-start-column="9" selection-end-line="1231" selection-end-column="9" />
+              <caret line="1231" column="9" lean-forward="false" selection-start-line="1231" selection-start-column="9" selection-end-line="1231" selection-end-column="9" />
               <folding>
-                <element signature="e#47939#47945#0#HTML" expanded="true" />
-                <marker date="1484515966000" expanded="true" signature="5054:5070" ph="..." />
-                <marker date="1484515966000" expanded="true" signature="42928:43169" ph="..." />
+                <element signature="e#47964#47970#0#HTML" expanded="true" />
+                <marker date="1484516481000" expanded="true" signature="5079:5095" ph="..." />
+                <marker date="1484516481000" expanded="true" signature="42953:43194" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="backup.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="backup.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backup.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -260,7 +251,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Bash.test_latest_version.sh">
+  <component name="RunManager" selected="Bash.tag_and_deploy_2.sh">
     <configuration default="false" name="branch_and_deploy.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="bash" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
@@ -298,6 +289,17 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/html" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/html/test_latest_version.sh" />
+      <option name="PARAMETERS" value="" />
+      <module name="raspberrypiwebsite" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="tag_and_deploy_2.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="bash" />
+      <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tag_and_deploy_2.sh" />
       <option name="PARAMETERS" value="" />
       <module name="raspberrypiwebsite" />
       <envs />
@@ -380,16 +382,18 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Bash.branch_and_deploy.sh" />
       <item index="1" class="java.lang.String" itemvalue="Bash.deploy_wc.sh" />
       <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
       <item index="3" class="java.lang.String" itemvalue="Bash.test_latest_version.sh" />
+      <item index="4" class="java.lang.String" itemvalue="Bash.tag_and_deploy_2.sh" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Bash.test_latest_version.sh" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Bash.tag_and_deploy_2.sh" />
+        <item index="1" class="java.lang.String" itemvalue="Bash.test_latest_version.sh" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
   </component>
@@ -432,7 +436,7 @@
       <workItem from="1484386969586" duration="32000" />
       <workItem from="1484387017895" duration="913000" />
       <workItem from="1484388147606" duration="26000" />
-      <workItem from="1484388190794" duration="3159000" />
+      <workItem from="1484388190794" duration="3365000" />
     </task>
     <task id="LOCAL-00001" summary="testing commit">
       <created>1455566339028</created>
@@ -462,15 +466,22 @@
       <option name="project" value="LOCAL" />
       <updated>1455572043034</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Taken old backup">
+      <created>1484516482033</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1484516482033</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4130000" />
+    <option name="totallyTimeSpent" value="4336000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="959" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20818071" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -535,7 +546,8 @@
     <MESSAGE value="testing commit id" />
     <MESSAGE value="testing commit again" />
     <MESSAGE value="Organisated directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Organisated directory" />
+    <MESSAGE value="Taken old backup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Taken old backup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -875,20 +887,12 @@
     <entry file="file://$PROJECT_DIR$/html/poker-simulator/pokerindex.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
-          <caret line="1231" column="9" lean-forward="true" selection-start-line="1231" selection-start-column="9" selection-end-line="1231" selection-end-column="9" />
+          <caret line="1231" column="9" lean-forward="false" selection-start-line="1231" selection-start-column="9" selection-end-line="1231" selection-end-column="9" />
           <folding>
-            <element signature="e#47939#47945#0#HTML" expanded="true" />
-            <marker date="1484515966000" expanded="true" signature="5054:5070" ph="..." />
-            <marker date="1484515966000" expanded="true" signature="42928:43169" ph="..." />
+            <element signature="e#47964#47970#0#HTML" expanded="true" />
+            <marker date="1484516481000" expanded="true" signature="5079:5095" ph="..." />
+            <marker date="1484516481000" expanded="true" signature="42953:43194" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tag_and_deploy_2.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="9" selection-end-column="87" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -904,6 +908,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tag_and_deploy_2.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="29" column="2" lean-forward="true" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
           <folding />
         </state>
       </provider>
