@@ -4,7 +4,7 @@
 # Remember to run from ~/rpiwebsite/trunk
 # DEPLOY TO DIGITAL OCEAN DROPLET
 HOST=finchmeister.co.uk
-VERSION=X_04_05
+VERSION=X_04_06
 USER=jfinch
 #SVNREPODIR=file:///Users/jfinch/raspberrypiSVN # Linux rig
 SVNREPODIR=file:///Users/jfinch/PersonalProjects/finchmeister1/website_repository # MBP
