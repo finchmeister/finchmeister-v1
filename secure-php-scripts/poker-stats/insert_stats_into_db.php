@@ -9,7 +9,6 @@ date_default_timezone_set('UTC');
 $DEPLOY = true; // Uncomment to deploy
 
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-
 $csv = array_map('str_getcsv', file("pokerstatsALL.csv"));
 print_r($csv);
 unset ($csv[0]);

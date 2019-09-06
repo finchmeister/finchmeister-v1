@@ -5,9 +5,9 @@
 /**
  * These are the database login details
  */
-define("HOST", "localhost");     // The host you want to connect to.
+define("HOST", "mysql");     // The host you want to connect to.
 define("USER", "sec_user");    // The database username.
-define("PASSWORD", 'V&sWy$VCS3f7ezRd');    // The database password.
+define("PASSWORD", 'tpoasdjabajsdhajshfgjhsadg23847');    // The database password.
 define("DATABASE", "finchmeister");    // The database name.
 
 /*define("CAN_REGISTER", "any");

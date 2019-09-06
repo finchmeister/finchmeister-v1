@@ -1,0 +1,21 @@
+version: '3'
+services:
+    php:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+#        image: finchmeister-v1
+        ports:
+            - "80:80"
+#        volumes:
+#          - .:/var/www/
+    mysql:
+        build:
+            context: docker/mysql/
+        environment:
+            MYSQL_ROOT_PASSWORD: 'newpass'
+            MYSQL_DATABASE: 'finchmeister'
+            MYSQL_USER: 'sec_user'
+            MYSQL_PASSWORD: 'tpoasdjabajsdhajshfgjhsadg23847'
+        ports:
+            - "3306:3306"
